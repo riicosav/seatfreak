@@ -14,10 +14,22 @@ body {
   flex-direction: column;
   justify-content: center; 
   align-items: center; 
+
 }
+
+
 
 .seat {
   background-color: #D9D9D9;
+  width: 2.5rem;
+  height: 3rem;
+  margin: 0.5rem;
+  border-top-left-radius: 2.5rem;
+  border-top-right-radius: 2.5rem;
+}
+
+.seatClicked {
+  background-color: #50db00;
   width: 2.5rem;
   height: 3rem;
   margin: 0.5rem;
