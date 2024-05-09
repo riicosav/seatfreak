@@ -60,6 +60,7 @@ function App() {
           />
       </div>
 
+      {/* To Show Components dynamically */}
         {datesVisible && (
           <div className="container"> 
             <AddMovie 
