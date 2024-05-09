@@ -49,7 +49,7 @@ function AddMovie({ movieProps }) {
             <button type="submit">Search</button>
           </form>
         </div>
-        <div className="movie-container">
+        <div>
           <ul className="movie-grid">
             {movies.slice(0, max).map((movie, index) => (
               <li key={index} className="movie-item">

@@ -102,6 +102,7 @@ body {
 .movie-row {
   display: grid;
   grid-template-columns: auto auto auto;
+  
 }
 
 .date-text {
@@ -113,16 +114,18 @@ body {
 }
 
 .search-container {
-  top: 10px; /* Adjust this value as needed */
-  right: 90%; /* Adjust this value as needed */
+  position: absolute;
+  top: 10%; /* Adjust this value as needed */
+  right: 3%; /* Adjust this value as needed */
 }
 
 .movie-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
   gap: 20px;
   list-style: none;
   padding: 0;
+  justify-content: center; /* Center the grid items horizontally */
 }
 
 .movie-item {
