@@ -7,7 +7,24 @@ body {
 
 }
 
+.body2 {
+  background-image: linear-gradient(to bottom, #232432, #191A24);
+  color: white;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; 
+}
+
 .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+}
+
+.container2 {
   margin-top: 7rem;
   margin-left: 50%;
   display: flex;

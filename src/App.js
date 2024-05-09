@@ -17,6 +17,121 @@ function App() {
   const [datesVisible, setDatesVisible] = useState(false);
   const [seatingVisible, setSeatingVisible] = useState(false);
 
+  const [switchPage, setSwitchPage] = useState(false);
+  const [exampleMovieList, setExampleMovieList] = useState([seatData]);
+  const [selectedMovie, setSelectedMovie] = useState(exampleMovieList[0]);
+
+
+  const switchClick = () => {
+    setSwitchPage((switchPage)=>!switchPage);
+  }
+  
+  function addNewMovie() {
+    
+    const newSeatData = JSON.parse(JSON.stringify(seatData));
+
+    
+    newSeatData[0].movieTitle = `example ${exampleMovieList.length}`;
+    newSeatData[0].id = exampleMovieList.length;
+
+
+    setExampleMovieList((exampleMovieList) => [...exampleMovieList, newSeatData]);
+  }
+
+
+
+  let displayPage = 
+  <div>
+      <div>
+
+          {/* Navbar */}
+          <div className="navbar"> 
+              <Navbar 
+                setDatesAppear={setDatesAppear} 
+                setSeatingAppear={setSeatingAppear}
+              />
+              <button type="button" class="btn btn-primary"onClick={() => switchClick()}>Switch to Theatre</button>
+          </div>
+
+          {/* To Show Components dynamically */}
+            {datesVisible && (
+              <div className="container2"> 
+                <AddMovie 
+                    movieProps={{
+                    movies: movies,
+                    query: query,
+                    setQuery: setQuery,
+                    selectedMovies: selectedMovies,
+                    setSelectedMovies: setSelectedMovies,
+                    setError: setError,
+                    fetchData: fetchData,
+                    }}
+                  />
+              </div> 
+              )}
+
+            {seatingVisible && (
+              <div className="container"> 
+                <DisplayMovie
+                  movieProps={{
+                    selectedMovies: selectedMovies,
+                    setSelectedMovies: setSelectedMovies,
+                    error: error,
+                  }}  />
+              </div> 
+              )}
+            
+
+              
+                
+              
+          </div>
+  </div>
+  
+
+function handleChange(event) {
+  const selectedIndex = event.target.selectedIndex;
+  setSelectedMovie(exampleMovieList[selectedIndex]);
+  
+
+} 
+
+function handleSeatChange() {
+
+}
+
+
+function saveChanges(e) {
+  e.preventDefault();
+
+}
+
+if(switchPage) {
+
+  let displayMovie = <div>
+    <p>{selectedMovie[0].movieTitle}</p>
+    <Theatre seatData={selectedMovie[0].data} />
+   
+    </div>
+
+
+ 
+  displayPage = 
+  <div>
+   <h1 className="text-center">SeatFreak</h1>
+    <div className="customContainer">
+    <select class="form-select" aria-label="Default select example" onChange={handleChange}>
+      {exampleMovieList.map((movie, index) => (<option key="index" value={movie}>{movie[0].movieTitle}{index}</option>))}
+    </select>
+    <button type="button" className="btn btn-primary" onClick={addNewMovie}>Add New Movie</button>
+
+    {displayMovie}
+    <button type="button" className="btn btn-primary" onClick={saveChanges}>Save</button>
+    </div>
+  </div>
+}
+      
+
    // Fetches data from API
    async function fetchData() {
     const url = `https://imdb8.p.rapidapi.com/auto-complete?q=${query}`;
@@ -50,50 +165,12 @@ function App() {
   }
 
   return (
+    
     <div>
-
-      {/* Navbar */}
-      <div className="navbar"> 
-          <Navbar 
-            setDatesAppear={setDatesAppear} 
-            setSeatingAppear={setSeatingAppear}
-          />
-      </div>
-
-      {/* To Show Components dynamically */}
-        {datesVisible && (
-          <div className="container"> 
-            <AddMovie 
-                movieProps={{
-                movies: movies,
-                query: query,
-                setQuery: setQuery,
-                selectedMovies: selectedMovies,
-                setSelectedMovies: setSelectedMovies,
-                setError: setError,
-                fetchData: fetchData,
-                }}
-              />
-          </div> 
-          )}
-
-        {seatingVisible && (
-          <div className="container"> 
-            <DisplayMovie
-              movieProps={{
-                selectedMovies: selectedMovies,
-                setSelectedMovies: setSelectedMovies,
-                error: error,
-              }}  />
-          </div> 
-          )}
-        
-      {/* Seating */}
-      <div className="container">
-          <h1 className="text-center">SeatFreak</h1>
-          <Theatre seatData={seatData}/>
-      </div>
-    </div>
+      {displayPage}
+   </div>
+    
+    
   );
 }
 
