@@ -2,7 +2,7 @@ export const seatData = [
     {id: 0, movieTitle: "example", data: [
       {id: 1, column: [
         { id: "a", row: [
-            {id: 1, name: "a1", selected: true}, 
+            {id: 1, name: "a1", selected: false}, 
             {id: 2, name: "a2", selected: false}, 
             {id: 3, name: "a3", selected: false}, 
             {id: 4, name: "a4", selected: false}, 

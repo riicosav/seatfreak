@@ -20,7 +20,7 @@ function App() {
   const [switchPage, setSwitchPage] = useState(false);
   const [exampleMovieList, setExampleMovieList] = useState([seatData]);
   const [selectedMovie, setSelectedMovie] = useState(exampleMovieList[0]);
-
+  //const [tempMovie, setTempMovie] = useState(exampleMovieList[0]);
 
   const switchClick = () => {
     setSwitchPage((switchPage)=>!switchPage);
@@ -28,11 +28,16 @@ function App() {
   
   function addNewMovie() {
     
+
+    
     const newSeatData = JSON.parse(JSON.stringify(seatData));
 
     
     newSeatData[0].movieTitle = `example ${exampleMovieList.length}`;
     newSeatData[0].id = exampleMovieList.length;
+    newSeatData[0].data[0].id = exampleMovieList.length + 3;
+    newSeatData[0].data[1].id = exampleMovieList.length + 4;
+    newSeatData[0].data[2].id = exampleMovieList.length + 5;
 
 
     setExampleMovieList((exampleMovieList) => [...exampleMovieList, newSeatData]);
@@ -92,6 +97,8 @@ function App() {
 function handleChange(event) {
   const selectedIndex = event.target.selectedIndex;
   setSelectedMovie(exampleMovieList[selectedIndex]);
+  //setTempMovie(exampleMovieList[selectedIndex]);
+  console.log(selectedMovie[0].id);
   
 
 } 
@@ -113,6 +120,15 @@ if(switchPage) {
     <Theatre seatData={selectedMovie[0].data} />
    
     </div>
+
+  if(selectedMovie) {
+    displayMovie = <div>
+    <p>{selectedMovie[0].movieTitle}</p>
+    <Theatre seatData={selectedMovie[0].data} />
+   
+    </div>
+
+  }
 
 
  
