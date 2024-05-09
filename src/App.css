@@ -114,7 +114,7 @@ body {
 
 .search-container {
   top: 10px; /* Adjust this value as needed */
-  right: 10px; /* Adjust this value as needed */
+  right: 90%; /* Adjust this value as needed */
 }
 
 .movie-grid {

@@ -36,7 +36,7 @@ function AddMovie({ movieProps }) {
     const max = 3;
   
     return (
-      <div > 
+      <div> 
         {/* Search function and Display of Movies from IMDB API */}
         <div className="search-container">  
           <form onSubmit={searchHandler}>
@@ -46,6 +46,7 @@ function AddMovie({ movieProps }) {
               placeholder="Search a movie..."
               onChange={(e) => setQuery(e.target.value)}
             />
+            <button type="submit">Search</button>
           </form>
         </div>
         <div className="movie-container">
@@ -96,4 +97,3 @@ function AddMovie({ movieProps }) {
   }
   
   export default AddMovie;
-  
