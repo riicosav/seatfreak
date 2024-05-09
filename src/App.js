@@ -18,7 +18,8 @@ function App() {
   const [seatingVisible, setSeatingVisible] = useState(false);
 
   const [switchPage, setSwitchPage] = useState(false);
-  const [exampleMovieList, setExampleMovieList] = useState([seatData]);
+  const newSeatData1 = JSON.parse(JSON.stringify(seatData));
+  const [exampleMovieList, setExampleMovieList] = useState([newSeatData1]);
   const [selectedMovie, setSelectedMovie] = useState(exampleMovieList[0]);
   //const [tempMovie, setTempMovie] = useState(exampleMovieList[0]);
 
