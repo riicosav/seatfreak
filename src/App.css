@@ -54,6 +54,17 @@ body {
   align-items: center; /* Center vertically */
   height: 100vh; /* Full viewport height */
 }
+.container-movie-page{
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  padding-top: 10%;
+
+}
+
+.serach-container{  /* problem to AHHAHA di ko ma uupper right */
+  align-items: center;
+}
 .seat {
   background-color: #D9D9D9;
   width: 2.5rem;
@@ -113,11 +124,7 @@ body {
   margin-bottom: 25px
 }
 
-.search-container {
-  position: absolute;
-  top: 10%; /* Adjust this value as needed */
-  right: 3%; /* Adjust this value as needed */
-}
+
 
 .movie-grid {
   display: grid;
@@ -133,18 +140,18 @@ body {
   border-radius: 5px;
   overflow: hidden;
 }
-
+.movie-content img {
+  width: 100%; /* Set the width to 100% */
+  height: auto; /* Allow the height to adjust automatically based on the aspect ratio */
+  max-height: 350px; /* Set a maximum height for the images */
+  object-fit: cover; /* Ensure the image covers the entire container */
+}
 .movie-content {
   display: flex;
   flex-direction: column;
 }
 
-.movie-content img {
-  width: 100%; /* Make the image take up the full width of its container */
-  height: auto; /* Ensure aspect ratio is maintained */
-  max-height: 200px; /* Set a maximum height for the image */
-  object-fit: cover; /* Ensure the image covers the entire container */
-}
+
 
 .movie-details {
   flex: 1;

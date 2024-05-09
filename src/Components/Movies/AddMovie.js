@@ -38,8 +38,8 @@ function AddMovie({ movieProps }) {
     return (
       <div> 
         {/* Search function and Display of Movies from IMDB API */}
-        <div className="search-container">  
-          <form onSubmit={searchHandler}>
+    
+          <form className="search-container" onSubmit={searchHandler}>
             <input
               type="text"
               value={query}
@@ -48,7 +48,7 @@ function AddMovie({ movieProps }) {
             />
             <button type="submit">Search</button>
           </form>
-        </div>
+    
         <div>
           <ul className="movie-grid">
             {movies.slice(0, max).map((movie, index) => (

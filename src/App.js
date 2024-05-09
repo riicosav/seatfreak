@@ -61,7 +61,7 @@ function App() {
 
       {/* To Show Components dynamically */}
         {datesVisible && (
-          <div className="container"> 
+          <div className="container-movie-page"> 
             <AddMovie 
                 movieProps={{
                 movies: movies,
