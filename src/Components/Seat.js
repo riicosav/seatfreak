@@ -6,7 +6,7 @@ function Seat({ seatData }) {
 
     const clickHandle = (e) => {
         setIsClicked((isClicked)=> !isClicked);
-        seatData.selected = isClicked;
+        seatData.selected = !isClicked;
         console.log(seatData.selected);
     }   
 
