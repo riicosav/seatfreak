@@ -36,7 +36,7 @@ function AddMovie({ movieProps }) {
     const max = 3;
   
     return (
-      <div className="movie-cards-container"> 
+      <div > 
         {/* Search function and Display of Movies from IMDB API */}
         <div className="search-container">  
           <form onSubmit={searchHandler}>
