@@ -50,8 +50,7 @@ function App() {
   }
 
   return (
-    <div>
-
+    <div className="full-screen">
       {/* Navbar */}
       <div className="navbar"> 
           <Navbar 
@@ -89,14 +88,15 @@ function App() {
           )}
         
       {/* Seating */}
-      <div className="container">
-          <h1 className="text-center">SeatFreak</h1>
-          <Theatre seatData={seatData}/>
+      <div className="center">
+        <div>
+            <h1 className="text-center">SeatFreak</h1>
+            <Theatre seatData={seatData}/>
+        </div>
+        
       </div>
     </div>
   );
 }
 
 export default App;
-
-
