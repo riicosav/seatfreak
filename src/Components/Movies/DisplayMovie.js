@@ -50,23 +50,29 @@ function DisplayMovie({movieProps}) {
                 <div>
                 {sortedDays.map(day => (
                     <div key={day}>
+                        
                     <h2 className="date-text">{day}</h2>
-                    <div className="movie-row">
-                        {sortedMoviesByDate[day].map((selectedMovie, index) => (
-                        <div key={index} className="movie-card">
-                            {selectedMovie.i ? (
-                            <img src={selectedMovie.i.imageUrl} alt={selectedMovie.l} className="img" />
-                            ) : (
-                            <p>No poster available</p>
-                            )} <br />
-                            <p>Title: {selectedMovie.l}</p>
-                            <p>Day: {selectedMovie.day}</p>
-                            <p>Time: {selectedMovie.time}</p>
-                            <br /> <button onClick={() => removeMovie(index)}>Remove</button>
-                        </div>
-                        ))}
-                    </div>
-                    </div>
+                    <ul className="movie-grid">
+        {sortedMoviesByDate[day].map((selectedMovie, index) => (
+          <li key={index} className="movie-item">
+            <div className="movie-content">
+              {selectedMovie.i ? (
+                <img src={selectedMovie.i.imageUrl} alt={selectedMovie.l} />
+              ) : (
+                <p>No poster available</p>
+              )}
+              <div className="movie-details">
+                <h5>{selectedMovie.l}</h5>
+                <p>Day: {selectedMovie.day}</p>
+                <p>Time: {selectedMovie.time}</p>
+                <br />
+                <button className="del-button" onClick={() => removeMovie(index)}>Remove</button>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
                 ))}
                 </div>
             </div>

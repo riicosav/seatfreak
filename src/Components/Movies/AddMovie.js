@@ -60,7 +60,7 @@ function AddMovie({ movieProps }) {
                     <p>No poster available</p>
                   )}
                   <div className="movie-details">
-                    <p>{movie.l}</p>
+                    <h5>{movie.l}</h5>
                     <p>Release Date: {movie.y}</p>
                     <p>Rating: {movie.rank}</p>
                     <form
@@ -71,20 +71,23 @@ function AddMovie({ movieProps }) {
                         addMovie(movie, day, time);
                       }}
                     >
-                      <p>Set Date and Time:</p>
-                      <select id="day">
+                      <div>
+                           <p>Set Date and Time:</p>
+                        <div>  <select id="day">
                         <option>Monday</option>
                         <option>Tuesday</option>
                         <option>Wednesday</option>
-                      </select>
-                      <br />
-                      <select id="time">
+                      </select></div>
+                        <div> <select id="time">
                         <option>1:00-3:00pm</option>
                         <option>3:30-4:30pm</option>
                         <option>5:00-7:00pm</option>
-                      </select>
+                      </select></div>
+                      </div>
+
+                     
                       <br />
-                      <button type="submit">Add Movie</button>
+                      <button type="submit" className="add-button">Add Movie</button>
                     </form>
                   </div>
                 </div>
