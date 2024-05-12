@@ -41,7 +41,7 @@ function DisplayMovie({ movieProps }) {
   return (
     <div>
       {/* List of Added Movies */}
-      <div className="listMovies">
+      <div>
         <h2>List of Movies:</h2>
         {error && (
           <div id="errorSection">
@@ -60,9 +60,9 @@ function DisplayMovie({ movieProps }) {
                       <div className="col">
                         {selectedMovie.i ? (
                           <img
+                            className="dp-img"
                             src={selectedMovie.i.imageUrl}
                             alt={selectedMovie.l}
-                            className="img"
                           />
                         ) : (
                           <p>No poster available</p>
