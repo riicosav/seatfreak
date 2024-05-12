@@ -1,3 +1,32 @@
+/* XS */
+@media (min-width: 475px) {
+  /* CSS rules for extra small screens */
+}
+
+/* sm */
+@media (min-width: 640px) {
+  /* CSS rules for small screens */
+}
+
+/* md */
+@media (min-width: 768px) {
+  /* CSS rules for medium screens */
+}
+
+/* lg */
+@media (min-width: 1024px) {
+  /* CSS rules for large screens */
+}
+
+/* xl */
+@media (min-width: 1280px) {
+  /* CSS rules for extra large screens */
+}
+
+/* 2xl */
+@media (min-width: 1536px) {
+  /* CSS rules for 2 extra large screens */
+}
 body {
   background-image: linear-gradient(to bottom, #232432, #191A24);
   color: white;
@@ -17,6 +46,13 @@ body {
   min-height: 100vh; 
 }
 
+.full-screen {
+  height: 100vh;
+  width: 100vw;
+  position: static;
+  margin: 0;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -26,13 +62,28 @@ body {
 
 .container2 {
   margin-top: 7rem;
-  margin-left: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center; 
   align-items: center; 
 }
+.center {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100vh; /* Full viewport height */
+}
+.container-movie-page{
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  padding-top: 10%;
 
+}
+
+.serach-container{  /* problem to AHHAHA di ko ma uupper right */
+  align-items: center;
+}
 .seat {
   background-color: #D9D9D9;
   width: 2.5rem;
@@ -81,6 +132,7 @@ body {
 .movie-row {
   display: grid;
   grid-template-columns: auto auto auto;
+  
 }
 
 .date-text {
@@ -89,6 +141,53 @@ body {
   height: 40px;
   margin: auto;
   margin-bottom: 25px
+}
+
+
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  justify-content: center; /* Center the grid items horizontally */
+}
+
+.movie-item {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.movie-content img {
+  width: 100%; /* Set the width to 100% */
+  height: auto; /* Allow the height to adjust automatically based on the aspect ratio */
+  max-height: 350px; /* Set a maximum height for the images */
+  object-fit: cover; /* Ensure the image covers the entire container */
+}
+.movie-content {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.movie-details {
+  flex: 1;
+  padding: 10px;
+}
+
+.movie-details p {
+  margin: 0;
+  padding-bottom: 5px;
+}
+
+.movie-details form {
+  margin-top: auto;
+}
+.movie-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
 }
 
 /* For navbar */

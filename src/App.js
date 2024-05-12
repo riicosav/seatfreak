@@ -21,30 +21,29 @@ function App() {
   const newSeatData1 = JSON.parse(JSON.stringify(seatData));
   const [exampleMovieList, setExampleMovieList] = useState([newSeatData1]);
   const [selectedMovie, setSelectedMovie] = useState(exampleMovieList[0]);
+
   //const [tempMovie, setTempMovie] = useState(exampleMovieList[0]);
+
+  const initialTempMovie = JSON.parse(JSON.stringify(exampleMovieList[0]));
+  const [tempMovie, setTempMovie] = useState(initialTempMovie);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [newMovieId, setNewMovieId] = useState(exampleMovieList.length);
 
   const switchClick = () => {
     setSwitchPage((switchPage)=>!switchPage);
   }
   
   function addNewMovie() {
-    
-
-    
     const newSeatData = JSON.parse(JSON.stringify(seatData));
 
-    
     newSeatData[0].movieTitle = `example ${exampleMovieList.length}`;
     newSeatData[0].id = exampleMovieList.length;
     newSeatData[0].data[0].id = exampleMovieList.length + 3;
     newSeatData[0].data[1].id = exampleMovieList.length + 4;
     newSeatData[0].data[2].id = exampleMovieList.length + 5;
 
-
     setExampleMovieList((exampleMovieList) => [...exampleMovieList, newSeatData]);
   }
-
-
 
   let displayPage = 
   <div>
@@ -100,39 +99,32 @@ function handleChange(event) {
   setSelectedMovie(exampleMovieList[selectedIndex]);
   //setTempMovie(exampleMovieList[selectedIndex]);
   console.log(selectedMovie[0].id);
-  
-
 } 
 
 function handleSeatChange() {
 
 }
 
-
 function saveChanges(e) {
   e.preventDefault();
 
 }
 
-if(switchPage) {
 
+if(switchPage) {
   let displayMovie = <div>
     <p>{selectedMovie[0].movieTitle}</p>
     <Theatre seatData={selectedMovie[0].data} />
-   
     </div>
 
   if(selectedMovie) {
     displayMovie = <div>
     <p>{selectedMovie[0].movieTitle}</p>
     <Theatre seatData={selectedMovie[0].data} />
-   
     </div>
-
   }
 
 
- 
   displayPage = 
   <div>
    <h1 className="text-center">SeatFreak</h1>
@@ -148,7 +140,6 @@ if(switchPage) {
   </div>
 }
       
-
    // Fetches data from API
    async function fetchData() {
     const url = `https://imdb8.p.rapidapi.com/auto-complete?q=${query}`;
@@ -182,15 +173,11 @@ if(switchPage) {
   }
 
   return (
-    
     <div>
       {displayPage}
    </div>
-    
-    
+
   );
 }
 
 export default App;
-
-
