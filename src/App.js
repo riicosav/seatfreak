@@ -8,7 +8,6 @@ import Theatre from './Components/Theatre.js';
 import AddMovie from './Components/Movies/AddMovie.js'
 import DisplayMovie from './Components/Movies/DisplayMovie.js';
 
-
 function App() {
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState('');
@@ -21,29 +20,47 @@ function App() {
   const newSeatData1 = JSON.parse(JSON.stringify(seatData));
   const [exampleMovieList, setExampleMovieList] = useState([newSeatData1]);
   const [selectedMovie, setSelectedMovie] = useState(exampleMovieList[0]);
-  //const [tempMovie, setTempMovie] = useState(exampleMovieList[0]);
+  const initialTempMovie = JSON.parse(JSON.stringify(exampleMovieList[0]));
+  const [tempMovie, setTempMovie] = useState(initialTempMovie);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [newMovieId, setNewMovieId] = useState(exampleMovieList.length);
 
   const switchClick = () => {
     setSwitchPage((switchPage)=>!switchPage);
   }
   
   function addNewMovie() {
-    
-
-    
+    // Deep clone the seatData structure
     const newSeatData = JSON.parse(JSON.stringify(seatData));
 
-    
-    newSeatData[0].movieTitle = `example ${exampleMovieList.length}`;
-    newSeatData[0].id = exampleMovieList.length;
-    newSeatData[0].data[0].id = exampleMovieList.length + 3;
-    newSeatData[0].data[1].id = exampleMovieList.length + 4;
-    newSeatData[0].data[2].id = exampleMovieList.length + 5;
+    // Generate unique IDs for the new movie
+    setNewMovieId((newMovieId)=> newMovieId + exampleMovieList.length);
+    const newColumnIdStart = newMovieId * 7 + 21;
+    const newRowIdStart = newMovieId * 14 + 1;
 
+    // Set movie title and ID
+    newSeatData[0].movieTitle = `example ${newMovieId}`;
+    newSeatData[0].id = newMovieId;
 
-    setExampleMovieList((exampleMovieList) => [...exampleMovieList, newSeatData]);
-  }
+    // Set IDs for seats, columns, and rows
+    newSeatData[0].data.forEach((column, columnIndex) => {
+        column.id = newMovieId * 7 + columnIndex + 1;
 
+        column.column.forEach((row, rowIndex) => {
+            row.id = newRowIdStart + rowIndex;
+
+            row.row.forEach((seat, seatIndex) => {
+                seat.id = newColumnIdStart + columnIndex + seatIndex * 7;
+            });
+        });
+    });
+
+    // Deep clone the existing movie list and append the new movie
+    const newList = [...exampleMovieList, newSeatData];
+
+    // Update the state with the new movie list
+    setExampleMovieList(newList);
+}
 
 
   let displayPage = 
@@ -96,41 +113,60 @@ function App() {
   
 
 function handleChange(event) {
-  const selectedIndex = event.target.selectedIndex;
-  setSelectedMovie(exampleMovieList[selectedIndex]);
-  //setTempMovie(exampleMovieList[selectedIndex]);
-  console.log(selectedMovie[0].id);
-  
+  const theIndex = event.target.selectedIndex;
+  setSelectedIndex(theIndex);
+  console.log(event.target.selectedIndex+"hi");
+ 
 
+  setSelectedMovie(exampleMovieList[theIndex]);
+  const theTemp = JSON.parse(JSON.stringify(exampleMovieList[theIndex]))
+  setTempMovie(theTemp);
+  console.log(selectedMovie[0].id);
 } 
 
-function handleSeatChange() {
+function deleteMovie() {
+  // Deep clone the current movie list
+  const newList = [...exampleMovieList];
+  
+  // Remove the selected movie from the list
+  newList.splice(selectedIndex, 1);
 
+  // Update the state with the modified movie list
+  setExampleMovieList(newList);
+
+  setTempMovie(exampleMovieList[0]);
 }
 
-
-function saveChanges(e) {
+function saveChange(e) {
   e.preventDefault();
-
+  setExampleMovieList(prevList => {
+    const newList = [...prevList];
+    newList[selectedIndex] = tempMovie;
+    return newList;
+  });
 }
+
+
+
 
 if(switchPage) {
 
   let displayMovie = <div>
     <p>{selectedMovie[0].movieTitle}</p>
-    <Theatre seatData={selectedMovie[0].data} />
+    <Theatre seatData={tempMovie[0].data} />
+    
    
     </div>
 
   if(selectedMovie) {
     displayMovie = <div>
     <p>{selectedMovie[0].movieTitle}</p>
-    <Theatre seatData={selectedMovie[0].data} />
+    <Theatre seatData={tempMovie[0].data} />
+    
    
     </div>
 
   }
-
 
  
   displayPage = 
@@ -143,7 +179,8 @@ if(switchPage) {
     <button type="button" className="btn btn-primary" onClick={addNewMovie}>Add New Movie</button>
 
     {displayMovie}
-    <button type="button" className="btn btn-primary" onClick={saveChanges}>Save</button>
+    <button type="button" className="btn btn-primary" onClick={saveChange}>Save</button>
+    <button type="button" className="btn btn-danger" onClick={deleteMovie}>Delete</button>
     </div>
   </div>
 }
@@ -192,5 +229,21 @@ if(switchPage) {
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

@@ -7,7 +7,8 @@ function Column({ seatData }) {
             
             { 
               seatData.map((row)=>(
-                <Row seatData={row.row}/>
+                <Row key={row.id}seatData={row.row}/>
+              
               ))
             }
         </div>
