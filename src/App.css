@@ -172,7 +172,7 @@ body {
   margin: 0;
   padding-bottom: 5px;
 }
-.movie-details h5{
+.movie-details h5 {
   font-weight: bold;
 }
 .movie-details form {
@@ -243,7 +243,7 @@ select {
   margin-bottom: 50px;
   padding: 10px;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .button {
