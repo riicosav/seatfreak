@@ -145,6 +145,7 @@ body {
   list-style: none;
   padding: 0;
   justify-content: center; /* Center the grid items horizontally */
+  margin-top: 50px;
 }
 
 .movie-item {
@@ -253,6 +254,7 @@ select {
   padding: 10px;
   align-items: center;
   justify-content: space-between;
+  z-index: 1000;
 }
 
 .button {
@@ -270,4 +272,8 @@ select {
 .button:hover {
   color: #00ea5d; /* Change text color on hover */
   text-shadow: 2px 2px 4px rgba(0, 234, 93, 0.5); /* Add shadow to text on hover */
+}
+
+.input-group {
+  margin-bottom: 5px;
 }

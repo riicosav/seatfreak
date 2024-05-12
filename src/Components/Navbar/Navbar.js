@@ -7,14 +7,14 @@ function Navbar({ setDatesAppear, setSeatingAppear }) {
           src={seatFreakLogo}
           alt="Logo"
           className="navbar-brand"
-          style={{ width: "150px" }}
+          style={{ width: "140px" }}
         />
       </div>
       <div className="buttons">
         <button className="button" onClick={setDatesAppear}>
           Add Movies
         </button>
-        <button className="button" onClick={setSeatingAppear}>
+        <button className="button button-my-movies" onClick={setSeatingAppear}>
           My Movies
         </button>
       </div>
