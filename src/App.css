@@ -28,12 +28,11 @@
   /* CSS rules for 2 extra large screens */
 }
 body {
-  background-image: linear-gradient(to bottom, #232432, #191A24);
+  background-image: linear-gradient(to bottom, #232432, #191a24);
   color: white;
   margin: 0;
   display: flex;
-  min-height: 100vh; 
-
+  min-height: 100vh;
 }
 .row {
   display: flex;
@@ -54,8 +53,8 @@ body {
   margin-top: 7rem;
   display: flex;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
 }
 .center {
   display: flex;
@@ -63,19 +62,19 @@ body {
   align-items: center; /* Center vertically */
   height: 100vh; /* Full viewport height */
 }
-.container-movie-page{
+.container-movie-page {
   display: flex;
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
   padding-top: 10%;
-
 }
 
-.serach-container{  /* problem to AHHAHA di ko ma uupper right */
+.search-container {
+  /* problem to AHHAHA di ko ma uupper right */
   align-items: center;
 }
 .seat {
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   width: 2.5rem;
   height: 3rem;
   margin: 0.5rem;
@@ -105,7 +104,7 @@ body {
 }
 
 .img {
-  width: 25%
+  width: 25%;
 }
 
 /* For Movies */
@@ -122,7 +121,6 @@ body {
 .movie-row {
   display: grid;
   grid-template-columns: auto auto auto;
-  
 }
 
 .date-text {
@@ -130,10 +128,8 @@ body {
   width: 20px;
   height: 40px;
   margin: auto;
-  margin-bottom: 25px
+  margin-bottom: 25px;
 }
-
-
 
 .movie-grid {
   display: grid;
@@ -147,7 +143,7 @@ body {
 .movie-item {
   border-radius: 5px;
   overflow: hidden;
-  box-shadow: 10px 10px 18px 0px rgba(0,0,0,0.74);
+  box-shadow: 10px 10px 18px 0px rgba(0, 0, 0, 0.74);
 }
 .movie-content img {
   width: 100%; /* Set the width to 100% */
@@ -164,7 +160,7 @@ body {
   flex: 1;
   padding: 10px;
   margin: 1.5%;
-  background-color: #191A24;
+  background-color: #191a24;
 }
 
 .movie-details p {
@@ -180,7 +176,7 @@ body {
   justify-content: center; /* Center horizontally */
 }
 
-.display-movie-pic{
+.display-movie-pic {
   width: 100%; /* Set the width to 100% */
   height: auto; /* Allow the height to adjust automatically based on the aspect ratio */
   max-height: 350px; /* Set a maximum height for the images */
@@ -209,7 +205,7 @@ select {
 }
 
 .add-button:hover {
-  background-color: #1FDF64;
+  background-color: #1fdf64;
 }
 
 .del-button {
@@ -234,25 +230,28 @@ select {
   position: fixed;
   top: 0;
   width: 100%;
-  height: 75px;
-  background-color: #ffffff;
+  height: 100px;
+  background-color: #232432;
   overflow: hidden;
   margin-bottom: 50px;
   padding: 10px;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .button {
   margin-right: 10px;
   color: white;
-  border: solid rgb(0, 0, 0);
-  background-color: rgb(0, 0, 0);
-  border-radius: 10px;
+  font-size: 20px;
+  background-color: rgba(255, 255, 255, 0); /* Transparent background */
+  border: none;
   transition: 0.2s;
+}
+.buttons {
+  margin-right: 30px;
 }
 
 .button:hover {
-  background-color: rgb(128, 128, 128);
-  border: solid rgb(128, 128, 128);
+  color: #00ea5d; /* Change text color on hover */
+  text-shadow: 2px 2px 4px rgba(0, 234, 93, 0.5); /* Add shadow to text on hover */
 }
