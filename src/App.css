@@ -141,9 +141,14 @@ body {
 }
 
 .movie-item {
-  border-radius: 5px;
+  border-radius: 8px;
   overflow: hidden;
   box-shadow: 10px 10px 18px 0px rgba(0, 0, 0, 0.74);
+  transition: transform 0.3s ease; /* Add transition for smooth animation */
+}
+
+.movie-item:hover {
+  transform: scale(1.1); /* Enlarge the item on hover */
 }
 .movie-content img {
   width: 100%; /* Set the width to 100% */
@@ -167,7 +172,9 @@ body {
   margin: 0;
   padding-bottom: 5px;
 }
-
+.movie-details h5{
+  font-weight: bold;
+}
 .movie-details form {
   margin-top: auto;
 }
