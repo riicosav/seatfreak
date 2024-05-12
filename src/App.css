@@ -33,6 +33,7 @@ body {
   margin: 0;
   display: flex;
   min-height: 100vh;
+  padding-bottom: 500px;
 }
 .row {
   display: flex;
@@ -104,13 +105,15 @@ body {
 }
 
 .img {
-  width: 25%;
+  width: 50%;
+}
+.col {
 }
 
 /* For Movies */
 
 .movie-card {
-  width: 300px;
+  width: 4 0em;
   height: auto;
   padding: 10px;
   margin: auto;
@@ -120,7 +123,7 @@ body {
 
 .movie-row {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto;
 }
 
 .date-text {
@@ -141,14 +144,9 @@ body {
 }
 
 .movie-item {
-  border-radius: 8px;
+  border-radius: 5px;
   overflow: hidden;
   box-shadow: 10px 10px 18px 0px rgba(0, 0, 0, 0.74);
-  transition: transform 0.3s ease; /* Add transition for smooth animation */
-}
-
-.movie-item:hover {
-  transform: scale(1.1); /* Enlarge the item on hover */
 }
 .movie-content img {
   width: 100%; /* Set the width to 100% */
@@ -172,9 +170,7 @@ body {
   margin: 0;
   padding-bottom: 5px;
 }
-.movie-details h5{
-  font-weight: bold;
-}
+
 .movie-details form {
   margin-top: auto;
 }
@@ -250,6 +246,7 @@ select {
   margin-right: 10px;
   color: white;
   font-size: 20px;
+  font-weight: 600;
   background-color: rgba(255, 255, 255, 0); /* Transparent background */
   border: none;
   transition: 0.2s;
@@ -261,4 +258,37 @@ select {
 .button:hover {
   color: #00ea5d; /* Change text color on hover */
   text-shadow: 2px 2px 4px rgba(0, 234, 93, 0.5); /* Add shadow to text on hover */
+}
+
+.input-group input[type="text"] {
+  background-color: #f2f2f205; /* Change this to the desired background color */
+  color: #fefefe; /* Change this to the desired text color */
+  border: 1px solid #ccc; /* Change this to the desired border color */
+  border-radius: 5px; /* Optional: Add border-radius for rounded corners */
+  padding: 10px;
+  /* Optional: Add padding for better appearance */
+}
+
+.input-group input[type="text"]::placeholder {
+  /* Optional: Customize placeholder text style */
+  color: #999; /* Change this to the desired placeholder text color */
+}
+.movie-item:hover {
+  transform: scale(1.1); /* Enlarge the item on hover */
+}
+.movie-content img {
+  width: 100%; /* Set the width to 100% */
+  height: auto; /* Allow the height to adjust automatically based on the aspect ratio */
+  max-height: 350px; /* Set a maximum height for the images */
+  object-fit: cover; /* Ensure the image covers the entire container */
+}
+.movie-content {
+  display: flex;
+  flex-direction: column;
+}
+.movie-item {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 10px 10px 18px 0px rgba(0, 0, 0, 0.74);
+  transition: transform 0.3s ease; /* Add transition for smooth animation */
 }

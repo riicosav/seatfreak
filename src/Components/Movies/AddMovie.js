@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+
 function AddMovie({ movieProps }) {
   const {
     movies,
@@ -55,14 +57,12 @@ function AddMovie({ movieProps }) {
           placeholder="Search a movie..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              searchHandler(e);
+            }
+          }}
         />
-        <button
-          className="btn btn-outline-secondary"
-          type="button"
-          onClick={searchHandler}
-        >
-          Search
-        </button>
       </div>
       <div>
         <ul className="movie-grid">
