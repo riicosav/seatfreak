@@ -136,11 +136,11 @@ body {
 .movie-card p {
   font-size: 20px;
 }
-.col:first-child {
+.colU:first-child {
   flex-basis: 25%; /* Set the width of the first column to 25% */
 }
 
-.col:last-child {
+.colU:last-child {
   flex-basis: 75%; /* Set the width of the last column to 75% */
 }
 
@@ -272,6 +272,7 @@ select {
   padding: 10px;
   align-items: center;
   justify-content: space-between;
+  z-index: 1000;
 }
 
 .button {

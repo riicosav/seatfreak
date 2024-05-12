@@ -209,12 +209,12 @@ function App() {
 
   // Fetches data from API
   async function fetchData() {
-    const url = `https://imdb8.p.rapidapi.com/auto-complete?q=${query}`;
+    const url = "https://imdb146.p.rapidapi.com/auto-complete?q=${query}";
     const options = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "ca224eb53amshd67a88c70e27f52p1d3a8cjsn12663eaca0ef",
-        "X-RapidAPI-Host": "imdb8.p.rapidapi.com",
+        "X-RapidAPI-Key": "c854878dccmsh0912f63313cc2f9p1535a6jsn8b610c175a1f",
+        "X-RapidAPI-Host": "imdb146.p.rapidapi.com",
       },
     };
 
@@ -229,7 +229,6 @@ function App() {
       console.error(error);
     }
   }
-
   // For Toggling Visibility
   function setDatesAppear() {
     setDatesVisible(!datesVisible);
