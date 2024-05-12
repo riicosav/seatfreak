@@ -3,6 +3,7 @@ import { useState } from 'react';
 function Seat({ seatData }) {
 
     const [isClicked, setIsClicked] = useState(seatData.selected);
+    const [lockClicked, setLockClicked] = useState(seatData.selected);
 
     const clickHandle = (e) => {
         setIsClicked((isClicked)=> !isClicked);
@@ -11,7 +12,7 @@ function Seat({ seatData }) {
     }   
 
     return (
-        <div className={isClicked ? "seatClicked" : "seat"} onClick={() => clickHandle()}></div>
+        <div className={isClicked ? "seatClicked" : "seat"} onClick={lockClicked ? null : () => clickHandle()}></div>
         
     )
 

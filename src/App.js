@@ -16,7 +16,7 @@ function App() {
   const [error, setError] = useState('');
   const [datesVisible, setDatesVisible] = useState(false);
   const [seatingVisible, setSeatingVisible] = useState(false);
-
+  
   const [switchPage, setSwitchPage] = useState(false);
   const newSeatData1 = JSON.parse(JSON.stringify(seatData));
   const [exampleMovieList, setExampleMovieList] = useState([newSeatData1]);
@@ -41,6 +41,7 @@ function App() {
 
     // Set movie title and ID
     newSeatData[0].movieTitle = `example ${newMovieId}`;
+    
     newSeatData[0].id = newMovieId;
 
     // Set IDs for seats, columns, and rows
@@ -72,7 +73,7 @@ function App() {
                       setDatesAppear={setDatesAppear} 
                       setSeatingAppear={setSeatingAppear}
                     />
-                                  <button type="button" class="btn btn-primary"onClick={() => switchClick()}>Switch to Theatre</button>
+                                  <button type="button" class="btn btn-primary" onClick={() => switchClick()}>Switch to Theatre</button>
                 </div>
 
                 {/* To Show Components dynamically */}
@@ -148,6 +149,13 @@ function saveChange(e) {
     newList[selectedIndex] = tempMovie;
     return newList;
   });
+
+  
+}
+
+function saveChange2() {
+  const theTemp = JSON.parse(JSON.stringify(exampleMovieList[selectedIndex]))
+  setTempMovie(theTemp);
 }
 
 if(switchPage) {
@@ -173,6 +181,8 @@ if(switchPage) {
     <div className="customContainer">
     <select class="form-select" aria-label="Default select example" onChange={handleChange}>
       {exampleMovieList.map((movie, index) => (<option key="index" value={movie}>{movie[0].movieTitle}{index}</option>))}
+      {/*add label for day, time and price  
+      */}
     </select>
     <button type="button" className="btn btn-primary" onClick={addNewMovie}>Add New Movie</button>
 
