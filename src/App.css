@@ -68,7 +68,18 @@ body {
   align-items: center; /* Center vertically */
   padding-top: 10%;
 }
+.input-group input[type="text"] {
+  background-color: #f2f2f205; /* Change this to the desired background color */
+  color: #fefefe; /* Change this to the desired text color */
+  border: 1px solid #ccc; /* Change this to the desired border color */
+  border-radius: 5px; /* Optional: Add border-radius for rounded corners */
+  padding: 10px; /* Optional: Add padding for better appearance */
+}
 
+.input-group input[type="text"]::placeholder {
+  /* Optional: Customize placeholder text style */
+  color: #999; /* Change this to the desired placeholder text color */
+}
 .search-container {
   /* problem to AHHAHA di ko ma uupper right */
   align-items: center;
