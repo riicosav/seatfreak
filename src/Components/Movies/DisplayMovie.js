@@ -1,4 +1,4 @@
-function DisplayMovie({ movieProps }) {
+function DisplayMovie({ movieProps, switchClick }) {
   const { selectedMovies, setSelectedMovies, error } = movieProps;
   // Sorts and add movies by date
   const moviesByDate = selectedMovies.reduce((acc, movie) => {
@@ -69,11 +69,25 @@ function DisplayMovie({ movieProps }) {
                       <br />
                     </div>
                     <div className="col">
-                      <p>Title: {selectedMovie.l}</p>
+                      <h3> {selectedMovie.l}</h3>
                       <p>Day: {selectedMovie.day}</p>
                       <p>Time: {selectedMovie.time}</p>
                       <br />
-                      <button onClick={() => removeMovie(index)}>Remove</button>
+                      <div className="dmButtons">
+                        <button
+                          type="button"
+                          class="btn btn-primary"
+                          onClick={() => switchClick()}
+                        >
+                          Switch to Theatre
+                        </button>
+                        <button
+                          class="btn btn-danger"
+                          onClick={() => removeMovie(index)}
+                        >
+                          Remove
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
