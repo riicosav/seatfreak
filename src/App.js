@@ -9,7 +9,6 @@ import AddMovie from './Components/Movies/AddMovie.js'
 import DisplayMovie from './Components/Movies/DisplayMovie.js';
 
 
-
 function App() {
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState('');
@@ -18,11 +17,6 @@ function App() {
   const [datesVisible, setDatesVisible] = useState(false);
   const [seatingVisible, setSeatingVisible] = useState(false);
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
   const [switchPage, setSwitchPage] = useState(false);
   const newSeatData1 = JSON.parse(JSON.stringify(seatData));
   const [exampleMovieList, setExampleMovieList] = useState([newSeatData1]);
@@ -35,11 +29,7 @@ function App() {
   const switchClick = () => {
     setSwitchPage((switchPage)=>!switchPage);
   }
-<<<<<<< Updated upstream
-  
-=======
 
->>>>>>> Stashed changes
   function addNewMovie() {
     // Deep clone the seatData structure
     const newSeatData = JSON.parse(JSON.stringify(seatData));
@@ -73,58 +63,6 @@ function App() {
     setExampleMovieList(newList);
 }
 
-<<<<<<< Updated upstream
-
-
-  let displayPage = 
-  <div>
-      <div>
-
-          {/* Navbar */}
-          <div className="navbar"> 
-              <Navbar 
-                setDatesAppear={setDatesAppear} 
-                setSeatingAppear={setSeatingAppear}
-              />
-              <button type="button" class="btn btn-primary"onClick={() => switchClick()}>Switch to Theatre</button>
-          </div>
-
-          {/* To Show Components dynamically */}
-            {datesVisible && (
-              <div className="container2"> 
-                <AddMovie 
-                    movieProps={{
-                    movies: movies,
-                    query: query,
-                    setQuery: setQuery,
-                    selectedMovies: selectedMovies,
-                    setSelectedMovies: setSelectedMovies,
-                    setError: setError,
-                    fetchData: fetchData,
-                    }}
-                  />
-              </div> 
-              )}
-
-            {seatingVisible && (
-              <div className="container"> 
-                <DisplayMovie
-                  movieProps={{
-                    selectedMovies: selectedMovies,
-                    setSelectedMovies: setSelectedMovies,
-                    error: error,
-                  }}  />
-              </div> 
-              )}
-            
-
-              
-                
-              
-          </div>
-  </div>
-  
-=======
   let displayPage = <div>
 
           <div className="full-screen">
@@ -177,7 +115,6 @@ function App() {
           
 
   </div>
->>>>>>> Stashed changes
 
 function handleChange(event) {
   const theIndex = event.target.selectedIndex;
@@ -191,10 +128,6 @@ function handleChange(event) {
   console.log(selectedMovie[0].id);
 } 
 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 function deleteMovie() {
   // Deep clone the current movie list
   const newList = [...exampleMovieList];
@@ -217,13 +150,6 @@ function saveChange(e) {
   });
 }
 
-<<<<<<< Updated upstream
-
-
-
-
-=======
->>>>>>> Stashed changes
 if(switchPage) {
 
   let displayMovie = <div>
@@ -237,20 +163,10 @@ if(switchPage) {
     displayMovie = <div>
     <p>{selectedMovie[0].movieTitle}</p>
     <Theatre seatData={tempMovie[0].data} />
-<<<<<<< Updated upstream
-    
-   
-=======
->>>>>>> Stashed changes
     </div>
 
   }
 
-<<<<<<< Updated upstream
-
- 
-=======
->>>>>>> Stashed changes
   displayPage = 
   <div>
    <h1 className="text-center">SeatFreak</h1>
@@ -266,19 +182,12 @@ if(switchPage) {
     </div>
   </div>
 }
-<<<<<<< Updated upstream
-      
-
->>>>>>> Stashed changes
-=======
-
 
 
 
 
 
   
->>>>>>> Stashed changes
    // Fetches data from API
    async function fetchData() {
     const url = `https://imdb8.p.rapidapi.com/auto-complete?q=${query}`;
@@ -320,3 +229,5 @@ if(switchPage) {
 }
 
 export default App;
+
+

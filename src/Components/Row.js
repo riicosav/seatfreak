@@ -1,3 +1,4 @@
+
 import Seat from './Seat.js'
 
 function Row({ seatData }) {
