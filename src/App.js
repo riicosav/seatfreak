@@ -209,22 +209,20 @@ function App() {
 
   // Fetches data from API
   async function fetchData() {
-    const url = "https://imdb146.p.rapidapi.com/auto-complete?q=${query}";
+    const url = `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=8afd20db7a02b0d89cbf914ffd94fdb3`;
     const options = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "c854878dccmsh0912f63313cc2f9p1535a6jsn8b610c175a1f",
-        "X-RapidAPI-Host": "imdb146.p.rapidapi.com",
+        accept: "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YWZkMjBkYjdhMDJiMGQ4OWNiZjkxNGZmZDk0ZmRiMyIsInN1YiI6IjY2NDBlMzI2OTJkNzFkMjc0NWMxMjFmOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.t4nZwRFJu94kEOyEDE-lsvClAVXqznrAm7cM2jwFFYY",
       },
     };
 
     try {
       const response = await fetch(url, options);
       const data = await response.json();
-      setMovies(data.d);
-
-      const result = await response.text();
-      console.log(result);
+      setMovies(data.results);
     } catch (error) {
       console.error(error);
     }
