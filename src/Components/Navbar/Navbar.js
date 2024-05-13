@@ -15,7 +15,7 @@ function Navbar({ setDatesAppear, setSeatingAppear }) {
           Add Movies
         </button>
         <button className="button" onClick={setSeatingAppear}>
-          My Movies
+          Schedules
         </button>
       </div>
     </div>
