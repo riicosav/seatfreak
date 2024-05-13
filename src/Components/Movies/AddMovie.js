@@ -69,15 +69,15 @@ function AddMovie({ movieProps }) {
           {movies.slice(0, max).map((movie, index) => (
             <li key={index} className="movie-item">
               <div className="movie-content">
-                {movie.i ? (
-                  <img src={movie.i.imageUrl} alt={movie.l} />
-                ) : (
-                  <p>No poster available</p>
-                )}
+              <img
+                          className="dp-img"
+                          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                          alt={movie.title}
+                        />
                 <div className="movie-details">
-                  <h5>{movie.l}</h5>
-                  <p>Release Date: {movie.y}</p>
-                  <p>Rating: {movie.rank}</p>
+                  <h5>{movie.title}</h5>
+                  <p>Release Date: {movie.release_date}</p>
+                  <p>Rating: {movie.vote_average}</p>
                   <form
                     onSubmit={(e) => {
                       e.preventDefault();

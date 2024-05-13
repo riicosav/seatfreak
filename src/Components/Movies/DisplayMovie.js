@@ -53,25 +53,21 @@ function DisplayMovie({ movieProps, switchClick }) {
           {sortedDays.map((day) => (
             <div key={day}>
               <h2 className="date-text">{day}</h2>
-              {sortedMoviesByDate[day].map((selectedMovie, index) => (
+              {sortedMoviesByDate[day].map((movie, index) => (
                 <div key={index} className="movie-card">
                   <div className="row">
                     <div className="col">
-                      {selectedMovie.i ? (
                         <img
                           className="dp-img"
-                          src={selectedMovie.i.imageUrl}
-                          alt={selectedMovie.l}
+                          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                          alt={movie.title}
                         />
-                      ) : (
-                        <p>No poster available</p>
-                      )}
                       <br />
                     </div>
                     <div className="col">
-                      <h3> {selectedMovie.l}</h3>
-                      <p>Day: {selectedMovie.day}</p>
-                      <p>Time: {selectedMovie.time}</p>
+                      <h3> {movie.title}</h3>
+                      <p>Day: {movie.day}</p>
+                      <p>Time: {movie.time}</p>
                       <br />
                       <div className="dmButtons">
                         <button
