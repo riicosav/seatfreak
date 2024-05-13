@@ -129,6 +129,10 @@ body {
   border-radius: 10px;
   background-color: #2e3041;
   margin-bottom: 30px;
+  transition: transform 0.3s ease;
+}
+.movie-card:hover {
+  transform: scale(1.1); /* Enlarge the item on hover */
 }
 .movie-list {
   background-color: #45475f;
