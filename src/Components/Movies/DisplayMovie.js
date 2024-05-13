@@ -1,4 +1,4 @@
-function DisplayMovie({movieProps}) {
+function DisplayMovie({movieProps, bookSeats}) {
     const {selectedMovies, setSelectedMovies, error} = movieProps
     // Sorts and add movies by date
     const moviesByDate = selectedMovies.reduce((acc, movie) => {
@@ -60,6 +60,7 @@ function DisplayMovie({movieProps}) {
                             <p>Day: {movie.release_date}</p>
                             <p>Time: {movie.vote_average}</p>
                             <br /> <button onClick={() => removeMovie(index)}>Remove</button>
+                            <button onClick={() => bookSeats(movie.index)}>Book Seats</button>
                         </div>
                         ))}
                     </div>

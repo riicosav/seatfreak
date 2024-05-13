@@ -1,4 +1,10 @@
+import { useState } from 'react';
+
+
 function AddMovie({ movieProps }) {
+
+  const [movieIndex, setMovieIndex] = useState(1);
+
   const {
     movies,
     selectedMovies,
@@ -36,6 +42,7 @@ function AddMovie({ movieProps }) {
           ...movie,
           day: day,
           time: time,
+          index: movieIndex,
         },
       ]);
   
@@ -128,6 +135,8 @@ function AddMovie({ movieProps }) {
                       const day = e.target.day.value;
                       const time = e.target.time.value;
                       addMovie(movie, day, time);
+                      setMovieIndex(prevIndex => prevIndex + 1);
+                      console.log("Movie Index: " + movieIndex);
                     }}
                   >
                     <div>

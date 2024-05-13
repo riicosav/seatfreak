@@ -128,7 +128,9 @@ function App() {
                           selectedMovies: selectedMovies,
                           setSelectedMovies: setSelectedMovies,
                           error: error,
-                        }}  />
+                        }} 
+                        bookSeats={bookSeats}
+                        />
                     </div> 
                     )}
                   
@@ -155,6 +157,18 @@ async function handleChange(event) {
   const theTemp = JSON.parse(JSON.stringify(exampleMovieList[theIndex]))
   setTempMovie(theTemp);
   console.log(selectedMovie[0].id);
+}
+
+async function bookSeats(theIndex) {
+
+    setSelectedIndex(theIndex);
+    setSelectedMovie(exampleMovieList[theIndex]);
+    const theTemp = JSON.parse(JSON.stringify(exampleMovieList[theIndex]))
+    setTempMovie(theTemp);
+    switchClick();
+
+   
+
 }
 
 function deleteMovie() {
