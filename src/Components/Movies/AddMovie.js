@@ -7,10 +7,15 @@ function AddMovie({ movieProps }) {
     setQuery,
     setError,
     fetchData,
+    setNewMovieId,
+    newMovieId,
+    setExampleMovieList,
+    exampleMovieList,
+    seatData,
   } = movieProps;
 
   // Add movie function
-  function addMovie(movie, day, time) {
+  async function addMovie(movie, day, time) {
     const isDuplicate = selectedMovies.some((selectedMovie) => {
       return selectedMovie.day === day && selectedMovie.time === time;
     });
@@ -33,8 +38,49 @@ function AddMovie({ movieProps }) {
           time: time,
         },
       ]);
-      setError("");
+  
+      // Deep clone the seatData structure
+      const newSeatData = JSON.parse(JSON.stringify(seatData));
+  
+      // Generate unique IDs for the new movie
+      setNewMovieId((newMovieId)=> newMovieId + exampleMovieList.length);
+      const newColumnIdStart = newMovieId * 7 + 21;
+      const newRowIdStart = newMovieId * 14 + 1;
+  
+      // Set movie title and ID
+      console.log(selectedMovies)
+      newSeatData[0].movieTitle = movie.title;
+      newSeatData[0].id = newMovieId;
+  
+      // Set IDs for seats, columns, and rows
+      newSeatData[0].data.forEach((column, columnIndex) => {
+          column.id = newMovieId * 7 + columnIndex + 1;
+  
+          column.column.forEach((row, rowIndex) => {
+              row.id = newRowIdStart + rowIndex;
+  
+              row.row.forEach((seat, seatIndex) => {
+                  seat.id = newColumnIdStart + columnIndex + seatIndex * 7;
+              });
+          });
+      });
+
+      // Deep clone the existing movie list and append the new movie
+      const newList = [...exampleMovieList, newSeatData];
+  
+      // Update the state with the new movie list
+      setExampleMovieList(newList);
+  
     }
+  }
+
+  async function setMovie(movie, day, time) {
+    const newSeatData = JSON.parse(JSON.stringify(seatData));
+    
+    // Generate unique IDs for the new movie
+    setNewMovieId((newMovieId)=> newMovieId + exampleMovieList.length);
+    const newColumnIdStart = newMovieId * 7 + 21;
+    const newRowIdStart = newMovieId * 14 + 1;
   }
 
   // Searching in IMDB Database
@@ -69,15 +115,11 @@ function AddMovie({ movieProps }) {
           {movies.slice(0, max).map((movie, index) => (
             <li key={index} className="movie-item">
               <div className="movie-content">
-                {movie.i ? (
-                  <img src={movie.i.imageUrl} alt={movie.l} />
-                ) : (
-                  <p>No poster available</p>
-                )}
+              <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className="img" />
                 <div className="movie-details">
-                  <h5>{movie.l}</h5>
-                  <p>Release Date: {movie.y}</p>
-                  <p>Rating: {movie.rank}</p>
+                  <h5>{movie.title}</h5>
+                  <p>Release Date: {movie.release_date}</p>
+                  <p>Rating: {movie.vote_average}</p>
                   <form
                     onSubmit={(e) => {
                       e.preventDefault();
