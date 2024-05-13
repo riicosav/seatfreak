@@ -70,19 +70,21 @@ function DisplayMovie({ movieProps, switchClick }) {
                       <p>Day: {movie.day}</p>
                       <p>Time: {movie.time}</p>
                       <br />
-                      <button
-                        type="button"
-                        class="btn btn-primary"
-                        onClick={() => switchClick()}
-                      >
-                        Book Seats
-                      </button>
-                      <button
-                        class="btn btn-danger"
-                        onClick={() => removeMovie(index)}
-                      >
-                        Remove
-                      </button>
+                      <div className="dmButtons">
+                        <button
+                          type="button"
+                          className="btn btn-custom-primary"
+                          onClick={() => switchClick()}
+                        >
+                          Book Seats
+                        </button>
+                        <button
+                          class="btn btn-custom-danger"
+                          onClick={() => removeMovie(index)}
+                        >
+                          Remove
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
