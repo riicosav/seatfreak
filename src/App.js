@@ -199,6 +199,9 @@ if(switchPage) {
   if(selectedMovie) {
     displayMovie = <div>
     <p>{selectedMovie[0].movieTitle}</p>
+    <p>{selectedMovie[0].day}</p>
+    <p>{selectedMovie[0].time}</p>
+    <p>{selectedMovie[0].movieTitle}</p>
     <Theatre seatData={tempMovie[0].data} />
     </div>
 

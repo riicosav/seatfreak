@@ -50,6 +50,8 @@ function AddMovie({ movieProps }) {
       // Set movie title and ID
       console.log(selectedMovies)
       newSeatData[0].movieTitle = movie.title;
+      newSeatData[0].day = day;
+      newSeatData[0].time = time;
       newSeatData[0].id = newMovieId;
   
       // Set IDs for seats, columns, and rows
