@@ -172,16 +172,16 @@ async function bookSeats(theIndex) {
 }
 
 function deleteMovie() {
-  // // Deep clone the current movie list
-  // const newList = [...exampleMovieList];
+  // Deep clone the current movie list
+  const newList = [...exampleMovieList];
   
-  // // Remove the selected movie from the list
-  // newList.splice(selectedIndex, 1);
+  // Remove the selected movie from the list
+  newList.splice(selectedIndex, 1);
 
-  // // Update the state with the modified movie list
-  // setExampleMovieList(newList);
+  // Update the state with the modified movie list
+  setExampleMovieList(newList);
 
-  // setTempMovie(exampleMovieList[0]);
+  setTempMovie(exampleMovieList[0]);
 }
 
 async function saveChange(e) {
@@ -192,14 +192,7 @@ async function saveChange(e) {
     return newList;
   });
 
-  
 }
-
-// // delete
-// function saveChange2() {
-//   const theTemp = JSON.parse(JSON.stringify(exampleMovieList[selectedIndex]))
-//   setTempMovie(theTemp);
-// }
 
 if(switchPage) {
 
