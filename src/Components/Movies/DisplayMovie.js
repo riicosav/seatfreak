@@ -42,7 +42,6 @@ function DisplayMovie({ movieProps, switchClick }) {
     <div>
       {/* List of Added Movies */}
       <div>
-        <h2>List of Movies:</h2>
         {error && (
           <div id="errorSection">
             <h2>Error:</h2>
@@ -50,18 +49,20 @@ function DisplayMovie({ movieProps, switchClick }) {
           </div>
         )}
         <div className="movie-list">
+          <h2>
+            <center>List of Movies:</center>
+          </h2>
           {sortedDays.map((day) => (
             <div key={day}>
-              <h2 className="date-text">{day}</h2>
               {sortedMoviesByDate[day].map((movie, index) => (
                 <div key={index} className="movie-card">
                   <div className="row">
                     <div className="col">
-                        <img
-                          className="dp-img"
-                          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                          alt={movie.title}
-                        />
+                      <img
+                        className="dp-img"
+                        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                        alt={movie.title}
+                      />
                       <br />
                     </div>
                     <div className="col">
@@ -69,21 +70,19 @@ function DisplayMovie({ movieProps, switchClick }) {
                       <p>Day: {movie.day}</p>
                       <p>Time: {movie.time}</p>
                       <br />
-                      <div className="dmButtons">
-                        <button
-                          type="button"
-                          class="btn btn-primary"
-                          onClick={() => switchClick()}
-                        >
-                          Switch to Theatre
-                        </button>
-                        <button
-                          class="btn btn-danger"
-                          onClick={() => removeMovie(index)}
-                        >
-                          Remove
-                        </button>
-                      </div>
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        onClick={() => switchClick()}
+                      >
+                        Book Seats
+                      </button>
+                      <button
+                        class="btn btn-danger"
+                        onClick={() => removeMovie(index)}
+                      >
+                        Remove
+                      </button>
                     </div>
                   </div>
                 </div>
