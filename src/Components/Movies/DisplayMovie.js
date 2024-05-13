@@ -52,16 +52,13 @@ function DisplayMovie({movieProps}) {
                     <div key={day}>
                     <h2 className="date-text">{day}</h2>
                     <div className="movie-row">
-                        {sortedMoviesByDate[day].map((selectedMovie, index) => (
+                        {sortedMoviesByDate[day].map((movie, index) => (
                         <div key={index} className="movie-card">
-                            {selectedMovie.i ? (
-                            <img src={selectedMovie.i.imageUrl} alt={selectedMovie.l} className="img" />
-                            ) : (
-                            <p>No poster available</p>
-                            )} <br />
-                            <p>Title: {selectedMovie.l}</p>
-                            <p>Day: {selectedMovie.day}</p>
-                            <p>Time: {selectedMovie.time}</p>
+                             <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className="img" />
+                            <br />
+                            <p>Title: {movie.title}</p>
+                            <p>Day: {movie.release_date}</p>
+                            <p>Time: {movie.vote_average}</p>
                             <br /> <button onClick={() => removeMovie(index)}>Remove</button>
                         </div>
                         ))}
