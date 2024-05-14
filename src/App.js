@@ -11,7 +11,6 @@ function App() {
   const [query, setQuery] = useState('');
   const [selectedMovies, setSelectedMovies] = useState([]);
   const [error, setError] = useState('');
-  const [datesVisible, setDatesVisible] = useState(false);
   const [seatingVisible, setSeatingVisible] = useState(false);
   
   const [switchPage, setSwitchPage] = useState(false);
@@ -29,67 +28,6 @@ function App() {
   const switchClick = () => {
     setSwitchPage((switchPage)=>!switchPage);
   }
-
-  // let displayPage = <div>
-  //         <div className="full-screen">
-  //               {/* Navbar */}
-  //               <div className="navbar"> 
-  //                   <Navbar 
-  //                     setDatesAppear={setDatesAppear} 
-  //                     setSeatingAppear={setSeatingAppear}
-  //                   />
-  //                                 <button type="button" class="btn btn-primary" onClick={() => switchClick()}>Switch to Theatre</button>
-  //               </div>
-
-  //               {/* To Show Components dynamically */}
-  //                 {datesVisible && (
-  //                   <div className="container-movie-page"> 
-  //                     <AddMovie 
-  //                         movieProps={{
-  //                         movies: movies,
-  //                         query: query,
-  //                         setQuery: setQuery,
-  //                         selectedMovies: selectedMovies,
-  //                         setSelectedMovies: setSelectedMovies,
-  //                         setError: setError,
-  //                         fetchData: fetchData,
-  //                         setNewMovieId: setNewMovieId,
-  //                         newMovieId: newMovieId,
-  //                         setExampleMovieList: setExampleMovieList,
-  //                         exampleMovieList: exampleMovieList,
-  //                         seatData: seatData,
-  //                         }}
-  //                       />
-  //                   </div> 
-  //                   )}
-
-  //                 {seatingVisible && (
-  //                   <div className="container"> 
-  //                     <DisplayMovie
-  //                       movieProps={{
-  //                         selectedMovies: selectedMovies,
-  //                         setSelectedMovies: setSelectedMovies,
-  //                         error: error,
-                          
-  //                       }} 
-  //                       bookSeats={bookSeats}
-  //                       deleteMovie2={deleteMovie2}
-  //                       />
-  //                   </div> 
-  //                   )}
-                  
-  //               {/* Seating */}
-  //               <div className="center">
-  //                 <div>
-  //                     <h1 className="text-center">SeatFreak</h1>
-                      
-  //                 </div>
-                  
-  //               </div>
-  //             </div>
-          
-
-  // </div>
 
 function addSelectedSeats(data) {
     setSelectedSeats((prev)=>[...prev, data]);
@@ -174,46 +112,6 @@ async function saveChange(e) {
 
 }
 
-// if(switchPage) {
-
-//   let displayMovie = <div>
-//     <p>{selectedMovie[0].movieTitle}</p>
-//     <p>{selectedMovie[0].day}</p>
-//     <p>{selectedMovie[0].time}</p>
-//     <p>Price: ₱{selectedMovie[0].price}</p>
-//     <Theatre seatData={tempMovie[0].data} addSelectedSeats={addSelectedSeats} deleteSelectedSeats={deleteSelectedSeats}/>
-//     </div>
-
-//   if(selectedMovie) {
-//     displayMovie = <div>
-//     <p>{selectedMovie[0].movieTitle}</p>
-//     <p>{selectedMovie[0].day}</p>
-//     <p>{selectedMovie[0].time}</p>
-//     <p>Price: ₱{selectedMovie[0].price}</p>
-//     <Theatre seatData={tempMovie[0].data} addSelectedSeats={addSelectedSeats} deleteSelectedSeats={deleteSelectedSeats}/>
-//     </div>
-
-//   }
-
-//   displayPage = 
-//   <div>
-//    <h1 className="text-center">SeatFreak</h1>
-//     <div className="customContainer">
-//     <select className="form-select" aria-label="Default select example" onChange={handleChange}>
-//   {exampleMovieList.map((movie, index) => (
-//     <option key={index} value={index}>{movie[0].movieTitle}</option>
-//   ))}
-// </select>
-//     {displayMovie}
-//     <p class="text"> 
-//       You have selected <span>{selectedSeats.length}</span> seats for a price of ₱<span>{selectedSeats.length * tempMovie[0].price}</span>
-//     </p>
-//     <button type="button" className="btn btn-primary" onClick={saveChange}>Save</button>
-//     <button type="button" className="btn btn-danger" onClick={deleteMovie}>Delete</button>
-//     </div>
-//   </div>
-// }
-
    // Fetches data from API
    async function fetchData() {
     const url = `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=8afd20db7a02b0d89cbf914ffd94fdb3`;
@@ -233,15 +131,6 @@ async function saveChange(e) {
       console.error(error)
     }
   };
-
-  // // For Toggling Visibility
-  // async function setDatesAppear () {
-  //   setDatesVisible(!datesVisible)
-  // }
-
-  // async function setSeatingAppear() {
-  //   setSeatingVisible(!seatingVisible)
-  // }
 
   const toggleComponent = (componentName) => {
     setVisibleComponent(componentName);
@@ -293,6 +182,8 @@ async function saveChange(e) {
               setSelectedMovies: setSelectedMovies,
               error: error,
             }}
+            bookSeats={bookSeats}
+            deleteMovie2={deleteMovie2}
           />
         </div>
       )}
@@ -319,7 +210,10 @@ async function saveChange(e) {
           </button>
           <div>
             <p>{selectedMovie[0].movieTitle}</p>
-            <Theatre seatData={tempMovie[0].data} />
+            <Theatre 
+              seatData={tempMovie[0].data} 
+              addSelectedSeats={addSelectedSeats} 
+              deleteSelectedSeats={deleteSelectedSeats}/>
           </div>
           <button
             type="button"
