@@ -1,4 +1,4 @@
-function DisplayMovie({ movieProps }) {
+function DisplayMovie({ movieProps, switchClick }) {
   const { selectedMovies, setSelectedMovies, error } = movieProps;
   // Sorts and add movies by date
   const moviesByDate = selectedMovies.reduce((acc, movie) => {
@@ -42,47 +42,53 @@ function DisplayMovie({ movieProps }) {
     <div>
       {/* List of Added Movies */}
       <div>
-        <h2>List of Movies:</h2>
         {error && (
           <div id="errorSection">
             <h2>Error:</h2>
             <p>{error}</p>
           </div>
         )}
-        <div>
+        <div className="movie-list">
+          <h2>
+            <center>List of Movies:</center>
+          </h2>
           {sortedDays.map((day) => (
             <div key={day}>
-              <h2 className="date-text">{day}</h2>
-              <div className="movie-row">
-                {sortedMoviesByDate[day].map((selectedMovie, index) => (
-                  <div key={index} className="movie-card">
-                    <div className="row">
-                      <div className="col">
-                        {selectedMovie.i ? (
-                          <img
-                            className="dp-img"
-                            src={selectedMovie.i.imageUrl}
-                            alt={selectedMovie.l}
-                          />
-                        ) : (
-                          <p>No poster available</p>
-                        )}{" "}
-                        <br />
-                      </div>
-
-                      <div className="col">
-                        <p>Title: {selectedMovie.l}</p>
-                        <p>Day: {selectedMovie.day}</p>
-                        <p>Time: {selectedMovie.time}</p>
-                        <br />{" "}
-                        <button onClick={() => removeMovie(index)}>
+              {sortedMoviesByDate[day].map((movie, index) => (
+                <div key={index} className="movie-card">
+                  <div className="row">
+                    <div className="col">
+                      <img
+                        className="dp-img"
+                        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                        alt={movie.title}
+                      />
+                      <br />
+                    </div>
+                    <div className="col">
+                      <h3> {movie.title}</h3>
+                      <p>Day: {movie.day}</p>
+                      <p>Time: {movie.time}</p>
+                      <br />
+                      <div className="dmButtons">
+                        <button
+                          type="button"
+                          className="btn btn-custom-primary"
+                          onClick={() => switchClick()}
+                        >
+                          Book Seats
+                        </button>
+                        <button
+                          class="btn btn-custom-danger"
+                          onClick={() => removeMovie(index)}
+                        >
                           Remove
                         </button>
                       </div>
                     </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           ))}
         </div>

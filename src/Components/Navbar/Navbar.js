@@ -1,16 +1,25 @@
+import React, { useState } from "react";
 import seatFreakLogo from "../../images/seatfreak3.png";
-function Navbar({ setDatesAppear, setSeatingAppear }) {
+
+function Navbar({ setDatesAppear, setSeatingAppear, setHomeAppear }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
-    <div className="navbar">
+    <div className={`navbar ${menuOpen ? "responsive" : ""}`}>
       <div className="logo">
         <img
+          onClick={setHomeAppear}
           src={seatFreakLogo}
           alt="Logo"
           className="navbar-brand"
           style={{ width: "140px" }}
         />
       </div>
-      <div className="buttons">
+      <div className={`buttons ${menuOpen ? "show" : ""}`}>
         <button className="button" onClick={setDatesAppear}>
           Add Movies
         </button>
@@ -18,6 +27,9 @@ function Navbar({ setDatesAppear, setSeatingAppear }) {
           My Movies
         </button>
       </div>
+      <a href="javascript:void(0);" className="icon" onClick={toggleMenu}>
+        &#9776;
+      </a>
     </div>
   );
 }
