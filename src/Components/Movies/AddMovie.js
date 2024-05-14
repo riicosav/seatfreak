@@ -75,10 +75,10 @@ function AddMovie({ movieProps }) {
     <div>
       {/* Search function and Display of Movies from IMDB API */}
       <div className="gFeatures">
-        <div className="input-group mb-3">
+        <div className="search-box">
           <input
             type="text"
-            className="form-control"
+            className="search"
             placeholder="Search a movie..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
