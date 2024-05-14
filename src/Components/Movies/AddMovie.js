@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faStar } from "@fortawesome/free-solid-svg-icons";
 
 function AddMovie({ movieProps }) {
   const {
@@ -71,7 +71,26 @@ function AddMovie({ movieProps }) {
     return filteredMovies;
   }
 
-  const max = 3;
+  // Function to render star rating
+  function renderStarRating(rating) {
+    const percentage = (rating / 10) * 100; // Convert rating to percentage
+    return (
+      <div className="star-rating">
+        <div className="star-rating-top" style={{ width: `${percentage}%` }}>
+          {[...Array(5)].map((_, index) => (
+            <FontAwesomeIcon key={index} icon={faStar} className="star-icon" />
+          ))}
+        </div>
+        <div className="star-rating-bottom">
+          {[...Array(5)].map((_, index) => (
+            <FontAwesomeIcon key={index} icon={faStar} className="star-icon" />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  const max = 10;
 
   return (
     <div>
@@ -149,9 +168,11 @@ function AddMovie({ movieProps }) {
                       alt={movie.title}
                     />
                     <div className="movie-details">
-                      <h5>{movie.title}</h5>
-                      <p>Release Date: {movie.release_date}</p>
-                      <p>Rating: {movie.vote_average}</p>
+                      <h5 className="movie-title">{movie.title}</h5>
+                      <h5 className="movie-date">
+                        {new Date(movie.release_date).getFullYear()}
+                      </h5>
+                      <p>{renderStarRating(movie.vote_average)}</p>
                       <form
                         onSubmit={(e) => {
                           e.preventDefault();

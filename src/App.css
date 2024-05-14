@@ -167,7 +167,7 @@ body {
 
 .movie-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  grid-template-columns: repeat(4, 1fr); /* 3 columns */
   gap: 20px;
   list-style: none;
   padding: 0;
@@ -211,8 +211,12 @@ body {
   margin: 0;
   padding-bottom: 5px;
 }
-.movie-details h5 {
+.movie-title {
   font-weight: bold;
+}
+.movie-date {
+  font-weight: normal;
+  color: #b3b3b3;
 }
 .movie-details form {
   margin-top: auto;
@@ -273,6 +277,26 @@ select {
 .del-button:hover {
   background-color: #ff6666; /* Lighter shade of red on hover */
 }
+
+.star-rating {
+  position: relative;
+  display: inline-block;
+  font-size: 1.5rem; /* Adjust the size as needed */
+}
+
+.star-rating .star-rating-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  color: gold;
+}
+
+.star-rating .star-rating-bottom {
+  color: gray;
+}
+
 /* For navbar */
 .navbar {
   position: fixed;
