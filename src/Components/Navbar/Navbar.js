@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import seatFreakLogo from "../../images/seatfreak3.png";
 import jans from "../../images/jans.png";
 function Navbar({ setDatesAppear, setSeatingAppear, setHomeAppear }) {
@@ -32,12 +32,12 @@ function Navbar({ setDatesAppear, setSeatingAppear, setHomeAppear }) {
           Seats
         </button>
       </div>
-      <a href="#" className="icon" onClick={toggleMenu}>
+      {/* <a href="#" className="icon" onClick={toggleMenu}>
         <FontAwesomeIcon
           icon={menuOpen ? faXmark : faBars}
           className="menu-icon"
         />
-      </a>
+      </a> */}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faStar } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faSearch, faStar } from "@fortawesome/free-solid-svg-icons";
 
 function AddMovie({ movieProps }) {
 
@@ -24,7 +24,7 @@ function AddMovie({ movieProps }) {
   const [filterType, setFilterType] = useState("");
   const [genre, setGenre] = useState("");
 
-  // Add movie function
+  // Add Movie function
   async function addMovie(movie, day, time, price) {
     const isDuplicate = selectedMovies.some((selectedMovie) => {
       return selectedMovie.day === day && selectedMovie.time === time;
@@ -125,24 +125,24 @@ function AddMovie({ movieProps }) {
     return filteredMovies;
   }
 
-  // Function to render star rating
-  function renderStarRating(rating) {
-    const percentage = (rating / 10) * 100; // Convert rating to percentage
-    return (
-      <div className="star-rating">
-        <div className="star-rating-top" style={{ width: `${percentage}%` }}>
-          {[...Array(5)].map((_, index) => (
-            <FontAwesomeIcon key={index} icon={faStar} className="star-icon" />
-          ))}
-        </div>
-        <div className="star-rating-bottom">
-          {[...Array(5)].map((_, index) => (
-            <FontAwesomeIcon key={index} icon={faStar} className="star-icon" />
-          ))}
-        </div>
-      </div>
-    );
-  }
+  // // Function to render star rating
+  // function renderStarRating(rating) {
+  //   const percentage = (rating / 10) * 100; // Convert rating to percentage
+  //   return (
+  //     <div className="star-rating">
+  //       <div className="star-rating-top" style={{ width: `${percentage}%` }}>
+  //         {[...Array(5)].map((_, index) => (
+  //           <FontAwesomeIcon key={index} icon={faStar} className="star-icon" />
+  //         ))}
+  //       </div>
+  //       <div className="star-rating-bottom">
+  //         {[...Array(5)].map((_, index) => (
+  //           <FontAwesomeIcon key={index} icon={faStar} className="star-icon" />
+  //         ))}
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   const max = 10;
 
@@ -163,9 +163,10 @@ function AddMovie({ movieProps }) {
               }
             }}
           />
-          <span className="search-icon">
+          {/* Star Rating */}
+          {/* <span className="search-icon">
             <FontAwesomeIcon icon={faSearch} style={{ color: "black" }} />
-          </span>
+          </span> */}
         </div>
 
         {/* Filters */}
@@ -226,7 +227,7 @@ function AddMovie({ movieProps }) {
                       <h5 className="movie-date">
                         {new Date(movie.release_date).getFullYear()}
                       </h5>
-                      <p>{renderStarRating(movie.vote_average)}</p>
+                      {/* <p>{renderStarRating(movie.vote_average)}</p> */}
                       <form
                         onSubmit={(e) => {
                           e.preventDefault();
@@ -260,6 +261,9 @@ function AddMovie({ movieProps }) {
                             <p>Price:</p>
                             <input type="number" id="price" placeholder="0"></input>
                           </div>
+                          <button type="submit" className="add-button">
+                            Add Movie
+                          </button>
                         </div>
                         <br />
                       </form>
