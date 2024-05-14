@@ -88,8 +88,7 @@ function AddMovie({ movieProps }) {
           }}
         />
       </div>
-
-      {/* Filters */}
+      Filters
       <div className="filters">
         <select
           className="filter-dropdown"
@@ -128,7 +127,6 @@ function AddMovie({ movieProps }) {
           <option value="37">Western</option>
         </select>
       </div>
-
       <div>
         <ul className="movie-grid">
           {filterAndSortMovies(movies)
