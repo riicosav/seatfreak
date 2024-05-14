@@ -28,6 +28,9 @@ function Navbar({ setDatesAppear, setSeatingAppear, setHomeAppear }) {
         <button className="button button-my-movies" onClick={setSeatingAppear}>
           My Movies
         </button>
+        <button className="button button-my-movies" onClick={setSeatingAppear}>
+          Seats
+        </button>
       </div>
       <a href="#" className="icon" onClick={toggleMenu}>
         <FontAwesomeIcon
