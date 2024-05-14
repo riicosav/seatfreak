@@ -1,20 +1,16 @@
-import { useState } from 'react';
-import './App.css';
-import Navbar from './Components/Navbar/Navbar.js'
-import Seat from './Components/Seat.js';
-import Column from './Components/Column.js';
-import { seatData } from './Components/Data.js';
-import Theatre from './Components/Theatre.js';
-import AddMovie from './Components/Movies/AddMovie.js'
-import DisplayMovie from './Components/Movies/DisplayMovie.js';
-
+import { useState } from "react";
+import "./App.css";
+import Navbar from "./Components/Navbar/Navbar.js";
+import Theatre from "./Components/Theatre.js";
+import AddMovie from "./Components/Movies/AddMovie.js";
+import DisplayMovie from "./Components/Movies/DisplayMovie.js";
+import { seatData } from "./Components/Data.js";
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState('');
   const [selectedMovies, setSelectedMovies] = useState([]);
   const [error, setError] = useState('');
-  const [datesVisible, setDatesVisible] = useState(false);
   const [seatingVisible, setSeatingVisible] = useState(false);
   
   const [switchPage, setSwitchPage] = useState(false);
@@ -25,99 +21,22 @@ function App() {
   const [tempMovie, setTempMovie] = useState(initialTempMovie);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [newMovieId, setNewMovieId] = useState(exampleMovieList.length);
+  const [selectedSeats, setSelectedSeats] = useState([]);
+
+  const [visibleComponent, setVisibleComponent] = useState([]);
 
   const switchClick = () => {
     setSwitchPage((switchPage)=>!switchPage);
   }
 
-  function addNewMovie() {
-    // Deep clone the seatData structure
-    const newSeatData = JSON.parse(JSON.stringify(seatData));
-
-    // Generate unique IDs for the new movie
-    setNewMovieId((newMovieId)=> newMovieId + exampleMovieList.length);
-    const newColumnIdStart = newMovieId * 7 + 21;
-    const newRowIdStart = newMovieId * 14 + 1;
-
-    // Set movie title and ID
-    newSeatData[0].movieTitle = `example ${newMovieId}`;
-    
-    newSeatData[0].id = newMovieId;
-
-    // Set IDs for seats, columns, and rows
-    newSeatData[0].data.forEach((column, columnIndex) => {
-        column.id = newMovieId * 7 + columnIndex + 1;
-
-        column.column.forEach((row, rowIndex) => {
-            row.id = newRowIdStart + rowIndex;
-
-            row.row.forEach((seat, seatIndex) => {
-                seat.id = newColumnIdStart + columnIndex + seatIndex * 7;
-            });
-        });
-    });
-
-    // Deep clone the existing movie list and append the new movie
-    const newList = [...exampleMovieList, newSeatData];
-
-    // Update the state with the new movie list
-    setExampleMovieList(newList);
+function addSelectedSeats(data) {
+    setSelectedSeats((prev)=>[...prev, data]);
 }
 
-  let displayPage = <div>
-
-          <div className="full-screen">
-                {/* Navbar */}
-                <div className="navbar"> 
-                    <Navbar 
-                      setDatesAppear={setDatesAppear} 
-                      setSeatingAppear={setSeatingAppear}
-                    />
-                                  <button type="button" class="btn btn-primary" onClick={() => switchClick()}>Switch to Theatre</button>
-                </div>
-
-                {/* To Show Components dynamically */}
-                  {datesVisible && (
-                    <div className="container-movie-page"> 
-                      <AddMovie 
-                          movieProps={{
-                          movies: movies,
-                          query: query,
-                          setQuery: setQuery,
-                          selectedMovies: selectedMovies,
-                          setSelectedMovies: setSelectedMovies,
-                          setError: setError,
-                          fetchData: fetchData,
-                          }}
-                        />
-                    </div> 
-                    )}
-
-                  {seatingVisible && (
-                    <div className="container"> 
-                      <DisplayMovie
-                        movieProps={{
-                          selectedMovies: selectedMovies,
-                          setSelectedMovies: setSelectedMovies,
-                          error: error,
-                        }}  />
-                    </div> 
-                    )}
-                  
-                {/* Seating */}
-                <div className="center">
-                  <div>
-                      <h1 className="text-center">SeatFreak</h1>
-                      
-                  </div>
-                  
-                </div>
-              </div>
-          
-
-  </div>
-
-function handleChange(event) {
+function deleteSelectedSeats(data) {
+  setSelectedSeats((prev)=>prev.filter((seat)=> seat !== data));
+}
+async function handleChange(event) {
   const theIndex = event.target.selectedIndex;
   setSelectedIndex(theIndex);
   console.log(event.target.selectedIndex+"hi");
@@ -127,7 +46,47 @@ function handleChange(event) {
   const theTemp = JSON.parse(JSON.stringify(exampleMovieList[theIndex]))
   setTempMovie(theTemp);
   console.log(selectedMovie[0].id);
-} 
+  setSelectedSeats([]);
+}
+
+async function bookSeats(theIndex) {
+
+    let finalIndex = 0;
+
+    for(let i = 0; i < exampleMovieList.length; i++) {
+      if(exampleMovieList[i][0].id === theIndex) {
+          finalIndex = i;
+          break;
+      }
+    }
+    setSelectedIndex(finalIndex);
+    setSelectedMovie(exampleMovieList[finalIndex]);
+    const theTemp = JSON.parse(JSON.stringify(exampleMovieList[finalIndex]))
+    setTempMovie(theTemp);
+    switchClick();
+    setSelectedSeats([]);
+   
+
+}
+
+async function deleteMovie2(theIndex) {
+  let finalIndex = 0;
+  const newList = [...exampleMovieList];
+    for(let i = 0; i < exampleMovieList.length; i++) {
+    
+      
+      if(exampleMovieList[i][0].id === theIndex) {
+          finalIndex = i;
+          console.log(i);
+          break;
+      }
+    }
+
+    newList.splice(finalIndex, 1);
+    setExampleMovieList(newList);
+    setTempMovie(exampleMovieList[0]);
+    setSelectedSeats([])
+}
 
 function deleteMovie() {
   // Deep clone the current movie list
@@ -142,62 +101,22 @@ function deleteMovie() {
   setTempMovie(exampleMovieList[0]);
 }
 
-function saveChange(e) {
+async function saveChange(e) {
   e.preventDefault();
   setExampleMovieList(prevList => {
     const newList = [...prevList];
     newList[selectedIndex] = tempMovie;
     return newList;
   });
+  setSelectedSeats([])
 
-  
-}
-
-function saveChange2() {
-  const theTemp = JSON.parse(JSON.stringify(exampleMovieList[selectedIndex]))
-  setTempMovie(theTemp);
-}
-
-if(switchPage) {
-
-  let displayMovie = <div>
-    <p>{selectedMovie[0].movieTitle}</p>
-    <Theatre seatData={tempMovie[0].data} />
-    
-   
-    </div>
-
-  if(selectedMovie) {
-    displayMovie = <div>
-    <p>{selectedMovie[0].movieTitle}</p>
-    <Theatre seatData={tempMovie[0].data} />
-    </div>
-
-  }
-
-  displayPage = 
-  <div>
-   <h1 className="text-center">SeatFreak</h1>
-    <div className="customContainer">
-    <select class="form-select" aria-label="Default select example" onChange={handleChange}>
-      {exampleMovieList.map((movie, index) => (<option key="index" value={movie}>{movie[0].movieTitle}{index}</option>))}
-      {/*add label for day, time and price  
-      */}
-    </select>
-    <button type="button" className="btn btn-primary" onClick={addNewMovie}>Add New Movie</button>
-
-    {displayMovie}
-    <button type="button" className="btn btn-primary" onClick={saveChange}>Save</button>
-    <button type="button" className="btn btn-danger" onClick={deleteMovie}>Delete</button>
-    </div>
-  </div>
 }
 
    // Fetches data from API
    async function fetchData() {
     const url = `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=8afd20db7a02b0d89cbf914ffd94fdb3`;
     const options = {
-      method: 'GET',
+      method: "GET",
       headers: {
         accept: 'application/json',
         Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YWZkMjBkYjdhMDJiMGQ4OWNiZjkxNGZmZDk0ZmRiMyIsInN1YiI6IjY2NDBlMzI2OTJkNzFkMjc0NWMxMjFmOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.t4nZwRFJu94kEOyEDE-lsvClAVXqznrAm7cM2jwFFYY'
@@ -211,25 +130,109 @@ if(switchPage) {
     } catch (error) {
       console.error(error)
     }
-  }
+  };
 
-  // For Toggling Visibility
-  function setDatesAppear () {
-    setDatesVisible(!datesVisible)
-  }
-
-  function setSeatingAppear() {
-    setSeatingVisible(!seatingVisible)
-  }
+  const toggleComponent = (componentName) => {
+    setVisibleComponent(componentName);
+  };
 
   return (
-    <div>
-      {displayPage}
+    <div className="full-screen">
+      <div className="navbar">
+        <Navbar
+          setDatesAppear={() => toggleComponent("addMovie")}
+          setSeatingAppear={() => toggleComponent("displayMovie")}
+          setHomeAppear={() => toggleComponent("home")}
+        />
+      </div>
+
+      {visibleComponent === "home" && (
+        <div className="center">
+          <h1 className="text-center">SeatFreak</h1>
+        </div>
+      )}
+
+      {visibleComponent === "addMovie" && (
+        <div className="container-movie-page">
+          <AddMovie
+            movieProps={{
+              movies: movies,
+              query: query,
+              setQuery: setQuery,
+              selectedMovies: selectedMovies,
+              setSelectedMovies: setSelectedMovies,
+              setError: setError,
+              fetchData: fetchData,
+              setNewMovieId: setNewMovieId,
+              newMovieId: newMovieId,
+              setExampleMovieList: setExampleMovieList,
+              exampleMovieList: exampleMovieList,
+              seatData: seatData,
+            }}
+          />
+        </div>
+      )}
+
+      {visibleComponent === "displayMovie" && (
+        <div className="container">
+          <DisplayMovie
+            switchClick={() => toggleComponent("displayMovie")}
+            movieProps={{
+              selectedMovies: selectedMovies,
+              setSelectedMovies: setSelectedMovies,
+              error: error,
+            }}
+            bookSeats={bookSeats}
+            deleteMovie2={deleteMovie2}
+          />
+        </div>
+      )}
+
+      {visibleComponent === "displayMovie" && (
+        <div className="customContainer">
+          <select
+            className="form-select"
+            aria-label="Default select example"
+            onChange={handleChange}
+          >
+            {exampleMovieList.map((movie, index) => (
+              <option key={index} value={movie}>
+                {movie[0].movieTitle}
+              </option>
+            ))}
+          </select>
+          <button
+            type="button"
+            className="btn btn-primary"
+            // onClick={addNewMovie}
+          >
+            Add New Movie
+          </button>
+          <div>
+            <p>{selectedMovie[0].movieTitle}</p>
+            <Theatre 
+              seatData={tempMovie[0].data} 
+              addSelectedSeats={addSelectedSeats} 
+              deleteSelectedSeats={deleteSelectedSeats}/>
+          </div>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={saveChange}
+          >
+            Save
+          </button>
+          <button
+            type="button"
+            className="btn btn-danger"
+            onClick={deleteMovie}
+          >
+            Delete
+          </button>
+        </div>
+      )}
     </div>
-    
   );
 }
 
 export default App;
-
-

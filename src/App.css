@@ -29,10 +29,14 @@
 }
 body {
   background-image: linear-gradient(to bottom, #232432, #191a24);
+  background-repeat: no-repeat; /* Prevent background image from repeating /
+  background-size: cover; / Ensure the background covers the entire viewport */
+  background-attachment: fixed;
   color: white;
   margin: 0;
   display: flex;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 .row {
   display: flex;
@@ -63,12 +67,22 @@ body {
   height: 100vh; /* Full viewport height */
 }
 .container-movie-page {
-  display: flex;
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
   padding-top: 10%;
 }
+.input-group input[type="text"] {
+  background-color: #f2f2f205; /* Change this to the desired background color */
+  color: #fefefe; /* Change this to the desired text color */
+  border: 1px solid #ccc; /* Change this to the desired border color */
+  border-radius: 5px; /* Optional: Add border-radius for rounded corners */
+  padding: 10px; /* Optional: Add padding for better appearance */
+}
 
+.input-group input[type="text"]::placeholder {
+  /* Optional: Customize placeholder text style */
+  color: #999; /* Change this to the desired placeholder text color */
+}
 .search-container {
   /* problem to AHHAHA di ko ma uupper right */
   align-items: center;
@@ -103,19 +117,39 @@ body {
   text-align: center;
 }
 
-.img {
-  width: 25%;
-}
-
 /* For Movies */
 
 .movie-card {
-  width: 300px;
+  width: 30em;
   height: auto;
   padding: 10px;
   margin: auto;
-  border: solid rgb(255, 255, 255);
+  box-shadow: 10px 10px 18px 0px rgba(0, 0, 0, 0.74);
   border-radius: 10px;
+  background-color: #2e3041;
+  margin-bottom: 30px;
+  transition: transform 0.3s ease;
+}
+.movie-card:hover {
+  transform: scale(1.05); /* Enlarge the item on hover */
+}
+.movie-list {
+  background-color: #45475f;
+  width: 50em;
+  height: auto;
+  border-radius: 5px;
+  padding: 20px;
+  margin: auto;
+}
+.movie-card p {
+  font-size: 20px;
+}
+.colU:first-child {
+  flex-basis: 25%; /* Set the width of the first column to 25% */
+}
+
+.colU:last-child {
+  flex-basis: 75%; /* Set the width of the last column to 75% */
 }
 
 .movie-row {
@@ -133,14 +167,20 @@ body {
 
 .movie-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  grid-template-columns: repeat(4, 1fr); /* 3 columns */
   gap: 20px;
   list-style: none;
   padding: 0;
   justify-content: center; /* Center the grid items horizontally */
+  margin-top: 50px;
 }
-
+.movieContent {
+  display: flex;
+  justify-content: center;
+}
 .movie-item {
+  width: 300px; /* Set a fixed width for all movie items */
+  height: auto; /* Set a fixed height for all movie items */
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 10px 10px 18px 0px rgba(0, 0, 0, 0.74);
@@ -160,7 +200,6 @@ body {
   display: flex;
   flex-direction: column;
 }
-
 .movie-details {
   flex: 1;
   padding: 10px;
@@ -172,8 +211,12 @@ body {
   margin: 0;
   padding-bottom: 5px;
 }
-.movie-details h5{
+.movie-title {
   font-weight: bold;
+}
+.movie-date {
+  font-weight: normal;
+  color: #b3b3b3;
 }
 .movie-details form {
   margin-top: auto;
@@ -182,11 +225,14 @@ body {
   display: flex;
   justify-content: center; /* Center horizontally */
 }
-
+.dp-img {
+  width: 100%; /* Set the width to 100% */
+  height: 100%; /* Allow the height to adjust automatically based on the aspect ratio */
+  object-fit: cover; /* Ensure the image covers the entire container */
+}
 .display-movie-pic {
   width: 100%; /* Set the width to 100% */
   height: auto; /* Allow the height to adjust automatically based on the aspect ratio */
-  max-height: 350px; /* Set a maximum height for the images */
   object-fit: cover; /* Ensure the image covers the entire container */
 }
 
@@ -231,34 +277,225 @@ select {
 .del-button:hover {
   background-color: #ff6666; /* Lighter shade of red on hover */
 }
-/* For navbar */
 
+.star-rating {
+  position: relative;
+  display: inline-block;
+  font-size: 1.5rem; /* Adjust the size as needed */
+}
+
+.star-rating .star-rating-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  color: gold;
+}
+
+.star-rating .star-rating-bottom {
+  color: gray;
+}
+
+/* For navbar */
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
-  height: 100px;
-  background-color: #232432;
+  height: auto;
+  /* background-color: #262739; */
+  background-color: #161618;
   overflow: hidden;
   margin-bottom: 50px;
-  padding: 10px;
+
+  display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 1000;
 }
 
 .button {
+  position: relative; /* Needed for the ripple effect */
   margin-right: 10px;
+  padding: 10px 20px;
   color: white;
-  font-size: 20px;
+  font-size: 16px;
+  font-weight: 500;
   background-color: rgba(255, 255, 255, 0); /* Transparent background */
   border: none;
-  transition: 0.2s;
-}
-.buttons {
-  margin-right: 30px;
+  cursor: pointer;
+  overflow: hidden; /* Hide the ripple overflow */
+  transition: color 0.3s;
 }
 
 .button:hover {
-  color: #00ea5d; /* Change text color on hover */
-  text-shadow: 2px 2px 4px rgba(0, 234, 93, 0.5); /* Add shadow to text on hover */
+  color: #00ea5d;
+  text-shadow: 2px 2px 4px rgba(0, 234, 93, 0.5);
+}
+
+/* Ripple effect */
+.button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3); /* Ripple color */
+  border-radius: 50%;
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.5s, opacity 1s;
+}
+
+.button:hover::before {
+  transform: scale(4);
+  opacity: 1;
+}
+
+/* Specific class for 'My Movies' button */
+.button-my-movies {
+  margin-left: 10px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .button {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
+
+/* Hamburger icon */
+.icon {
+  display: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: white;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .buttons {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .buttons.show {
+    display: flex;
+    background-color: #272829;
+  }
+
+  .icon {
+    display: block;
+  }
+
+  .navbar.responsive .buttons {
+    display: flex;
+  }
+
+  .button {
+    margin: 10px 0;
+  }
+}
+
+.input-group {
+  margin-bottom: 5px;
+}
+
+.logo {
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Add these styles to your CSS */
+
+/* Add these styles to your CSS */
+
+.filters {
+  display: flex;
+  gap: 10px; /* Space between the filter dropdowns */
+  margin-bottom: 10px;
+}
+
+.filter-dropdown {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #2e3041;
+  color: white;
+}
+.customContainer {
+  margin-top: 50px;
+  margin-left: 350px;
+  margin-right: 350px;
+}
+.btn-custom-primary {
+  background-color: #00ea5d;
+  color: rgb(27, 27, 27);
+  margin: 5px;
+}
+.btn-custom-danger {
+  background-color: rgb(225, 18, 18);
+  color: rgb(244, 244, 244);
+  margin: 5px;
+  width: auto;
+}
+.btn-custom-danger:hover {
+  background-color: rgb(237, 37, 37);
+}
+.btn-custom-primary:hover {
+  background-color: #1bf572;
+  color: #080808;
+}
+.dmButtons {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.gFeatures {
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.search {
+  min-width: 100%;
+  width: auto; /* Set a fixed width for all movie items */
+  background: transparent;
+  outline: none;
+  border: none;
+}
+.search-box {
+  padding: 10px;
+  background-color: white;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+.icon {
+  font-size: 24px;
+  cursor: pointer;
+  margin-right: 20px; /* Adjust the value as needed */
+}
+
+.menu-icon {
+  font-size: 24px;
+  cursor: pointer;
+  margin-left: 20px; /* Adjust the value as needed */
+}
+.search-box {
+  position: relative;
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Center vertically */
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px; /* Adjust as needed */
 }
