@@ -121,7 +121,7 @@ body {
 /* For Movies */
 
 .movie-card {
-  width: 35em;
+  width: 30em;
   height: auto;
   padding: 10px;
   margin: auto;
@@ -277,7 +277,7 @@ select {
   background-color: #262739;
   overflow: hidden;
   margin-bottom: 50px;
-  padding: 10px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -343,4 +343,9 @@ select {
   .button {
     margin: 10px 0;
   }
+}
+.customContainer {
+  margin-top: 50px;
+  margin-left: 350px;
+  margin-right: 350px;
 }
