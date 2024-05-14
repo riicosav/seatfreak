@@ -269,7 +269,6 @@ select {
   background-color: #ff6666; /* Lighter shade of red on hover */
 }
 /* For navbar */
-
 .navbar {
   position: fixed;
   top: 0;
@@ -279,9 +278,19 @@ select {
   overflow: hidden;
   margin-bottom: 50px;
   padding: 10px;
+  display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   z-index: 1000;
+}
+
+.navbar .logo {
+  margin-right: auto;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
 }
 
 .button {
@@ -289,45 +298,45 @@ select {
   color: white;
   font-size: 20px;
   font-weight: 500;
-  background-color: rgba(255, 255, 255, 0); /* Transparent background */
+  background-color: rgba(255, 255, 255, 0);
   border: none;
   transition: 0.2s;
 }
-.buttons {
-  margin-right: 30px;
-}
 
 .button:hover {
-  color: #00ea5d; /* Change text color on hover */
-  text-shadow: 2px 2px 4px rgba(0, 234, 93, 0.5); /* Add shadow to text on hover */
-}
-.btn {
-  margin: 10px;
-  width: 300px;
-  padding: 5px;
-}
-.logo {
-  margin-right: 580px;
-}
-.btn-custom-primary {
-  background-color: #00ea5d;
-  font-weight: 600;
-  color: rgb(0, 0, 0);
-  box-shadow: 3px 4px 10px 0px rgba(0, 0, 0, 0.74);
+  color: #00ea5d;
+  text-shadow: 2px 2px 4px rgba(0, 234, 93, 0.5);
 }
 
-.btn-custom-primary:hover {
-  background-color: #bbf6a7 /* Your custom hover color */;
-  color: rgb(0, 0, 0) /* Your custom text hover color */;
-}
-.btn-custom-danger {
-  background-color: #ea0000;
-  font-weight: 600;
-  color: rgb(255, 255, 255);
-  box-shadow: 3px 4px 10px 0px rgba(0, 0, 0, 0.74);
+/* Hamburger icon */
+.icon {
+  display: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: white;
 }
 
-.btn-custom-danger:hover {
-  background-color: #ff2c21 /* Your custom hover color */;
-  color: rgb(255, 255, 255) /* Your custom text hover color */;
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .buttons {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .buttons.show {
+    display: flex;
+  }
+
+  .icon {
+    display: block;
+  }
+
+  .navbar.responsive .buttons {
+    display: flex;
+  }
+
+  .button {
+    margin: 10px 0;
+  }
 }
