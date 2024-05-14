@@ -286,18 +286,56 @@ select {
 }
 
 .button {
+  position: relative; /* Needed for the ripple effect */
   margin-right: 10px;
+  padding: 10px 20px;
   color: white;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 500;
-  background-color: rgba(255, 255, 255, 0);
+  background-color: rgba(255, 255, 255, 0); /* Transparent background */
   border: none;
-  transition: 0.2s;
+  cursor: pointer;
+  overflow: hidden; /* Hide the ripple overflow */
+  transition: color 0.3s;
 }
 
 .button:hover {
   color: #00ea5d;
   text-shadow: 2px 2px 4px rgba(0, 234, 93, 0.5);
+}
+
+/* Ripple effect */
+.button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3); /* Ripple color */
+  border-radius: 50%;
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.5s, opacity 1s;
+}
+
+.button:hover::before {
+  transform: scale(4);
+  opacity: 1;
+}
+
+/* Specific class for 'My Movies' button */
+.button-my-movies {
+  margin-left: 10px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .button {
+    width: 100%;
+    margin: 5px 0;
+  }
 }
 
 /* Hamburger icon */
@@ -335,4 +373,32 @@ select {
 
 .input-group {
   margin-bottom: 5px;
+}
+
+.logo {
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Add these styles to your CSS */
+
+/* Add these styles to your CSS */
+
+.filters {
+  display: flex;
+  gap: 10px; /* Space between the filter dropdowns */
+  margin-bottom: 10px;
+}
+
+.filter-dropdown {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #2e3041;
+  color: white;
 }
