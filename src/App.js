@@ -25,6 +25,8 @@ function App() {
   const [tempMovie, setTempMovie] = useState(initialTempMovie);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [newMovieId, setNewMovieId] = useState(exampleMovieList.length);
+  const [selectedSeats, setSelectedSeats] = useState([]);
+
 
   const switchClick = () => {
     setSwitchPage((switchPage)=>!switchPage);
@@ -128,8 +130,10 @@ function App() {
                           selectedMovies: selectedMovies,
                           setSelectedMovies: setSelectedMovies,
                           error: error,
+                          
                         }} 
                         bookSeats={bookSeats}
+                        deleteMovie2={deleteMovie2}
                         />
                     </div> 
                     )}
@@ -147,6 +151,13 @@ function App() {
 
   </div>
 
+function addSelectedSeats(data) {
+    setSelectedSeats((prev)=>[...prev, data]);
+}
+
+function deleteSelectedSeats(data) {
+  setSelectedSeats((prev)=>prev.filter((seat)=> seat !== data));
+}
 async function handleChange(event) {
   const theIndex = event.target.selectedIndex;
   setSelectedIndex(theIndex);
@@ -157,18 +168,46 @@ async function handleChange(event) {
   const theTemp = JSON.parse(JSON.stringify(exampleMovieList[theIndex]))
   setTempMovie(theTemp);
   console.log(selectedMovie[0].id);
+  setSelectedSeats([]);
 }
 
 async function bookSeats(theIndex) {
 
-    setSelectedIndex(theIndex);
-    setSelectedMovie(exampleMovieList[theIndex]);
-    const theTemp = JSON.parse(JSON.stringify(exampleMovieList[theIndex]))
+    let finalIndex = 0;
+
+    for(let i = 0; i < exampleMovieList.length; i++) {
+      if(exampleMovieList[i][0].id === theIndex) {
+          finalIndex = i;
+          break;
+      }
+    }
+    setSelectedIndex(finalIndex);
+    setSelectedMovie(exampleMovieList[finalIndex]);
+    const theTemp = JSON.parse(JSON.stringify(exampleMovieList[finalIndex]))
     setTempMovie(theTemp);
     switchClick();
-
+    setSelectedSeats([]);
    
 
+}
+
+async function deleteMovie2(theIndex) {
+  let finalIndex = 0;
+  const newList = [...exampleMovieList];
+    for(let i = 0; i < exampleMovieList.length; i++) {
+    
+      
+      if(exampleMovieList[i][0].id === theIndex) {
+          finalIndex = i;
+          console.log(i);
+          break;
+      }
+    }
+
+    newList.splice(finalIndex, 1);
+    setExampleMovieList(newList);
+    setTempMovie(exampleMovieList[0]);
+    setSelectedSeats([])
 }
 
 function deleteMovie() {
@@ -191,6 +230,7 @@ async function saveChange(e) {
     newList[selectedIndex] = tempMovie;
     return newList;
   });
+  setSelectedSeats([])
 
 }
 
@@ -200,7 +240,8 @@ if(switchPage) {
     <p>{selectedMovie[0].movieTitle}</p>
     <p>{selectedMovie[0].day}</p>
     <p>{selectedMovie[0].time}</p>
-    <Theatre seatData={tempMovie[0].data} />
+    <p>Price: ₱{selectedMovie[0].price}</p>
+    <Theatre seatData={tempMovie[0].data} addSelectedSeats={addSelectedSeats} deleteSelectedSeats={deleteSelectedSeats}/>
     </div>
 
   if(selectedMovie) {
@@ -208,8 +249,8 @@ if(switchPage) {
     <p>{selectedMovie[0].movieTitle}</p>
     <p>{selectedMovie[0].day}</p>
     <p>{selectedMovie[0].time}</p>
-    <p>{selectedMovie[0].movieTitle}</p>
-    <Theatre seatData={tempMovie[0].data} />
+    <p>Price: ₱{selectedMovie[0].price}</p>
+    <Theatre seatData={tempMovie[0].data} addSelectedSeats={addSelectedSeats} deleteSelectedSeats={deleteSelectedSeats}/>
     </div>
 
   }
@@ -224,6 +265,9 @@ if(switchPage) {
   ))}
 </select>
     {displayMovie}
+    <p class="text"> 
+      You have selected <span>{selectedSeats.length}</span> seats for a price of ₱<span>{selectedSeats.length * tempMovie[0].price}</span>
+    </p>
     <button type="button" className="btn btn-primary" onClick={saveChange}>Save</button>
     <button type="button" className="btn btn-danger" onClick={deleteMovie}>Delete</button>
     </div>

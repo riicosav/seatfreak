@@ -21,7 +21,7 @@ function AddMovie({ movieProps }) {
   } = movieProps;
 
   // Add movie function
-  async function addMovie(movie, day, time) {
+  async function addMovie(movie, day, time, price) {
     const isDuplicate = selectedMovies.some((selectedMovie) => {
       return selectedMovie.day === day && selectedMovie.time === time;
     });
@@ -42,6 +42,7 @@ function AddMovie({ movieProps }) {
           ...movie,
           day: day,
           time: time,
+          price: price,
           index: movieIndex,
         },
       ]);
@@ -60,6 +61,7 @@ function AddMovie({ movieProps }) {
       newSeatData[0].day = day;
       newSeatData[0].time = time;
       newSeatData[0].id = newMovieId;
+      newSeatData[0].price = price;
   
       // Set IDs for seats, columns, and rows
       newSeatData[0].data.forEach((column, columnIndex) => {
@@ -134,7 +136,12 @@ function AddMovie({ movieProps }) {
                       e.preventDefault();
                       const day = e.target.day.value;
                       const time = e.target.time.value;
-                      addMovie(movie, day, time);
+                      let price = e.target.price.value;
+                      if(!price) {
+                         price = 0;
+                         console.log("price is empty");
+                      }
+                      addMovie(movie, day, time, price);
                       setMovieIndex(prevIndex => prevIndex + 1);
                       console.log("Movie Index: " + movieIndex);
                     }}
@@ -156,6 +163,8 @@ function AddMovie({ movieProps }) {
                           <option>3:30-4:30pm</option>
                           <option>5:00-7:00pm</option>
                         </select>
+                        <p>Price:</p>
+                        <input type="number" id="price" placeholder="0"></input>
                       </div>
                     </div>
 

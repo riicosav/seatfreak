@@ -1,4 +1,4 @@
-function DisplayMovie({movieProps, bookSeats}) {
+function DisplayMovie({movieProps, bookSeats, deleteMovie2}) {
     const {selectedMovies, setSelectedMovies, error} = movieProps
     // Sorts and add movies by date
     const moviesByDate = selectedMovies.reduce((acc, movie) => {
@@ -31,9 +31,11 @@ function DisplayMovie({movieProps, bookSeats}) {
     });
 
     // Remove movie function
-    async function removeMovie(indexToRemove) {
+    async function removeMovie(indexToRemove, index2) {
         const newSelectedMovies = selectedMovies.filter((_, index) => index !== indexToRemove);
         setSelectedMovies(newSelectedMovies);
+
+        deleteMovie2(index2);
     }
 
     return (
@@ -59,7 +61,7 @@ function DisplayMovie({movieProps, bookSeats}) {
                             <p>Title: {movie.title}</p>
                             <p>Day: {movie.release_date}</p>
                             <p>Time: {movie.vote_average}</p>
-                            <br /> <button onClick={() => removeMovie(index)}>Remove</button>
+                            <br /> <button onClick={() => removeMovie(index, movie.index)}>Remove</button>
                             <button onClick={() => bookSeats(movie.index)}>Book Seats</button>
                         </div>
                         ))}
