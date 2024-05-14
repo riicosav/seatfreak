@@ -3,6 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faStar } from "@fortawesome/free-solid-svg-icons";
 
 function AddMovie({ movieProps }) {
+
+  const [movieIndex, setMovieIndex] = useState(1);
+
   const {
     movies,
     selectedMovies,
@@ -11,13 +14,18 @@ function AddMovie({ movieProps }) {
     setQuery,
     setError,
     fetchData,
+    setNewMovieId,
+    newMovieId,
+    setExampleMovieList,
+    exampleMovieList,
+    seatData,
   } = movieProps;
 
   const [filterType, setFilterType] = useState("");
   const [genre, setGenre] = useState("");
 
   // Add movie function
-  function addMovie(movie, day, time) {
+  async function addMovie(movie, day, time, price) {
     const isDuplicate = selectedMovies.some((selectedMovie) => {
       return selectedMovie.day === day && selectedMovie.time === time;
     });
@@ -38,10 +46,56 @@ function AddMovie({ movieProps }) {
           ...movie,
           day: day,
           time: time,
+          price: price,
+          index: movieIndex,
         },
       ]);
-      setError("");
+  
+      // Deep clone the seatData structure
+      const newSeatData = JSON.parse(JSON.stringify(seatData));
+  
+      // Generate unique IDs for the new movie
+      setNewMovieId((newMovieId)=> newMovieId + exampleMovieList.length);
+      const newColumnIdStart = newMovieId * 7 + 21;
+      const newRowIdStart = newMovieId * 14 + 1;
+  
+      // Set movie title and ID
+      console.log(selectedMovies)
+      newSeatData[0].movieTitle = movie.title;
+      newSeatData[0].day = day;
+      newSeatData[0].time = time;
+      newSeatData[0].id = newMovieId;
+      newSeatData[0].price = price;
+  
+      // Set IDs for seats, columns, and rows
+      newSeatData[0].data.forEach((column, columnIndex) => {
+          column.id = newMovieId * 7 + columnIndex + 1;
+  
+          column.column.forEach((row, rowIndex) => {
+              row.id = newRowIdStart + rowIndex;
+  
+              row.row.forEach((seat, seatIndex) => {
+                  seat.id = newColumnIdStart + columnIndex + seatIndex * 7;
+              });
+          });
+      });
+
+      // Deep clone the existing movie list and append the new movie
+      const newList = [...exampleMovieList, newSeatData];
+  
+      // Update the state with the new movie list
+      setExampleMovieList(newList);
+  
     }
+  }
+
+  async function setMovie(movie, day, time) {
+    const newSeatData = JSON.parse(JSON.stringify(seatData));
+    
+    // Generate unique IDs for the new movie
+    setNewMovieId((newMovieId)=> newMovieId + exampleMovieList.length);
+    const newColumnIdStart = newMovieId * 7 + 21;
+    const newRowIdStart = newMovieId * 14 + 1;
   }
 
   // Searching in IMDB Database
@@ -178,7 +232,14 @@ function AddMovie({ movieProps }) {
                           e.preventDefault();
                           const day = e.target.day.value;
                           const time = e.target.time.value;
-                          addMovie(movie, day, time);
+                          let price = e.target.price.value;
+                          if(!price) {
+                            price = 0;
+                            console.log("price is empty");
+                          }
+                          addMovie(movie, day, time, price);
+                          setMovieIndex(prevIndex => prevIndex + 1);
+                          console.log("Movie Index: " + movieIndex);
                         }}
                       >
                         <div>
@@ -196,12 +257,11 @@ function AddMovie({ movieProps }) {
                               <option>3:30-4:30pm</option>
                               <option>5:00-7:00pm</option>
                             </select>
+                            <p>Price:</p>
+                            <input type="number" id="price" placeholder="0"></input>
                           </div>
                         </div>
                         <br />
-                        <button type="submit" className="add-button">
-                          Add Movie
-                        </button>
                       </form>
                     </div>
                   </div>
