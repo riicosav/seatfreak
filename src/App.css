@@ -67,7 +67,6 @@ body {
   height: 100vh; /* Full viewport height */
 }
 .container-movie-page {
-  display: flex;
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
   padding-top: 10%;
@@ -175,7 +174,10 @@ body {
   justify-content: center; /* Center the grid items horizontally */
   margin-top: 50px;
 }
-
+.movieContent {
+  display: flex;
+  justify-content: center;
+}
 .movie-item {
   border-radius: 8px;
   overflow: hidden;
@@ -429,4 +431,8 @@ select {
   justify-content: center;
   align-items: center;
   width: 100%;
+}
+.gFeatures {
+  margin-left: 15%;
+  margin-right: 15%;
 }
