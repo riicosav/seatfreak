@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 function AddMovie({ movieProps }) {
   const {
@@ -88,6 +90,9 @@ function AddMovie({ movieProps }) {
               }
             }}
           />
+          <span className="search-icon">
+            <FontAwesomeIcon icon={faSearch} style={{ color: "black" }} />
+          </span>
         </div>
 
         {/* Filters */}

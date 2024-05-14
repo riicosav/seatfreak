@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import seatFreakLogo from "../../images/seatfreak3.png";
 
 function Navbar({ setDatesAppear, setSeatingAppear, setHomeAppear }) {
@@ -27,8 +29,11 @@ function Navbar({ setDatesAppear, setSeatingAppear, setHomeAppear }) {
           My Movies
         </button>
       </div>
-      <a href="javascript:void(0);" className="icon" onClick={toggleMenu}>
-        &#9776;
+      <a href="#" className="icon" onClick={toggleMenu}>
+        <FontAwesomeIcon
+          icon={menuOpen ? faXmark : faBars}
+          className="menu-icon"
+        />
       </a>
     </div>
   );

@@ -360,6 +360,7 @@ select {
 
   .buttons.show {
     display: flex;
+    background-color: #272829;
   }
 
   .icon {
@@ -451,4 +452,25 @@ select {
   background-color: white;
   border-radius: 20px;
   margin-bottom: 10px;
+}
+.icon {
+  font-size: 24px;
+  cursor: pointer;
+  margin-right: 20px; /* Adjust the value as needed */
+}
+
+.menu-icon {
+  font-size: 24px;
+  cursor: pointer;
+  margin-left: 20px; /* Adjust the value as needed */
+}
+.search-box {
+  position: relative;
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Center vertically */
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px; /* Adjust as needed */
 }
