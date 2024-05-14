@@ -132,7 +132,7 @@ body {
   transition: transform 0.3s ease;
 }
 .movie-card:hover {
-  transform: scale(1.1); /* Enlarge the item on hover */
+  transform: scale(1.05); /* Enlarge the item on hover */
 }
 .movie-list {
   background-color: #45475f;
@@ -406,4 +406,27 @@ select {
   margin-top: 50px;
   margin-left: 350px;
   margin-right: 350px;
+}
+.btn-custom-primary {
+  background-color: #00ea5d;
+  color: rgb(27, 27, 27);
+  margin: 5px;
+}
+.btn-custom-danger {
+  background-color: rgb(225, 18, 18);
+  color: rgb(244, 244, 244);
+  margin: 5px;
+  width: auto;
+}
+.btn-custom-danger:hover {
+  background-color: rgb(237, 37, 37);
+}
+.btn-custom-primary:hover {
+  background-color: #1bf572;
+  color: #080808;
+}
+.dmButtons {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
