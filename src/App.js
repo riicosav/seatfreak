@@ -8,7 +8,7 @@ import { seatData } from "./Components/Data.js";
 
 function App() {
   const [movies, setMovies] = useState([]);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const [selectedMovies, setSelectedMovies] = useState([]);
   const [error, setError] = useState('');
   const [datesVisible, setDatesVisible] = useState(false);
