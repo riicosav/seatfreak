@@ -286,8 +286,12 @@ select {
 
 .navbar .logo {
   margin-right: auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.logo:hover {
+  transform: scale(1.1);
+}
 .buttons {
   display: flex;
   align-items: center;

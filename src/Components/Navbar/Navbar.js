@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import seatFreakLogo from "../../images/seatfreak3.png";
 
-function Navbar({ setDatesAppear, setSeatingAppear }) {
+function Navbar({ setDatesAppear, setSeatingAppear, setHomeAppear }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -12,6 +12,7 @@ function Navbar({ setDatesAppear, setSeatingAppear }) {
     <div className={`navbar ${menuOpen ? "responsive" : ""}`}>
       <div className="logo">
         <img
+          onClick={setHomeAppear}
           src={seatFreakLogo}
           alt="Logo"
           className="navbar-brand"
