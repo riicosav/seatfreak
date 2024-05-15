@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faSearch, faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch, faStar } from "@fortawesome/free-solid-svg-icons";
 
 function AddMovie({ movieProps }) {
-
   const [movieIndex, setMovieIndex] = useState(1);
 
   const {
@@ -50,50 +49,49 @@ function AddMovie({ movieProps }) {
           index: movieIndex,
         },
       ]);
-  
+
       // Deep clone the seatData structure
       const newSeatData = JSON.parse(JSON.stringify(seatData));
-  
+
       // Generate unique IDs for the new movie
-      setNewMovieId((newMovieId)=> newMovieId + exampleMovieList.length);
+      setNewMovieId((newMovieId) => newMovieId + exampleMovieList.length);
       const newColumnIdStart = newMovieId * 7 + 21;
       const newRowIdStart = newMovieId * 14 + 1;
-  
+
       // Set movie title and ID
-      console.log(selectedMovies)
+      console.log(selectedMovies);
       newSeatData[0].movieTitle = movie.title;
       newSeatData[0].day = day;
       newSeatData[0].time = time;
       newSeatData[0].id = newMovieId;
       newSeatData[0].price = price;
-  
+
       // Set IDs for seats, columns, and rows
       newSeatData[0].data.forEach((column, columnIndex) => {
-          column.id = newMovieId * 7 + columnIndex + 1;
-  
-          column.column.forEach((row, rowIndex) => {
-              row.id = newRowIdStart + rowIndex;
-  
-              row.row.forEach((seat, seatIndex) => {
-                  seat.id = newColumnIdStart + columnIndex + seatIndex * 7;
-              });
+        column.id = newMovieId * 7 + columnIndex + 1;
+
+        column.column.forEach((row, rowIndex) => {
+          row.id = newRowIdStart + rowIndex;
+
+          row.row.forEach((seat, seatIndex) => {
+            seat.id = newColumnIdStart + columnIndex + seatIndex * 7;
           });
+        });
       });
 
       // Deep clone the existing movie list and append the new movie
       const newList = [...exampleMovieList, newSeatData];
-  
+
       // Update the state with the new movie list
       setExampleMovieList(newList);
-  
     }
   }
 
   async function setMovie(movie, day, time) {
     const newSeatData = JSON.parse(JSON.stringify(seatData));
-    
+
     // Generate unique IDs for the new movie
-    setNewMovieId((newMovieId)=> newMovieId + exampleMovieList.length);
+    setNewMovieId((newMovieId) => newMovieId + exampleMovieList.length);
     const newColumnIdStart = newMovieId * 7 + 21;
     const newRowIdStart = newMovieId * 14 + 1;
   }
@@ -125,24 +123,24 @@ function AddMovie({ movieProps }) {
     return filteredMovies;
   }
 
-  // // Function to render star rating
-  // function renderStarRating(rating) {
-  //   const percentage = (rating / 10) * 100; // Convert rating to percentage
-  //   return (
-  //     <div className="star-rating">
-  //       <div className="star-rating-top" style={{ width: `${percentage}%` }}>
-  //         {[...Array(5)].map((_, index) => (
-  //           <FontAwesomeIcon key={index} icon={faStar} className="star-icon" />
-  //         ))}
-  //       </div>
-  //       <div className="star-rating-bottom">
-  //         {[...Array(5)].map((_, index) => (
-  //           <FontAwesomeIcon key={index} icon={faStar} className="star-icon" />
-  //         ))}
-  //       </div>
-  //     </div>
-  //   );
-  // }
+  // Function to render star rating
+  function renderStarRating(rating) {
+    const percentage = (rating / 10) * 100; // Convert rating to percentage
+    return (
+      <div className="star-rating">
+        <div className="star-rating-top" style={{ width: `${percentage}%` }}>
+          {[...Array(5)].map((_, index) => (
+            <FontAwesomeIcon key={index} icon={faStar} className="star-icon" />
+          ))}
+        </div>
+        <div className="star-rating-bottom">
+          {[...Array(5)].map((_, index) => (
+            <FontAwesomeIcon key={index} icon={faStar} className="star-icon" />
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   const max = 10;
 
@@ -164,9 +162,10 @@ function AddMovie({ movieProps }) {
             }}
           />
           {/* Star Rating */}
-          {/* <span className="search-icon">
+          <span className="search-icon">
             <FontAwesomeIcon icon={faSearch} style={{ color: "black" }} />
-          </span> */}
+          </span>{" "}
+          *
         </div>
 
         {/* Filters */}
@@ -227,19 +226,19 @@ function AddMovie({ movieProps }) {
                       <h5 className="movie-date">
                         {new Date(movie.release_date).getFullYear()}
                       </h5>
-                      {/* <p>{renderStarRating(movie.vote_average)}</p> */}
+                      <p>{renderStarRating(movie.vote_average)}</p>
                       <form
                         onSubmit={(e) => {
                           e.preventDefault();
                           const day = e.target.day.value;
                           const time = e.target.time.value;
                           let price = e.target.price.value;
-                          if(!price) {
+                          if (!price) {
                             price = 0;
                             console.log("price is empty");
                           }
                           addMovie(movie, day, time, price);
-                          setMovieIndex(prevIndex => prevIndex + 1);
+                          setMovieIndex((prevIndex) => prevIndex + 1);
                           console.log("Movie Index: " + movieIndex);
                         }}
                       >
@@ -259,7 +258,11 @@ function AddMovie({ movieProps }) {
                               <option>5:00-7:00pm</option>
                             </select>
                             <p>Price:</p>
-                            <input type="number" id="price" placeholder="0"></input>
+                            <input
+                              type="number"
+                              id="price"
+                              placeholder="0"
+                            ></input>
                           </div>
                           <button type="submit" className="add-button">
                             Add Movie
