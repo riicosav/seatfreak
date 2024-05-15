@@ -2,8 +2,8 @@ import React, { useState } from "react";
 //import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //import { faSearch, faStar } from "@fortawesome/free-solid-svg-icons";
 
-function AddMovie({ movieProps }) {
-  const [movieIndex, setMovieIndex] = useState(1);
+function AddMovie({ movieProps, movieIndex, setMovieIndex }) {
+  
 
   const {
     movies,
@@ -54,7 +54,8 @@ function AddMovie({ movieProps }) {
       const newSeatData = JSON.parse(JSON.stringify(seatData));
 
       // Generate unique IDs for the new movie
-      setNewMovieId((newMovieId) => newMovieId + exampleMovieList.length);
+          //setNewMovieId((newMovieId) => newMovieId + exampleMovieList.length);
+          setNewMovieId((newMovieId) => newMovieId + 1);
       const newColumnIdStart = newMovieId * 7 + 21;
       const newRowIdStart = newMovieId * 14 + 1;
 
@@ -238,7 +239,7 @@ function AddMovie({ movieProps }) {
                             console.log("price is empty");
                           }
                           addMovie(movie, day, time, price);
-                          setMovieIndex((prevIndex) => prevIndex + 1);
+                          setMovieIndex(movieIndex+1);
                           console.log("Movie Index: " + movieIndex);
                         }}
                       >

@@ -22,6 +22,7 @@ function App() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [newMovieId, setNewMovieId] = useState(exampleMovieList.length);
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [movieIndex, setMovieIndex] = useState(1);
 
   const [visibleComponent, setVisibleComponent] = useState([]);
 
@@ -58,11 +59,14 @@ async function bookSeats(theIndex) {
     let finalIndex = 0;
 
     for(let i = 0; i < exampleMovieList.length; i++) {
+      //console.log("The Index: " + theIndex + " and: " + exampleMovieList[i][0].id);
       if(exampleMovieList[i][0].id === theIndex) {
           finalIndex = i;
           break;
       }
     }
+
+    
     setSelectedIndex(finalIndex);
     setSelectedMovie(exampleMovieList[finalIndex]);
     const theTemp = JSON.parse(JSON.stringify(exampleMovieList[finalIndex]))
@@ -76,10 +80,12 @@ async function bookSeats(theIndex) {
 
 async function deleteMovie2(theIndex) {
   let finalIndex = 0;
+  let finalIndex2 = 0;
   const newList = [...exampleMovieList];
+  const newSelectedList = [...selectedMovies];
     for(let i = 0; i < exampleMovieList.length; i++) {
     
-      
+      console.log("The Index: " + theIndex + " and: " + exampleMovieList[i][0].id);
       if(exampleMovieList[i][0].id === theIndex) {
           finalIndex = i;
           console.log(i);
@@ -87,8 +93,18 @@ async function deleteMovie2(theIndex) {
       }
     }
 
+    for(let a = 0; a < selectedMovies.length; a++) {
+      console.log(selectedMovies[a].index);
+      if(selectedMovies[a].index === theIndex) {
+          finalIndex2 = a;
+          break;
+      }
+    }
+
+    newSelectedList.splice(finalIndex2, 1);
     newList.splice(finalIndex, 1);
     setExampleMovieList(newList);
+    setSelectedMovies(newSelectedList);
     setTempMovie(exampleMovieList[0]);
     setSelectedSeats([])
 }
@@ -155,6 +171,7 @@ async function saveChange(e) {
     }}
     bookSeats={bookSeats}
     deleteMovie2={deleteMovie2}
+  
   />
 </div>
 
@@ -240,7 +257,11 @@ async function saveChange(e) {
               setExampleMovieList: setExampleMovieList,
               exampleMovieList: exampleMovieList,
               seatData: seatData,
-            }}
+            }
+          }
+
+          setMovieIndex={setMovieIndex}
+          movieIndex={movieIndex}
           />
         </div>
       )}

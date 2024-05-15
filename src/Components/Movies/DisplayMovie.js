@@ -1,4 +1,4 @@
-function DisplayMovie({movieProps, bookSeats, deleteMovie2, switchClick}) {
+function DisplayMovie({movieProps, bookSeats, deleteMovie2}) {
     const {selectedMovies, setSelectedMovies, error} = movieProps
     // Sorts and add movies by date
     const moviesByDate = selectedMovies.reduce((acc, movie) => {
@@ -83,7 +83,7 @@ function DisplayMovie({movieProps, bookSeats, deleteMovie2, switchClick}) {
                         </button>
                         <button
                           class="btn btn-custom-danger"
-                          onClick={() => removeMovie(index, movie.index)}
+                          onClick={() => deleteMovie2(movie.index)}
                         >
                           Remove
                         </button>
