@@ -24,7 +24,7 @@ function App() {
   const [newMovieId, setNewMovieId] = useState(exampleMovieList.length);
   const [selectedSeats, setSelectedSeats] = useState([]);
 
-  const [visibleComponent, setVisibleComponent] = useState([]);
+  const [visibleComponent, setVisibleComponent] = useState("home"); // Set initial state to "home"
 
   const switchClick = () => {
     setSwitchPage((switchPage) => (switchPage = true));
