@@ -188,39 +188,63 @@ async function saveChange(e) {
     addSelectedSeats={addSelectedSeats} 
     deleteSelectedSeats={deleteSelectedSeats}/>
     }
-    displayPage = <div className="customContainer">
-   
-    <div>
-    
-        <p>{selectedMovie[0].movieTitle}</p>
-        <p>{selectedMovie[0].day}</p>
-        <p>{selectedMovie[0].time}</p>
-        <p>₱{selectedMovie[0].price}</p>
-      
-      
-      
-        {displaySeats} 
-      
-        
-    </div>
-    <p class="text"> 
-      You have selected <span>{selectedSeats.length}</span> seats for a price of ₱<span>{selectedSeats.length * tempMovie[0].price}</span>
-    </p>
-    <button
-      type="button"
-      className="btn btn-primary"
-      onClick={saveChange}
-    >
-      Save
-    </button>
-    <button
-      type="button"
-      className="btn btn-danger"
-      onClick={deleteMovie}
-    >
-      Delete
-    </button>
-  </div>
+    displayPage = 
+    <div >
+
+<div className="theatreHalf1">
+<p className="theTitle">{selectedMovie[0].movieTitle}</p>
+            <div className="screenContainer">
+                <div className="screen">
+               
+                </div>
+            </div>
+            
+            <div className="d-flex">
+              <p className="px-3">{selectedMovie[0].day}</p>
+              <p>|</p>
+              <p className="px-3">{selectedMovie[0].time}</p>
+              <p>|</p>
+              <p className="px-3">Price: ₱{selectedMovie[0].price}</p>
+            </div>
+            <ul class="showcase">
+              <li>
+                  <div class="seatMini"></div>
+                    <small>N/A</small>
+                  
+              </li>
+              <li>
+                  <div class="seatClickedMini"></div>
+                    <small>Selected</small>
+                  
+              </li>
+              <li>
+                  <div class="seatBookedMini"></div>
+                    <small>Booked</small>
+                  
+              </li>
+            </ul>
+            
+           
+          
+            
+        </div>
+                    <div className="customContainer">
+            
+            
+            {displaySeats} 
+            <p class="text"> 
+              You have selected <span>{selectedSeats.length}</span> seats for a price of ₱<span>{selectedSeats.length * tempMovie[0].price}</span>
+            </p>
+            
+          </div>
+        <button
+              type="button"
+              className="btn btn-primary"
+              onClick={saveChange}
+            >
+              Save
+            </button>
+           </div>
 
     
   }
