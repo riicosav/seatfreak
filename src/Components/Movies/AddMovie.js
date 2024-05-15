@@ -267,6 +267,7 @@ function AddMovie({ movieProps, movieIndex, setMovieIndex }) {
                             </div>
                             <div className="col">
                               <input
+                                className="price"
                                 type="number"
                                 id="price"
                                 placeholder="0"
