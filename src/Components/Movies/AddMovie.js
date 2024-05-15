@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//import { faSearch, faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch, faStar } from "@fortawesome/free-solid-svg-icons";
 
 function AddMovie({ movieProps }) {
   const [movieIndex, setMovieIndex] = useState(1);
@@ -123,24 +123,24 @@ function AddMovie({ movieProps }) {
     return filteredMovies;
   }
 
-  // // Function to render star rating
-  // function renderStarRating(rating) {
-  //   const percentage = (rating / 10) * 100; // Convert rating to percentage
-  //   return (
-  //     <div className="star-rating">
-  //       <div className="star-rating-top" style={{ width: `${percentage}%` }}>
-  //         {[...Array(5)].map((_, index) => (
-  //           <FontAwesomeIcon key={index} icon={faStar} className="star-icon" />
-  //         ))}
-  //       </div>
-  //       <div className="star-rating-bottom">
-  //         {[...Array(5)].map((_, index) => (
-  //           <FontAwesomeIcon key={index} icon={faStar} className="star-icon" />
-  //         ))}
-  //       </div>
-  //     </div>
-  //   );
-  // }
+  // Function to render star rating
+  function renderStarRating(rating) {
+    const percentage = (rating / 10) * 100; // Convert rating to percentage
+    return (
+      <div className="star-rating">
+        <div className="star-rating-top" style={{ width: `${percentage}%` }}>
+          {[...Array(5)].map((_, index) => (
+            <FontAwesomeIcon key={index} icon={faStar} className="star-icon" />
+          ))}
+        </div>
+        <div className="star-rating-bottom">
+          {[...Array(5)].map((_, index) => (
+            <FontAwesomeIcon key={index} icon={faStar} className="star-icon" />
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   const max = 10;
 
@@ -162,9 +162,9 @@ function AddMovie({ movieProps }) {
             }}
           />
           {/* Star Rating */}
-          {/* <span className="search-icon">
+          <span className="search-icon">
             <FontAwesomeIcon icon={faSearch} style={{ color: "black" }} />
-          </span>{" "} */}
+          </span>{" "}
           *
         </div>
 
@@ -226,7 +226,7 @@ function AddMovie({ movieProps }) {
                       <h5 className="movie-date">
                         {new Date(movie.release_date).getFullYear()}
                       </h5>
-                      {/* <p>{renderStarRating(movie.vote_average)}</p> */}
+                      <p>{renderStarRating(movie.vote_average)}</p>
                       <form
                         onSubmit={(e) => {
                           e.preventDefault();
@@ -244,26 +244,35 @@ function AddMovie({ movieProps }) {
                       >
                         <div>
                           <p>Set Date and Time:</p>
-                          <div>
-                            <select id="day">
-                              <option>Monday</option>
-                              <option>Tuesday</option>
-                              <option>Wednesday</option>
-                            </select>
+                          <div className="row">
+                            <div className="col">
+                              <select id="day">
+                                <option>Monday</option>
+                                <option>Tuesday</option>
+                                <option>Wednesday</option>
+                              </select>
+                            </div>
+                            <div className="col">
+                              <select id="time">
+                                <option>1:00-3:00pm</option>
+                                <option>3:30-4:30pm</option>
+                                <option>5:00-7:00pm</option>
+                              </select>
+                            </div>
                           </div>
-                          <div>
-                            <select id="time">
-                              <option>1:00-3:00pm</option>
-                              <option>3:30-4:30pm</option>
-                              <option>5:00-7:00pm</option>
-                            </select>
-                            <p>Price:</p>
-                            <input
-                              type="number"
-                              id="price"
-                              placeholder="0"
-                            ></input>
+                          <div className="row">
+                            <div className="col">
+                              <p>Price:</p>
+                            </div>
+                            <div className="col">
+                              <input
+                                type="number"
+                                id="price"
+                                placeholder="0"
+                              ></input>
+                            </div>
                           </div>
+                          <hr />
                           <button type="submit" className="add-button">
                             Add Movie
                           </button>
