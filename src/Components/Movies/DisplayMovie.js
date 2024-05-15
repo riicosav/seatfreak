@@ -30,17 +30,6 @@ function DisplayMovie({movieProps, bookSeats, deleteMovie2}) {
         });
     });
 
-    // Remove movie function
-    async function removeMovie(indexToRemove, index2) {
-        const newSelectedMovies = selectedMovies.filter((_, index) => index !== indexToRemove);
-        setSelectedMovies(newSelectedMovies);
-
-        deleteMovie2(index2);
-        // Add the movie to the corresponding date group
-        // acc[movie.day].push(movie);
-        // return acc;
-    }
-    
   return (
     <div>
       {/* List of Added Movies */}
@@ -53,20 +42,20 @@ function DisplayMovie({movieProps, bookSeats, deleteMovie2}) {
         )}
         <div className="movie-list">
           <h2>
-            <center>List of Movies:</center>
+            <center>Schedules</center>
           </h2>
+
           {sortedDays.map((day) => (
             <div key={day}>
               {sortedMoviesByDate[day].map((movie, index) => (
                 <div key={index} className="movie-card">
-                  <div className="row">
-                    <div className="col">
+                  <div className="row no-gutters">
+                    <div className="gradient-img col-md-4">
                       <img
-                        className="dp-img"
+                        className="img-fluid dp-img"
                         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                         alt={movie.title}
                       />
-                      <br />
                     </div>
                     <div className="col">
                       <h3> {movie.title}</h3>
