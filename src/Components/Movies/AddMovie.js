@@ -169,42 +169,44 @@ function AddMovie({ movieProps, movieIndex, setMovieIndex }) {
 
         {/* Filters */}
         <div className="filters">
-          <select
-            className="filter-dropdown"
-            value={filterType}
-            onChange={(e) => setFilterType(e.target.value)}
-          >
-            <option value="">Sort by...</option>
-            <option value="name">Name</option>
-            <option value="year">Year</option>
-          </select>
+          <div class="d-flex justify-content-end">
+            <select
+              class="filter-dropdown mr-2"
+              value={filterType}
+              onchange={(e) => setFilterType(e.target.value)}
+            >
+              <option value="">Sort by...</option>
+              <option value="name">Name</option>
+              <option value="year">Year</option>
+            </select>
 
-          <select
-            className="filter-dropdown"
-            value={genre}
-            onChange={(e) => setGenre(e.target.value)}
-          >
-            <option value="">Filter by Genre...</option>
-            <option value="28">Action</option>
-            <option value="12">Adventure</option>
-            <option value="16">Animation</option>
-            <option value="35">Comedy</option>
-            <option value="80">Crime</option>
-            <option value="99">Documentary</option>
-            <option value="18">Drama</option>
-            <option value="10751">Family</option>
-            <option value="14">Fantasy</option>
-            <option value="36">History</option>
-            <option value="27">Horror</option>
-            <option value="10402">Music</option>
-            <option value="9648">Mystery</option>
-            <option value="10749">Romance</option>
-            <option value="878">Science Fiction</option>
-            <option value="10770">TV Movie</option>
-            <option value="53">Thriller</option>
-            <option value="10752">War</option>
-            <option value="37">Western</option>
-          </select>
+            <select
+              class="filter-dropdown"
+              value={genre}
+              onchange={(e) => setGenre(e.target.value)}
+            >
+              <option value="">Filter by Genre...</option>
+              <option value="28">Action</option>
+              <option value="12">Adventure</option>
+              <option value="16">Animation</option>
+              <option value="35">Comedy</option>
+              <option value="80">Crime</option>
+              <option value="99">Documentary</option>
+              <option value="18">Drama</option>
+              <option value="10751">Family</option>
+              <option value="14">Fantasy</option>
+              <option value="36">History</option>
+              <option value="27">Horror</option>
+              <option value="10402">Music</option>
+              <option value="9648">Mystery</option>
+              <option value="10749">Romance</option>
+              <option value="878">Science Fiction</option>
+              <option value="10770">TV Movie</option>
+              <option value="53">Thriller</option>
+              <option value="10752">War</option>
+              <option value="37">Western</option>
+            </select>
+          </div>
         </div>
       </div>
       <div>
@@ -269,8 +271,8 @@ function AddMovie({ movieProps, movieIndex, setMovieIndex }) {
                                 className="input-price"
                                 type="number"
                                 id="price"
-                                placeholder="₱0000"
-                              ></input>
+                                placeholder="₱0.00"
+                              />
                             </div>
                           </div>
                           <button type="submit" className="add-button">

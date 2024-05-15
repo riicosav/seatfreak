@@ -48,7 +48,7 @@ function DisplayMovie({ movieProps, bookSeats, deleteMovie2, switchClick }) {
       {/* List of Added Movies */}
       <div>
         {error && (
-          <div id="errorSection">
+          <div className="error-card" id="errorSection">
             <h2>Error:</h2>
             <p>{error}</p>
           </div>
