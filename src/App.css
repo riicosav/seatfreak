@@ -499,3 +499,22 @@ select {
   position: absolute;
   right: 10px; /* Adjust as needed */
 }
+.welcome-msg {
+  position: absolute;
+  padding: 200px;
+  left: 0;
+}
+.welcome-msg h1 {
+  font-weight: bold;
+  font-size: 120px;
+}
+.welcome-msg p {
+  font-size: 20px;
+}
+.price {
+  width: 200px; /* Adjust as needed */
+  height: 40px; /* Adjust as needed */
+  padding: 5px; /* Adjust as needed */
+  border-radius: 10px;
+  background-color: white;
+}

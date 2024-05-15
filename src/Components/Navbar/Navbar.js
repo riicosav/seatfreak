@@ -16,7 +16,7 @@ function Navbar({ setDatesAppear, setSeatingAppear, setHomeAppear }) {
       <div className="logo">
         <img
           onClick={setHomeAppear}
-          src={jans} // testing lang pre
+          src={jans}
           alt="Logo"
           className="navbar-brand"
           style={{ width: "140px" }}
