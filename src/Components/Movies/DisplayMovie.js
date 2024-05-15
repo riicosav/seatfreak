@@ -1,5 +1,5 @@
 function DisplayMovie({movieProps, bookSeats, deleteMovie2}) {
-    const {selectedMovies, setSelectedMovies, error} = movieProps
+    const {selectedMovies, error} = movieProps
     // Sorts and add movies by date
     const moviesByDate = selectedMovies.reduce((acc, movie) => {
         // If the date group doesn't exist, create it
@@ -41,12 +41,14 @@ function DisplayMovie({movieProps, bookSeats, deleteMovie2}) {
           </div>
         )}
         <div className="movie-list">
-          <h2>
-            <center>Schedules</center>
+          <h2 className="schedules-title">
+            <center> SCHEDULES </center>
+            <hr/>
           </h2>
 
           {sortedDays.map((day) => (
             <div key={day}>
+              <div className="day-title"> {day} </div>
               {sortedMoviesByDate[day].map((movie, index) => (
                 <div key={index} className="movie-card">
                   <div className="row no-gutters">
@@ -58,9 +60,9 @@ function DisplayMovie({movieProps, bookSeats, deleteMovie2}) {
                       />
                     </div>
                     <div className="col">
-                      <h3> {movie.title}</h3>
-                      <p>Day: {movie.day}</p>
-                      <p>Time: {movie.time}</p>
+                      <h3 className="movie-title-display"> {movie.title}</h3>
+                      <p><b>Day:</b> {movie.day}</p>
+                      <p><b>Time:</b> {movie.time}</p>
                       <br />
                       <div className="dmButtons">
                         <button
@@ -81,6 +83,7 @@ function DisplayMovie({movieProps, bookSeats, deleteMovie2}) {
                   </div>
                 </div>
               ))}
+              <hr/>
             </div>
           ))}
         </div>

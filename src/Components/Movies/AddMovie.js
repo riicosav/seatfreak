@@ -88,15 +88,6 @@ function AddMovie({ movieProps, movieIndex, setMovieIndex }) {
     }
   }
 
-  async function setMovie(movie, day, time) {
-    const newSeatData = JSON.parse(JSON.stringify(seatData));
-
-    // Generate unique IDs for the new movie
-    setNewMovieId((newMovieId) => newMovieId + exampleMovieList.length);
-    const newColumnIdStart = newMovieId * 7 + 21;
-    const newRowIdStart = newMovieId * 14 + 1;
-  }
-
   // Searching in IMDB Database
   async function searchHandler(e) {
     e.preventDefault();
@@ -243,8 +234,8 @@ function AddMovie({ movieProps, movieIndex, setMovieIndex }) {
                           console.log("Movie Index: " + movieIndex);
                         }}
                       >
-                        <div>
-                          <p>Set Date and Time:</p>
+                        <div className="row-margin-tnd">
+                          <p className="date-and-time-text">Set Date and Time:</p>
                           <div className="row">
                             <div className="col">
                               <select id="day">
@@ -261,7 +252,7 @@ function AddMovie({ movieProps, movieIndex, setMovieIndex }) {
                               </select>
                             </div>
                           </div>
-                          <div className="row">
+                          <div className="row row-margin">
                             <div className="col">
                               <p>Price:</p>
                             </div>

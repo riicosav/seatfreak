@@ -47,18 +47,6 @@ function App() {
     setSelectedSeats((prev) => prev.filter((seat) => seat !== data));
   };
 
-  async function handleChange(event) {
-    const theIndex = event.target.selectedIndex;
-    setSelectedIndex(theIndex);
-    console.log(event.target.selectedIndex + "hi");
-
-    setSelectedMovie(exampleMovieList[theIndex]);
-    const theTemp = JSON.parse(JSON.stringify(exampleMovieList[theIndex]));
-    setTempMovie(theTemp);
-    console.log(selectedMovie[0].id);
-    setSelectedSeats([]);
-  };
-
   async function bookSeats(theIndex) {
     let finalIndex = 0;
 
@@ -107,20 +95,6 @@ function App() {
         setTempMovie(exampleMovieList[0]);
         setSelectedSeats([]);
   }
-
-  function deleteMovie() {
-    // Deep clone the current movie list
-    const newList = [...exampleMovieList];
-
-    // Remove the selected movie from the list
-    newList.splice(selectedIndex, 1);
-
-    // Update the state with the modified movie list
-    setExampleMovieList(newList);
-
-    setTempMovie(exampleMovieList[0]);
-  }
-
   async function saveChange(e) {
     e.preventDefault();
     setExampleMovieList((prevList) => {
@@ -165,7 +139,6 @@ function App() {
    switchClick={() => toggleComponent("displayMovie")}
     movieProps={{
       selectedMovies: selectedMovies,
-      setSelectedMovies: setSelectedMovies,
       error: error,
     }}
     bookSeats={bookSeats}
@@ -206,9 +179,6 @@ function App() {
           </p>
           <button type="button" className="btn btn-primary" onClick={saveChange}>
             Save
-          </button>
-          <button type="button" className="btn btn-danger" onClick={deleteMovie}>
-            Delete
           </button>
         </div>
       );

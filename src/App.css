@@ -499,34 +499,42 @@ select {
   background-color: #2e3041;
   color: white;
 }
+
 .customContainer {
   margin-top: 7vw;
   margin-left: 350px;
   margin-right: 350px;
 }
+
 .btn-custom-primary {
   background-color: #00ea5d;
   color: rgb(27, 27, 27);
   margin: 5px;
 }
+
 .btn-custom-danger {
   background-color: rgb(225, 18, 18);
   color: rgb(244, 244, 244);
   margin: 5px;
   width: auto;
 }
+
 .btn-custom-danger:hover {
   background-color: rgb(237, 37, 37);
 }
+
 .btn-custom-primary:hover {
   background-color: #1bf572;
   color: #080808;
 }
+
 .dmButtons {
   justify-content: center;
   align-items: center;
   width: 100%;
+  margin-top: -25px;
 }
+
 .gFeatures {
   margin-left: 15%;
   margin-right: 15%;
@@ -545,6 +553,7 @@ select {
   border-radius: 20px;
   margin-bottom: 10px;
 }
+
 .icon {
   font-size: 24px;
   cursor: pointer;
@@ -556,6 +565,7 @@ select {
   cursor: pointer;
   margin-left: 20px; /* Adjust the value as needed */
 }
+
 .search-box {
   position: relative;
   display: flex; /* Use flexbox for alignment */
@@ -571,17 +581,50 @@ select {
   padding: 200px;
   left: 0;
 }
+
 .welcome-msg h1 {
   font-weight: bold;
   font-size: 120px;
 }
+
 .welcome-msg p {
   font-size: 20px;
 }
+
 .price {
   width: 200px; /* Adjust as needed */
   height: 40px; /* Adjust as needed */
   padding: 5px; /* Adjust as needed */
   border-radius: 10px;
   background-color: white;
+}
+
+.movie-title-display {
+  margin-top: 25px;
+  font-weight: 1000;
+}
+
+.schedules-title {
+  font-size: 70px;
+  font-weight: 1000;
+  text-shadow: #7b7df0 5px 2px;
+  color:rgb(255, 255, 255);
+}
+
+.day-title {
+  font-size: 25px;
+  font-weight: 500;
+  margin-bottom: 25px;
+}
+
+.row-margin {
+  margin-top: 15px;
+}
+
+.row-margin-tnd {
+  margin-top: 15px
+}
+
+.date-and-time-text {
+  font-size: 16px;
 }
