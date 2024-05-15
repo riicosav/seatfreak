@@ -55,7 +55,7 @@ function DisplayMovie({ movieProps, bookSeats, deleteMovie2, switchClick }) {
         )}
         <div className="movie-list">
           <h2>
-            <center>List of Movies:</center>
+            <center>Schedules</center>
           </h2>
 
           {sortedDays.map((day) => (
