@@ -1,5 +1,5 @@
 function DisplayMovie({ movieProps}) {
-  const { selectedMovies, setSelectedMovies, error, bookSeats, deleteMovie2, } = movieProps;
+  const { selectedMovies, setSelectedMovies, bookSeats, deleteMovie, } = movieProps;
   // Sorts and add movies by date
   const moviesByDate = selectedMovies.reduce((acc, movie) => {
     // If the date group doesn't exist, create it
@@ -37,7 +37,7 @@ function DisplayMovie({ movieProps}) {
     );
     setSelectedMovies(newSelectedMovies);
 
-    deleteMovie2(index2);
+    deleteMovie(index2);
     // Add the movie to the corresponding date group
     // acc[movie.day].push(movie);
     // return acc;

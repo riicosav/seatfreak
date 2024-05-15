@@ -50,7 +50,6 @@ function App() {
     let finalIndex = 0;
 
     for (let i = 0; i < exampleMovieList.length; i++) {
-      //console.log("The Index: " + theIndex + " and: " + exampleMovieList[i][0].id);
       if (exampleMovieList[i][0].id === theIndex) {
         finalIndex = i;
         break;
@@ -66,7 +65,7 @@ function App() {
     setSuccessSave("");
   }
 
-  async function deleteMovie2(theIndex) {
+  async function deleteMovie(theIndex) {
     let finalIndex = 0;
     let finalIndex2 = 0;
     const newList = [...exampleMovieList];
@@ -151,7 +150,7 @@ function App() {
           setSelectedMovies: setSelectedMovies,
           error: error,
           bookSeats: bookSeats,
-          deleteMovie2: deleteMovie2
+          deleteMovie: deleteMovie
         }}
       />
     </div>

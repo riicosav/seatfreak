@@ -625,17 +625,18 @@ select {
   margin: 5px;
 }
 .btn-custom-danger {
-  background-color: rgb(225, 18, 18);
-  color: rgb(244, 244, 244);
+  background-color: rgb(230, 87, 87);
+  color: rgb(0, 0, 0);
   margin: 5px;
   width: auto;
 }
 .btn-custom-danger:hover {
   background-color: rgb(237, 37, 37);
+  color: white;
 }
 .btn-custom-primary:hover {
   background-color: #1bf572;
-  color: #080808;
+  color: #ffffff;
 }
 .dmButtons {
   justify-content: center;
@@ -701,4 +702,19 @@ select {
   height: 38px;
   border-radius: 5px;
   font-size: 18px;
+}
+
+.btn-update {
+  border-radius: 8px;
+  padding: 12px;
+  padding-bottom: 7px;
+  padding-top: 7px;
+  margin-left: 3px;
+  background-color: rgb(255, 166, 0);
+  transition: 0.3s;
+  color: rgb(0, 0, 0);
+}
+
+.btn-update:hover {
+  color: rgb(255, 255, 255);
 }
