@@ -25,6 +25,9 @@ function App() {
   const [selectedSeats, setSelectedSeats] = useState([]);
 
   const [visibleComponent, setVisibleComponent] = useState("home"); // Set initial state to "home"
+  const openAddMovieComponent = () => {
+    setVisibleComponent("addMovie");
+  };
 
   const switchClick = () => {
     setSwitchPage((switchPage) => (switchPage = true));
@@ -210,7 +213,12 @@ function App() {
           <div className="welcome-msg">
             <h1 className="text-center">SeatFreak</h1>
             <p>Watch in comfort.</p>
-            <button className="btn btn-warning">Start Now</button>
+            <button
+              className="btn btn-warning btn-lg"
+              onClick={openAddMovieComponent}
+            >
+              Start Now
+            </button>
           </div>
         </div>
       )}
