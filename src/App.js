@@ -13,6 +13,7 @@ function App() {
   const [selectedMovies, setSelectedMovies] = useState([]);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [successSave, setSuccessSave] = useState("");
 
   const [switchPage, setSwitchPage] = useState(false);
   const newSeatData1 = JSON.parse(JSON.stringify(seatData));
@@ -62,6 +63,7 @@ function App() {
     setTempMovie(theTemp);
     switchClick();
     setSelectedSeats([]);
+    setSuccessSave("");
   }
 
   async function deleteMovie2(theIndex) {
@@ -104,6 +106,11 @@ function App() {
       return newList;
     });
     setSelectedSeats([]);
+    setSuccessSave("Successfully saved seat!");
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }
 
   // Fetches data from API
@@ -143,9 +150,9 @@ function App() {
           selectedMovies: selectedMovies,
           setSelectedMovies: setSelectedMovies,
           error: error,
+          bookSeats: bookSeats,
+          deleteMovie2: deleteMovie2
         }}
-        bookSeats={bookSeats}
-        deleteMovie2={deleteMovie2}
       />
     </div>
   );
@@ -169,6 +176,12 @@ function App() {
     displayPage = (
       <div>
         <div className="theatreHalf1">
+          {successSave && (
+              <div className="success-card">
+              <h2>Success!</h2>
+              <p>{successSave}</p>
+            </div>
+            )}
           <p className="theTitle">{selectedMovie[0].movieTitle}</p>
           <div className="screenContainer">
             <div className="screen"></div>
@@ -203,9 +216,9 @@ function App() {
             price of ₱<span>{selectedSeats.length * tempMovie[0].price}</span>
           </p>
         </div>
-        <button type="button" className="btn btn-primary" onClick={saveChange}>
+        <center> <button type="button" className="btn-save btn-primary" onClick={saveChange}>
           Save
-        </button>
+        </button> </center>
       </div>
     );
   }

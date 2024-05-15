@@ -192,6 +192,7 @@ body {
   font-size: 2.5vw;
   font-weight: 100vw; /* Corrected to a valid font weight */
   text-shadow: 2px 4px 6px #2c2e3d; /* Example text shadow */
+  margin-top: 20px;
 }
 
 .theGap {
@@ -465,7 +466,7 @@ select {
   transition: transform 0.3s ease;
   margin-bottom: 30px;
   justify-content: center;
-  padding: 14px;
+  padding: 18px;
 }
 
 .success-card {
@@ -475,11 +476,12 @@ select {
   align-items: center;
   box-shadow: 10px 10px 18px 0px rgba(0, 0, 0, 0.74);
   border-radius: 10px;
-  background-color: #06c000;
+  background-color: #09ff00;
   transition: transform 0.3s ease;
   margin-bottom: 30px;
   justify-content: center;
-  padding: 14px;
+  padding: 18px;
+  color: black;
 }
 
 /* Ripple effect */
@@ -615,7 +617,6 @@ select {
   align-items: center; /* Center children horizontally */
   justify-content: center; /* Center children vertically */
   height: 100%; /* Ensure the container takes up full height, if needed */
-  text-align: center;
   margin-top: 6vw;
 }
 .btn-custom-primary {
@@ -693,4 +694,11 @@ select {
   font-weight: 500;
   background-color: rgba(0, 0, 0, 0.418);
   text-transform: uppercase;
+}
+
+.btn-save {
+  width: 100px;
+  height: 38px;
+  border-radius: 5px;
+  font-size: 18px;
 }

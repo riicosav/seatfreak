@@ -1,5 +1,5 @@
-function DisplayMovie({ movieProps, bookSeats, deleteMovie2, switchClick }) {
-  const { selectedMovies, setSelectedMovies, error } = movieProps;
+function DisplayMovie({ movieProps}) {
+  const { selectedMovies, setSelectedMovies, error, bookSeats, deleteMovie2, } = movieProps;
   // Sorts and add movies by date
   const moviesByDate = selectedMovies.reduce((acc, movie) => {
     // If the date group doesn't exist, create it
@@ -88,7 +88,6 @@ function DisplayMovie({ movieProps, bookSeats, deleteMovie2, switchClick }) {
                       </div>
                     </div>
                   </div>
-                  <hr/>
                 </div>
               ))}
             </div>
