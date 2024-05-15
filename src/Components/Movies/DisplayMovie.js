@@ -47,19 +47,14 @@ function DisplayMovie({ movieProps, bookSeats, deleteMovie2, switchClick }) {
     <div>
       {/* List of Added Movies */}
       <div>
-        {error && (
-          <div className="error-card" id="errorSection">
-            <h2>Error:</h2>
-            <p>{error}</p>
-          </div>
-        )}
         <div className="movie-list">
-          <h2>
-            <center>Schedules</center>
+          <h2 className="schedule-text">
+            <center>SCHEDULES</center>
           </h2>
-
+          <hr/>
           {sortedDays.map((day) => (
             <div key={day}>
+              <div className="days-text"> <center> {day} </center>  </div>
               {sortedMoviesByDate[day].map((movie, index) => (
                 <div key={index} className="movie-card">
                   <div className="row no-gutters">
@@ -93,6 +88,7 @@ function DisplayMovie({ movieProps, bookSeats, deleteMovie2, switchClick }) {
                       </div>
                     </div>
                   </div>
+                  <hr/>
                 </div>
               ))}
             </div>

@@ -12,7 +12,7 @@ function App() {
   const [query, setQuery] = useState("");
   const [selectedMovies, setSelectedMovies] = useState([]);
   const [error, setError] = useState("");
-  const [seatingVisible, setSeatingVisible] = useState(false);
+  const [success, setSuccess] = useState("");
 
   const [switchPage, setSwitchPage] = useState(false);
   const newSeatData1 = JSON.parse(JSON.stringify(seatData));
@@ -43,17 +43,6 @@ function App() {
 
   function deleteSelectedSeats(data) {
     setSelectedSeats((prev) => prev.filter((seat) => seat !== data));
-  }
-  async function handleChange(event) {
-    const theIndex = event.target.selectedIndex;
-    setSelectedIndex(theIndex);
-    console.log(event.target.selectedIndex + "hi");
-
-    setSelectedMovie(exampleMovieList[theIndex]);
-    const theTemp = JSON.parse(JSON.stringify(exampleMovieList[theIndex]));
-    setTempMovie(theTemp);
-    console.log(selectedMovie[0].id);
-    setSelectedSeats([]);
   }
 
   async function bookSeats(theIndex) {
@@ -105,19 +94,6 @@ function App() {
     setSelectedMovies(newSelectedList);
     setTempMovie(exampleMovieList[0]);
     setSelectedSeats([]);
-  }
-
-  function deleteMovie() {
-    // Deep clone the current movie list
-    const newList = [...exampleMovieList];
-
-    // Remove the selected movie from the list
-    newList.splice(selectedIndex, 1);
-
-    // Update the state with the modified movie list
-    setExampleMovieList(newList);
-
-    setTempMovie(exampleMovieList[0]);
   }
 
   async function saveChange(e) {
@@ -270,16 +246,19 @@ function App() {
               setQuery: setQuery,
               selectedMovies: selectedMovies,
               setSelectedMovies: setSelectedMovies,
+              error: error,
               setError: setError,
               fetchData: fetchData,
-              setNewMovieId: setNewMovieId,
               newMovieId: newMovieId,
-              setExampleMovieList: setExampleMovieList,
+              setNewMovieId: setNewMovieId,
               exampleMovieList: exampleMovieList,
+              setExampleMovieList: setExampleMovieList,
               seatData: seatData,
+              movieIndex: movieIndex,
+              setMovieIndex: setMovieIndex,
+              success: success,
+              setSuccess: setSuccess,
             }}
-            setMovieIndex={setMovieIndex}
-            movieIndex={movieIndex}
           />
         </div>
       )}

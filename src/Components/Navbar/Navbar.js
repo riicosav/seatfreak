@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
-import seatFreakLogo from "../../images/seatfreak3.png";
 import jans from "../../images/seatfreaklogo2.png";
 
 function Navbar({ setDatesAppear, setSeatingAppear, setHomeAppear }) {

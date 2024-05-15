@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faStar } from "@fortawesome/free-solid-svg-icons";
 
-function AddMovie({ movieProps, movieIndex, setMovieIndex }) {
+function AddMovie({ movieProps }) {
   const {
     movies,
     selectedMovies,
@@ -16,6 +16,11 @@ function AddMovie({ movieProps, movieIndex, setMovieIndex }) {
     setExampleMovieList,
     exampleMovieList,
     seatData,
+    error,
+    movieIndex,
+    setMovieIndex,
+    success,
+    setSuccess,
   } = movieProps;
 
   const [filterType, setFilterType] = useState("");
@@ -31,6 +36,7 @@ function AddMovie({ movieProps, movieIndex, setMovieIndex }) {
       setError(
         "There is already a movie at that time! Please remove it first."
       );
+      setSuccess("")
       window.scrollTo({
         top: 0,
         behavior: "smooth",
@@ -83,16 +89,14 @@ function AddMovie({ movieProps, movieIndex, setMovieIndex }) {
 
       // Update the state with the new movie list
       setExampleMovieList(newList);
+      setMovieIndex(movieIndex + 1);
+      setError("");
+      setSuccess("Movie successfully added. Please proceed to My Movies page.");
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     }
-  }
-
-  async function setMovie(movie, day, time) {
-    const newSeatData = JSON.parse(JSON.stringify(seatData));
-
-    // Generate unique IDs for the new movie
-    setNewMovieId((newMovieId) => newMovieId + exampleMovieList.length);
-    const newColumnIdStart = newMovieId * 7 + 21;
-    const newRowIdStart = newMovieId * 14 + 1;
   }
 
   // Searching in IMDB Database
@@ -145,6 +149,20 @@ function AddMovie({ movieProps, movieIndex, setMovieIndex }) {
 
   return (
     <div>
+      <div>
+        {error && (
+            <div className="error-card">
+              <h2>Error:</h2>
+              <p>{error}</p>
+            </div>
+          )}
+        {success && (
+          <div className="success-card">
+          <h2>Success!</h2>
+          <p>{success}</p>
+        </div>
+        )}
+      </div>
       {/* Search function and Display of Movies from IMDB API */}
       <div className="gFeatures">
         <div className="search-box">
@@ -169,44 +187,42 @@ function AddMovie({ movieProps, movieIndex, setMovieIndex }) {
 
         {/* Filters */}
         <div className="filters">
-          <div class="d-flex justify-content-end">
-            <select
-              class="filter-dropdown mr-2"
-              value={filterType}
-              onchange={(e) => setFilterType(e.target.value)}
-            >
-              <option value="">Sort by...</option>
-              <option value="name">Name</option>
-              <option value="year">Year</option>
-            </select>
+          <select
+            className="filter-dropdown"
+            value={filterType}
+            onChange={(e) => setFilterType(e.target.value)}
+          >
+            <option value="">Sort by...</option>
+            <option value="name">Name</option>
+            <option value="year">Year</option>
+          </select>
 
-            <select
-              class="filter-dropdown"
-              value={genre}
-              onchange={(e) => setGenre(e.target.value)}
-            >
-              <option value="">Filter by Genre...</option>
-              <option value="28">Action</option>
-              <option value="12">Adventure</option>
-              <option value="16">Animation</option>
-              <option value="35">Comedy</option>
-              <option value="80">Crime</option>
-              <option value="99">Documentary</option>
-              <option value="18">Drama</option>
-              <option value="10751">Family</option>
-              <option value="14">Fantasy</option>
-              <option value="36">History</option>
-              <option value="27">Horror</option>
-              <option value="10402">Music</option>
-              <option value="9648">Mystery</option>
-              <option value="10749">Romance</option>
-              <option value="878">Science Fiction</option>
-              <option value="10770">TV Movie</option>
-              <option value="53">Thriller</option>
-              <option value="10752">War</option>
-              <option value="37">Western</option>
-            </select>
-          </div>
+          <select
+            className="filter-dropdown"
+            value={genre}
+            onChange={(e) => setGenre(e.target.value)}
+          >
+            <option value="">Filter by Genre...</option>
+            <option value="28">Action</option>
+            <option value="12">Adventure</option>
+            <option value="16">Animation</option>
+            <option value="35">Comedy</option>
+            <option value="80">Crime</option>
+            <option value="99">Documentary</option>
+            <option value="18">Drama</option>
+            <option value="10751">Family</option>
+            <option value="14">Fantasy</option>
+            <option value="36">History</option>
+            <option value="27">Horror</option>
+            <option value="10402">Music</option>
+            <option value="9648">Mystery</option>
+            <option value="10749">Romance</option>
+            <option value="878">Science Fiction</option>
+            <option value="10770">TV Movie</option>
+            <option value="53">Thriller</option>
+            <option value="10752">War</option>
+            <option value="37">Western</option>
+          </select>
         </div>
       </div>
       <div>
@@ -239,7 +255,6 @@ function AddMovie({ movieProps, movieIndex, setMovieIndex }) {
                             console.log("price is empty");
                           }
                           addMovie(movie, day, time, price);
-                          setMovieIndex(movieIndex + 1);
                           console.log("Movie Index: " + movieIndex);
                         }}
                       >
