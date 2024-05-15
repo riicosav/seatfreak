@@ -23,10 +23,8 @@ function App() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [newMovieId, setNewMovieId] = useState(exampleMovieList.length);
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const [movieIndex, setMovieIndex] = useState(1);
 
   const [visibleComponent, setVisibleComponent] = useState("home"); // Set initial state to "home"
-  
   const openAddMovieComponent = () => {
     setVisibleComponent("addMovie");
   };
@@ -41,20 +39,30 @@ function App() {
 
   function addSelectedSeats(data) {
     setSelectedSeats((prev) => [...prev, data]);
-  };
+  }
 
   function deleteSelectedSeats(data) {
     setSelectedSeats((prev) => prev.filter((seat) => seat !== data));
-  };
+  }
+  async function handleChange(event) {
+    const theIndex = event.target.selectedIndex;
+    setSelectedIndex(theIndex);
+    console.log(event.target.selectedIndex + "hi");
+
+    setSelectedMovie(exampleMovieList[theIndex]);
+    const theTemp = JSON.parse(JSON.stringify(exampleMovieList[theIndex]));
+    setTempMovie(theTemp);
+    console.log(selectedMovie[0].id);
+    setSelectedSeats([]);
+  }
 
   async function bookSeats(theIndex) {
     let finalIndex = 0;
 
-    for(let i = 0; i < exampleMovieList.length; i++) {
-      //console.log("The Index: " + theIndex + " and: " + exampleMovieList[i][0].id);
-      if(exampleMovieList[i][0].id === theIndex) {
-          finalIndex = i;
-          break;
+    for (let i = 0; i < exampleMovieList.length; i++) {
+      if (exampleMovieList[i][0].id === theIndex) {
+        finalIndex = i;
+        break;
       }
     }
     setSelectedIndex(finalIndex);
@@ -63,38 +71,38 @@ function App() {
     setTempMovie(theTemp);
     switchClick();
     setSelectedSeats([]);
-  };
+  }
 
   async function deleteMovie2(theIndex) {
-      let finalIndex = 0;
-      let finalIndex2 = 0;
-      const newList = [...exampleMovieList];
-      const newSelectedList = [...selectedMovies];
-        for(let i = 0; i < exampleMovieList.length; i++) {
-        
-          console.log("The Index: " + theIndex + " and: " + exampleMovieList[i][0].id);
-          if(exampleMovieList[i][0].id === theIndex) {
-              finalIndex = i;
-              console.log(i);
-              break;
-          }
-        }
+    let finalIndex = 0;
+    const newList = [...exampleMovieList];
+    for (let i = 0; i < exampleMovieList.length; i++) {
+      if (exampleMovieList[i][0].id === theIndex) {
+        finalIndex = i;
+        console.log(i);
+        break;
+      }
+    }
 
-        for(let a = 0; a < selectedMovies.length; a++) {
-          console.log(selectedMovies[a].index);
-          if(selectedMovies[a].index === theIndex) {
-              finalIndex2 = a;
-              break;
-          }
-        }
-
-        newSelectedList.splice(finalIndex2, 1);
-        newList.splice(finalIndex, 1);
-        setExampleMovieList(newList);
-        setSelectedMovies(newSelectedList);
-        setTempMovie(exampleMovieList[0]);
-        setSelectedSeats([]);
+    newList.splice(finalIndex, 1);
+    setExampleMovieList(newList);
+    setTempMovie(exampleMovieList[0]);
+    setSelectedSeats([]);
   }
+
+  function deleteMovie() {
+    // Deep clone the current movie list
+    const newList = [...exampleMovieList];
+
+    // Remove the selected movie from the list
+    newList.splice(selectedIndex, 1);
+
+    // Update the state with the modified movie list
+    setExampleMovieList(newList);
+
+    setTempMovie(exampleMovieList[0]);
+  }
+
   async function saveChange(e) {
     e.preventDefault();
     setExampleMovieList((prevList) => {
@@ -134,18 +142,20 @@ function App() {
     setVisibleComponent(componentName);
   };
 
-  let displayPage =  <div className="container">
-  <DisplayMovie
-   switchClick={() => toggleComponent("displayMovie")}
-    movieProps={{
-      selectedMovies: selectedMovies,
-      error: error,
-    }}
-    bookSeats={bookSeats}
-    deleteMovie2={deleteMovie2}
-  
-  />
-</div>
+  let displayPage = (
+    <div className="container">
+      <DisplayMovie
+        switchClick={() => toggleComponent("displayMovie")}
+        movieProps={{
+          selectedMovies: selectedMovies,
+          setSelectedMovies: setSelectedMovies,
+          error: error,
+        }}
+        bookSeats={bookSeats}
+        deleteMovie2={deleteMovie2}
+      />
+    </div>
+  );
 
   if (switchPage) {
     let displaySeats = (
@@ -163,25 +173,28 @@ function App() {
         deleteSelectedSeats={deleteSelectedSeats}
       />;
     }
-      displayPage = (
-        <div className="customContainer">
-          <div>
-            <p>{selectedMovie[0].movieTitle}</p>
-            <p>{selectedMovie[0].day}</p>
-            <p>{selectedMovie[0].time}</p>
-            <p>₱{selectedMovie[0].price}</p>
+    displayPage = (
+      <div className="customContainer">
+        <div>
+          <p>{selectedMovie[0].movieTitle}</p>
+          <p>{selectedMovie[0].day}</p>
+          <p>{selectedMovie[0].time}</p>
+          <p>₱{selectedMovie[0].price}</p>
 
-            {displaySeats}
-          </div>
-          <p class="text">
-            You have selected <span>{selectedSeats.length}</span> seats for a
-            price of ₱<span>{selectedSeats.length * tempMovie[0].price}</span>
-          </p>
-          <button type="button" className="btn btn-primary" onClick={saveChange}>
-            Save
-          </button>
+          {displaySeats}
         </div>
-      );
+        <p class="text">
+          You have selected <span>{selectedSeats.length}</span> seats for a
+          price of ₱<span>{selectedSeats.length * tempMovie[0].price}</span>
+        </p>
+        <button type="button" className="btn btn-primary" onClick={saveChange}>
+          Save
+        </button>
+        <button type="button" className="btn btn-danger" onClick={deleteMovie}>
+          Delete
+        </button>
+      </div>
+    );
   }
 
   return (
@@ -226,11 +239,7 @@ function App() {
               setExampleMovieList: setExampleMovieList,
               exampleMovieList: exampleMovieList,
               seatData: seatData,
-            }
-          }
-
-          setMovieIndex={setMovieIndex}
-          movieIndex={movieIndex}
+            }}
           />
         </div>
       )}
