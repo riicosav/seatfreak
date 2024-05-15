@@ -77,13 +77,13 @@ function DisplayMovie({movieProps, bookSeats, deleteMovie2, switchClick}) {
                         <button
                           type="button"
                           className="btn btn-custom-primary"
-                          onClick={() => switchClick()}
+                          onClick={()=>bookSeats(movie.index)}
                         >
                           Book Seats
                         </button>
                         <button
                           class="btn btn-custom-danger"
-                          onClick={() => removeMovie(index)}
+                          onClick={() => removeMovie(index, movie.index)}
                         >
                           Remove
                         </button>

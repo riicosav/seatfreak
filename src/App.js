@@ -26,7 +26,11 @@ function App() {
   const [visibleComponent, setVisibleComponent] = useState([]);
 
   const switchClick = () => {
-    setSwitchPage((switchPage)=>!switchPage);
+    setSwitchPage((switchPage)=>switchPage=true);
+  }
+
+  const switchExit = () =>{
+    setSwitchPage((switchPage)=>switchPage=false);
   }
 
 function addSelectedSeats(data) {
@@ -66,6 +70,7 @@ async function bookSeats(theIndex) {
     switchClick();
     setSelectedSeats([]);
    
+  
 
 }
 
@@ -133,8 +138,75 @@ async function saveChange(e) {
   };
 
   const toggleComponent = (componentName) => {
+    if(componentName === "displayMovie") {
+      switchExit();
+    }
+
     setVisibleComponent(componentName);
   };
+
+  let displayPage =  <div className="container">
+  <DisplayMovie
+   switchClick={() => toggleComponent("displayMovie")}
+    movieProps={{
+      selectedMovies: selectedMovies,
+      setSelectedMovies: setSelectedMovies,
+      error: error,
+    }}
+    bookSeats={bookSeats}
+    deleteMovie2={deleteMovie2}
+  />
+</div>
+
+  if(switchPage) {
+
+    let displaySeats =  <Theatre 
+    seatData={tempMovie[0].data} 
+    addSelectedSeats={addSelectedSeats} 
+    deleteSelectedSeats={deleteSelectedSeats}/>
+
+    if(displaySeats) {
+      <Theatre 
+    seatData={tempMovie[0].data} 
+    addSelectedSeats={addSelectedSeats} 
+    deleteSelectedSeats={deleteSelectedSeats}/>
+    }
+    displayPage = <div className="customContainer">
+   
+    <div>
+    
+        <p>{selectedMovie[0].movieTitle}</p>
+        <p>{selectedMovie[0].day}</p>
+        <p>{selectedMovie[0].time}</p>
+        <p>₱{selectedMovie[0].price}</p>
+      
+      
+      
+        {displaySeats} 
+      
+        
+    </div>
+    <p class="text"> 
+      You have selected <span>{selectedSeats.length}</span> seats for a price of ₱<span>{selectedSeats.length * tempMovie[0].price}</span>
+    </p>
+    <button
+      type="button"
+      className="btn btn-primary"
+      onClick={saveChange}
+    >
+      Save
+    </button>
+    <button
+      type="button"
+      className="btn btn-danger"
+      onClick={deleteMovie}
+    >
+      Delete
+    </button>
+  </div>
+
+    
+  }
 
   return (
     <div className="full-screen">
@@ -174,64 +246,16 @@ async function saveChange(e) {
       )}
 
       {visibleComponent === "displayMovie" && (
-        <div className="container">
-          <DisplayMovie
-            switchClick={() => toggleComponent("displayMovie")}
-            movieProps={{
-              selectedMovies: selectedMovies,
-              setSelectedMovies: setSelectedMovies,
-              error: error,
-            }}
-            bookSeats={bookSeats}
-            deleteMovie2={deleteMovie2}
-          />
-        </div>
+        <div> {displayPage}</div>
+       
       )}
 
-      {visibleComponent === "displayMovie" && (
-        <div className="customContainer">
-          <select
-            className="form-select"
-            aria-label="Default select example"
-            onChange={handleChange}
-          >
-            {exampleMovieList.map((movie, index) => (
-              <option key={index} value={movie}>
-                {movie[0].movieTitle}
-              </option>
-            ))}
-          </select>
-          <button
-            type="button"
-            className="btn btn-primary"
-            // onClick={addNewMovie}
-          >
-            Add New Movie
-          </button>
-          <div>
-            <p>{selectedMovie[0].movieTitle}</p>
-            <Theatre 
-              seatData={tempMovie[0].data} 
-              addSelectedSeats={addSelectedSeats} 
-              deleteSelectedSeats={deleteSelectedSeats}/>
-          </div>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={saveChange}
-          >
-            Save
-          </button>
-          <button
-            type="button"
-            className="btn btn-danger"
-            onClick={deleteMovie}
-          >
-            Delete
-          </button>
-        </div>
-      )}
+      {visibleComponent === ""}
     </div>
+
+    
+
+    
   );
 }
 
