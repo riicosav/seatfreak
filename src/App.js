@@ -23,12 +23,12 @@ function App() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [newMovieId, setNewMovieId] = useState(exampleMovieList.length);
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [movieIndex, setMovieIndex] = useState(1);
 
   const [visibleComponent, setVisibleComponent] = useState("home"); // Set initial state to "home"
   const openAddMovieComponent = () => {
     setVisibleComponent("addMovie");
   };
-
   const switchClick = () => {
     setSwitchPage((switchPage) => (switchPage = true));
   };
@@ -60,11 +60,13 @@ function App() {
     let finalIndex = 0;
 
     for (let i = 0; i < exampleMovieList.length; i++) {
+      //console.log("The Index: " + theIndex + " and: " + exampleMovieList[i][0].id);
       if (exampleMovieList[i][0].id === theIndex) {
         finalIndex = i;
         break;
       }
     }
+
     setSelectedIndex(finalIndex);
     setSelectedMovie(exampleMovieList[finalIndex]);
     const theTemp = JSON.parse(JSON.stringify(exampleMovieList[finalIndex]));
@@ -75,8 +77,13 @@ function App() {
 
   async function deleteMovie2(theIndex) {
     let finalIndex = 0;
+    let finalIndex2 = 0;
     const newList = [...exampleMovieList];
+    const newSelectedList = [...selectedMovies];
     for (let i = 0; i < exampleMovieList.length; i++) {
+      console.log(
+        "The Index: " + theIndex + " and: " + exampleMovieList[i][0].id
+      );
       if (exampleMovieList[i][0].id === theIndex) {
         finalIndex = i;
         console.log(i);
@@ -84,8 +91,18 @@ function App() {
       }
     }
 
+    for (let a = 0; a < selectedMovies.length; a++) {
+      console.log(selectedMovies[a].index);
+      if (selectedMovies[a].index === theIndex) {
+        finalIndex2 = a;
+        break;
+      }
+    }
+
+    newSelectedList.splice(finalIndex2, 1);
     newList.splice(finalIndex, 1);
     setExampleMovieList(newList);
+    setSelectedMovies(newSelectedList);
     setTempMovie(exampleMovieList[0]);
     setSelectedSeats([]);
   }
@@ -174,24 +191,44 @@ function App() {
       />;
     }
     displayPage = (
-      <div className="customContainer">
-        <div>
-          <p>{selectedMovie[0].movieTitle}</p>
-          <p>{selectedMovie[0].day}</p>
-          <p>{selectedMovie[0].time}</p>
-          <p>₱{selectedMovie[0].price}</p>
+      <div>
+        <div className="theatreHalf1">
+          <p className="theTitle">{selectedMovie[0].movieTitle}</p>
+          <div className="screenContainer">
+            <div className="screen"></div>
+          </div>
 
-          {displaySeats}
+          <div className="d-flex">
+            <p className="px-3">{selectedMovie[0].day}</p>
+            <p>|</p>
+            <p className="px-3">{selectedMovie[0].time}</p>
+            <p>|</p>
+            <p className="px-3">Price: ₱{selectedMovie[0].price}</p>
+          </div>
+          <ul class="showcase">
+            <li>
+              <div class="seatMini"></div>
+              <small>N/A</small>
+            </li>
+            <li>
+              <div class="seatClickedMini"></div>
+              <small>Selected</small>
+            </li>
+            <li>
+              <div class="seatBookedMini"></div>
+              <small>Booked</small>
+            </li>
+          </ul>
         </div>
-        <p class="text">
-          You have selected <span>{selectedSeats.length}</span> seats for a
-          price of ₱<span>{selectedSeats.length * tempMovie[0].price}</span>
-        </p>
+        <div className="customContainer">
+          {displaySeats}
+          <p class="text">
+            You have selected <span>{selectedSeats.length}</span> seats for a
+            price of ₱<span>{selectedSeats.length * tempMovie[0].price}</span>
+          </p>
+        </div>
         <button type="button" className="btn btn-primary" onClick={saveChange}>
           Save
-        </button>
-        <button type="button" className="btn btn-danger" onClick={deleteMovie}>
-          Delete
         </button>
       </div>
     );
@@ -209,7 +246,8 @@ function App() {
 
       {visibleComponent === "home" && (
         <div className="center">
-          <img src={backdrop} alt="" />
+          <img className="home-img" src={backdrop} alt="" />
+          <div className="backdrop"></div>
           <div className="welcome-msg">
             <h1 className="text-center">SeatFreak</h1>
             <p>Watch in comfort.</p>
@@ -240,6 +278,8 @@ function App() {
               exampleMovieList: exampleMovieList,
               seatData: seatData,
             }}
+            setMovieIndex={setMovieIndex}
+            movieIndex={movieIndex}
           />
         </div>
       )}

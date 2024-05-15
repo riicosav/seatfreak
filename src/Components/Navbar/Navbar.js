@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import seatFreakLogo from "../../images/seatfreak3.png";
 import jans from "../../images/seatfreaklogo2.png";
 
@@ -16,7 +16,7 @@ function Navbar({ setDatesAppear, setSeatingAppear, setHomeAppear }) {
       <div className="logo">
         <img
           onClick={setHomeAppear}
-          src={jans}
+          src={jans} // testing lang pre
           alt="Logo"
           className="navbar-brand"
           style={{ width: "140px" }}
@@ -29,16 +29,13 @@ function Navbar({ setDatesAppear, setSeatingAppear, setHomeAppear }) {
         <button className="button button-my-movies" onClick={setSeatingAppear}>
           My Movies
         </button>
-        <button className="button button-my-movies" onClick={setSeatingAppear}>
-          Seats
-        </button>
       </div>
-      {/* <a href="#" className="icon" onClick={toggleMenu}>
+      <a href="#" className="icon" onClick={toggleMenu}>
         <FontAwesomeIcon
           icon={menuOpen ? faXmark : faBars}
           className="menu-icon"
         />
-      </a> */}
+      </a>
     </div>
   );
 }
