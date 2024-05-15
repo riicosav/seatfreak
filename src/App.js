@@ -232,19 +232,23 @@ async function saveChange(e) {
             
             
             {displaySeats} 
-            <p class="text"> 
-              You have selected <span>{selectedSeats.length}</span> seats for a price of ₱<span>{selectedSeats.length * tempMovie[0].price}</span>
-            </p>
+           
             
           </div>
-        <button
+          <div className="theatreHalf2">
+          <p class="text"> 
+              You have selected <span className="textYellow"><strong>{selectedSeats.length}</strong></span> seats for a price of<span className="textGreen"><strong> ₱{selectedSeats.length * tempMovie[0].price}</strong></span>
+            </p>
+          <button
               type="button"
-              className="btn btn-primary"
+              className="btn btn-custom-primary customButton1"
               onClick={saveChange}
             >
               Save
             </button>
            </div>
+          </div>
+        
 
     
   }
