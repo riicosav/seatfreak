@@ -510,17 +510,21 @@ select {
 .success-card {
   width: 500px;
   height: 105px;
-  margin: auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
   align-items: center;
   box-shadow: 10px 10px 18px 0px rgba(0, 0, 0, 0.74);
   border-radius: 10px;
   background-color: #09ff00;
   transition: transform 0.3s ease;
-  margin-bottom: 30px;
-  justify-content: center;
   padding: 18px;
   color: black;
+  z-index: 1000; /* Ensure it's on top of other elements */
 }
+
 
 /* Ripple effect */
 .button::before {

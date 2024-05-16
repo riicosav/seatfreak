@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Navbar from "./Components/Navbar/Navbar.js";
 import Theatre from "./Components/Theatre.js";
@@ -14,6 +14,7 @@ function App() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [successSave, setSuccessSave] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false); // New state for visibility of success message
 
   const [switchPage, setSwitchPage] = useState(false);
   const newSeatData1 = JSON.parse(JSON.stringify(seatData));
@@ -31,12 +32,23 @@ function App() {
     setVisibleComponent("addMovie");
   };
   const switchClick = () => {
-    setSwitchPage((switchPage) => (switchPage = true));
+    setSwitchPage(true);
   };
 
   const switchExit = () => {
-    setSwitchPage((switchPage) => (switchPage = false));
+    setSwitchPage(false);
   };
+
+  useEffect(() => {
+    if (successSave) {
+      setShowSuccess(true);
+      const timer = setTimeout(() => {
+        setShowSuccess(false);
+        setSuccessSave("");
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [successSave]);
 
   function addSelectedSeats(data) {
     setSelectedSeats((prev) => [...prev, data]);
@@ -71,18 +83,13 @@ function App() {
     const newList = [...exampleMovieList];
     const newSelectedList = [...selectedMovies];
     for (let i = 0; i < exampleMovieList.length; i++) {
-      console.log(
-        "The Index: " + theIndex + " and: " + exampleMovieList[i][0].id
-      );
       if (exampleMovieList[i][0].id === theIndex) {
         finalIndex = i;
-        console.log(i);
         break;
       }
     }
 
     for (let a = 0; a < selectedMovies.length; a++) {
-      console.log(selectedMovies[a].index);
       if (selectedMovies[a].index === theIndex) {
         finalIndex2 = a;
         break;
@@ -112,7 +119,6 @@ function App() {
     });
   }
 
-  // Fetches data from API
   async function fetchData() {
     const url = `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=8afd20db7a02b0d89cbf914ffd94fdb3`;
     const options = {
@@ -165,80 +171,58 @@ function App() {
       />
     );
 
-    if (displaySeats) {
-      <Theatre
-        seatData={tempMovie[0].data}
-        addSelectedSeats={addSelectedSeats}
-        deleteSelectedSeats={deleteSelectedSeats}
-      />;
-    }
-    displayPage = 
-    <div >
-
-<div className="theatreHalf1">
-{successSave && (
-              <div className="success-card">
+    displayPage = (
+      <div>
+        <div className="theatreHalf1">
+          {showSuccess && (
+            <div className="success-card">
               <h2>Success!</h2>
               <p>{successSave}</p>
             </div>
-            )}
-<p className="theTitle">{selectedMovie[0].movieTitle}</p>
-            <div className="screenContainer">
-                <div className="screen">
-               
-                </div>
-            </div>
-            
-            <div className="d-flex">
-              <p className="px-3">{selectedMovie[0].day}</p>
-              <p>|</p>
-              <p className="px-3">{selectedMovie[0].time}</p>
-              <p>|</p>
-              <p className="px-3">Price: ₱{selectedMovie[0].price}</p>
-            </div>
-            <ul class="showcase">
-              <li>
-                  <div class="seatMini"></div>
-                    <small>N/A</small>
-                  
-              </li>
-              <li>
-                  <div class="seatClickedMini"></div>
-                    <small>Selected</small>
-                  
-              </li>
-              <li>
-                  <div class="seatBookedMini"></div>
-                    <small>Booked</small>
-                  
-              </li>
-            </ul>
-            
-           
-          
-            
+          )}
+          <p className="theTitle">{selectedMovie[0].movieTitle}</p>
+          <div className="screenContainer">
+            <div className="screen"></div>
+          </div>
+          <div className="d-flex">
+            <p className="px-3">{selectedMovie[0].day}</p>
+            <p>|</p>
+            <p className="px-3">{selectedMovie[0].time}</p>
+            <p>|</p>
+            <p className="px-3">Price: ₱{selectedMovie[0].price}</p>
+          </div>
+          <ul className="showcase">
+            <li>
+              <div className="seatMini"></div>
+              <small>N/A</small>
+            </li>
+            <li>
+              <div className="seatClickedMini"></div>
+              <small>Selected</small>
+            </li>
+            <li>
+              <div className="seatBookedMini"></div>
+              <small>Booked</small>
+            </li>
+          </ul>
         </div>
-                    <div className="customContainer">
-            
-            
-            {displaySeats} 
-           
-            
-          </div>
-          <div className="theatreHalf2">
-          <p class="text"> 
-              You have selected <span className="textYellow"><strong>{selectedSeats.length}</strong></span> seats for a price of<span className="textGreen"><strong> ₱{selectedSeats.length * tempMovie[0].price}</strong></span>
-            </p>
+        <div className="customContainer">
+          {displaySeats}
+        </div>
+        <div className="theatreHalf2">
+          <p className="text">
+            You have selected <span className="textYellow"><strong>{selectedSeats.length}</strong></span> seats for a price of <span className="textGreen"><strong>₱{selectedSeats.length * tempMovie[0].price}</strong></span>
+          </p>
           <button
-              type="button"
-              className="btn btn-custom-primary customButton1"
-              onClick={saveChange}
-            >
-              Save
-            </button>
-           </div>
-          </div>
-
+            type="button"
+            className="btn btn-custom-primary customButton1"
+            onClick={saveChange}
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -295,8 +279,6 @@ function App() {
       )}
 
       {visibleComponent === "displayMovie" && <div> {displayPage}</div>}
-
-      {visibleComponent === ""}
     </div>
   );
 }

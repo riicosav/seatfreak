@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faStar } from "@fortawesome/free-solid-svg-icons";
 
@@ -25,6 +25,7 @@ function AddMovie({ movieProps }) {
 
   const [filterType, setFilterType] = useState("");
   const [genre, setGenre] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false); // New state for visibility of success message
 
   // Add Movie function
   async function addMovie(movie, day, time, price) {
@@ -33,9 +34,7 @@ function AddMovie({ movieProps }) {
     });
 
     if (isDuplicate) {
-      setError(
-        "There is already a movie at that time! Please remove it first."
-      );
+      setError("There is already a movie at that time! Please remove it first.");
       setSuccess("");
       window.scrollTo({
         top: 0,
@@ -58,7 +57,6 @@ function AddMovie({ movieProps }) {
       const newSeatData = JSON.parse(JSON.stringify(seatData));
 
       // Generate unique IDs for the new movie
-      //setNewMovieId((newMovieId) => newMovieId + exampleMovieList.length);
       setNewMovieId((newMovieId) => newMovieId + 1);
       const newColumnIdStart = newMovieId * 7 + 21;
       const newRowIdStart = newMovieId * 14 + 1;
@@ -92,12 +90,24 @@ function AddMovie({ movieProps }) {
       setMovieIndex(movieIndex + 1);
       setError("");
       setSuccess("Movie successfully added. Please proceed to My Movies page.");
+      setShowSuccess(true); // Show success message
       window.scrollTo({
         top: 0,
         behavior: "smooth",
       });
     }
   }
+
+  useEffect(() => {
+    if (success) {
+      setShowSuccess(true);
+      const timer = setTimeout(() => {
+        setShowSuccess(false);
+        setSuccess("");
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [success]);
 
   // Searching in IMDB Database
   async function searchHandler(e) {
@@ -156,7 +166,7 @@ function AddMovie({ movieProps }) {
             <p>{error}</p>
           </div>
         )}
-        {success && (
+        {showSuccess && (
           <div className="success-card">
             <h2>Success!</h2>
             <p>{success}</p>
