@@ -9,10 +9,10 @@ function Seat({ seatData, addSelectedSeats, deleteSelectedSeats }) {
     seatData.selected = !isClicked;
     console.log(seatData.selected);
     if (!isClicked) {
-      console.log("hello!!");
+      
       addSelectedSeats(seatData.name);
     } else {
-      console.log("nahh!!!");
+      setLockClicked(false);
       deleteSelectedSeats(seatData.name);
     }
   };
@@ -24,14 +24,14 @@ function Seat({ seatData, addSelectedSeats, deleteSelectedSeats }) {
     design = "seat";
   }
 
-  if (lockClicked) {
+  if (lockClicked && isClicked) {
     design = "seatBooked";
   }
 
   return (
     <div
       className={design}
-      onClick={lockClicked ? null : () => clickHandle()}
+      onClick={() => clickHandle()}
     ></div>
   );
 }

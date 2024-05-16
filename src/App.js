@@ -172,54 +172,67 @@ function App() {
         deleteSelectedSeats={deleteSelectedSeats}
       />;
     }
-    displayPage = (
-      <div>
-        <div className="theatreHalf1">
-          {successSave && (
-              <div className="success-card">
-              <h2>Success!</h2>
-              <p>{successSave}</p>
+    displayPage = 
+    <div >
+
+<div className="theatreHalf1">
+<p className="theTitle">{selectedMovie[0].movieTitle}</p>
+            <div className="screenContainer">
+                <div className="screen">
+               
+                </div>
             </div>
-            )}
-          <p className="theTitle">{selectedMovie[0].movieTitle}</p>
-          <div className="screenContainer">
-            <div className="screen"></div>
+            
+            <div className="d-flex">
+              <p className="px-3">{selectedMovie[0].day}</p>
+              <p>|</p>
+              <p className="px-3">{selectedMovie[0].time}</p>
+              <p>|</p>
+              <p className="px-3">Price: ₱{selectedMovie[0].price}</p>
+            </div>
+            <ul class="showcase">
+              <li>
+                  <div class="seatMini"></div>
+                    <small>N/A</small>
+                  
+              </li>
+              <li>
+                  <div class="seatClickedMini"></div>
+                    <small>Selected</small>
+                  
+              </li>
+              <li>
+                  <div class="seatBookedMini"></div>
+                    <small>Booked</small>
+                  
+              </li>
+            </ul>
+            
+           
+          
+            
+        </div>
+                    <div className="customContainer">
+            
+            
+            {displaySeats} 
+           
+            
+          </div>
+          <div className="theatreHalf2">
+          <p class="text"> 
+              You have selected <span className="textYellow"><strong>{selectedSeats.length}</strong></span> seats for a price of<span className="textGreen"><strong> ₱{selectedSeats.length * tempMovie[0].price}</strong></span>
+            </p>
+          <button
+              type="button"
+              className="btn btn-custom-primary customButton1"
+              onClick={saveChange}
+            >
+              Save
+            </button>
+           </div>
           </div>
 
-          <div className="d-flex">
-            <p className="px-3">{selectedMovie[0].day}</p>
-            <p>|</p>
-            <p className="px-3">{selectedMovie[0].time}</p>
-            <p>|</p>
-            <p className="px-3">Price: ₱{selectedMovie[0].price}</p>
-          </div>
-          <ul class="showcase">
-            <li>
-              <div class="seatMini"></div>
-              <small>N/A</small>
-            </li>
-            <li>
-              <div class="seatClickedMini"></div>
-              <small>Selected</small>
-            </li>
-            <li>
-              <div class="seatBookedMini"></div>
-              <small>Booked</small>
-            </li>
-          </ul>
-        </div>
-        <div className="customContainer">
-          {displaySeats}
-          <p class="text">
-            You have selected <span>{selectedSeats.length}</span> seats for a
-            price of ₱<span>{selectedSeats.length * tempMovie[0].price}</span>
-          </p>
-        </div>
-        <center> <button type="button" className="btn-save btn-primary" onClick={saveChange}>
-          Save
-        </button> </center>
-      </div>
-    );
   }
 
   return (
