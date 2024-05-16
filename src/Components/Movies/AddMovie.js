@@ -164,7 +164,7 @@ function AddMovie({ movieProps }) {
         )}
       </div>
       {/* Search function and Display of Movies from IMDB API */}
-      <div className="gFeatures">
+      <div className="gFeatures conatiner">
         <div className="search-box">
           <input
             type="text"

@@ -629,6 +629,10 @@ select {
   display: flex;
   gap: 10px; /* Space between the filter dropdowns */
   margin-bottom: 10px;
+  padding-left: 80%;
+  max-width: 1260px; /* Set the maximum width */
+  margin-left: auto; /* Center the box horizontally */
+  margin-right: auto; /* Center the box horizontally */
 }
 
 .filter-dropdown {
@@ -685,6 +689,7 @@ select {
   min-width: 100%;
   width: auto; /* Set a fixed width for all movie items */
   background: transparent;
+
   outline: none;
   border: none;
 }
@@ -693,7 +698,11 @@ select {
   background-color: white;
   border-radius: 20px;
   margin-bottom: 10px;
+  max-width: 1260px; /* Set the maximum width */
+  margin-left: auto; /* Center the box horizontally */
+  margin-right: auto; /* Center the box horizontally */
 }
+
 .icon {
   font-size: 24px;
   cursor: pointer;
