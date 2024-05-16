@@ -36,7 +36,7 @@ function AddMovie({ movieProps }) {
       setError(
         "There is already a movie at that time! Please remove it first."
       );
-      setSuccess("")
+      setSuccess("");
       window.scrollTo({
         top: 0,
         behavior: "smooth",
@@ -151,16 +151,16 @@ function AddMovie({ movieProps }) {
     <div>
       <div>
         {error && (
-            <div className="error-card">
-              <h2>Error:</h2>
-              <p>{error}</p>
-            </div>
-          )}
+          <div className="error-card">
+            <h2>Error:</h2>
+            <p>{error}</p>
+          </div>
+        )}
         {success && (
           <div className="success-card">
-          <h2>Success!</h2>
-          <p>{success}</p>
-        </div>
+            <h2>Success!</h2>
+            <p>{success}</p>
+          </div>
         )}
       </div>
       {/* Search function and Display of Movies from IMDB API */}
@@ -283,6 +283,7 @@ function AddMovie({ movieProps }) {
                             </div>
                             <div className="col">
                               <input
+                                required
                                 className="input-price"
                                 type="number"
                                 id="price"

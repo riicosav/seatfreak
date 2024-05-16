@@ -484,8 +484,8 @@ select {
 }
 
 .button:hover {
-  color: #00ea5d;
-  text-shadow: 2px 2px 4px rgba(0, 234, 93, 0.5);
+  color: #ffeb3b; /* Bright yellow color */
+  text-shadow: 2px 2px 4px rgba(255, 235, 59, 0.5); /* Yellow shadow with reduced opacity */
 }
 
 .error-card {
