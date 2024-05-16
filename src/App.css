@@ -276,6 +276,39 @@ body {
   justify-content: center; /* Center the grid items horizontally */
   margin-top: 50px;
 }
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Default to 4 columns */
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  justify-content: center; /* Center the grid items horizontally */
+  margin-top: 50px;
+}
+
+@media (max-width: 1200px) {
+  .movie-grid {
+    grid-template-columns: repeat(
+      3,
+      1fr
+    ); /* 3 columns for screens smaller than 1200px */
+  }
+}
+
+@media (max-width: 900px) {
+  .movie-grid {
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ); /* 2 columns for screens smaller than 900px */
+  }
+}
+
+@media (max-width: 600px) {
+  .movie-grid {
+    grid-template-columns: 1fr; /* 1 column for screens smaller than 600px */
+  }
+}
 .movieContent {
   display: flex;
   justify-content: center;
