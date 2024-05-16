@@ -176,6 +176,12 @@ function App() {
     <div >
 
 <div className="theatreHalf1">
+{successSave && (
+              <div className="success-card">
+              <h2>Success!</h2>
+              <p>{successSave}</p>
+            </div>
+            )}
 <p className="theTitle">{selectedMovie[0].movieTitle}</p>
             <div className="screenContainer">
                 <div className="screen">

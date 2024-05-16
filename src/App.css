@@ -710,6 +710,7 @@ select {
   border: none;
 }
 .search-box {
+  
   padding: 10px;
   background-color: white;
   border-radius: 20px;
