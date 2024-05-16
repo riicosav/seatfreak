@@ -6,14 +6,13 @@ import AddMovie from "./Components/Movies/AddMovie.js";
 import DisplayMovie from "./Components/Movies/DisplayMovie.js";
 import backdrop from "./images/backdrop2.png";
 import { seatData } from "./Components/Data.js";
+import SuccessPopup from "./Components/Popup/SuccessPopup.js"
+import ErrorPopup from "./Components/Popup/ErrorPopup.js";
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState("");
   const [selectedMovies, setSelectedMovies] = useState([]);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  const [successSave, setSuccessSave] = useState("");
 
   const [switchPage, setSwitchPage] = useState(false);
   const newSeatData1 = JSON.parse(JSON.stringify(seatData));
@@ -27,9 +26,19 @@ function App() {
   const [movieIndex, setMovieIndex] = useState(1);
 
   const [visibleComponent, setVisibleComponent] = useState("home"); // Set initial state to "home"
+  
+  const [popUp, setPopUp] = useState(false)
+  const [errorPopUp, setErrorPopUp] = useState(false)
+
+  async function handleAnimationEnd() {
+    setPopUp(false);
+    setErrorPopUp(false);
+  };
+
   const openAddMovieComponent = () => {
     setVisibleComponent("addMovie");
   };
+
   const switchClick = () => {
     setSwitchPage((switchPage) => (switchPage = true));
   };
@@ -62,7 +71,6 @@ function App() {
     setTempMovie(theTemp);
     switchClick();
     setSelectedSeats([]);
-    setSuccessSave("");
   }
 
   async function deleteMovie(theIndex) {
@@ -95,6 +103,7 @@ function App() {
     setSelectedMovies(newSelectedList);
     setTempMovie(exampleMovieList[0]);
     setSelectedSeats([]);
+    setPopUp(true);
   }
 
   async function saveChange(e) {
@@ -105,11 +114,7 @@ function App() {
       return newList;
     });
     setSelectedSeats([]);
-    setSuccessSave("Successfully saved seat!");
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    setPopUp(true);
   }
 
   // Fetches data from API
@@ -148,7 +153,6 @@ function App() {
         movieProps={{
           selectedMovies: selectedMovies,
           setSelectedMovies: setSelectedMovies,
-          error: error,
           bookSeats: bookSeats,
           deleteMovie: deleteMovie
         }}
@@ -175,50 +179,37 @@ function App() {
     displayPage = 
     <div >
 
-<div className="theatreHalf1">
-<p className="theTitle">{selectedMovie[0].movieTitle}</p>
-            <div className="screenContainer">
-                <div className="screen">
-               
-                </div>
-            </div>
-            
+    <div className="theatreHalf1">
+        <p className="theTitle">{selectedMovie[0].movieTitle}</p>
+          <div className="screenContainer">
+              <div className="screen"> </div>
+          </div>
             <div className="d-flex">
               <p className="px-3">{selectedMovie[0].day}</p>
-              <p>|</p>
+                <p>|</p>
               <p className="px-3">{selectedMovie[0].time}</p>
-              <p>|</p>
+                <p>|</p>
               <p className="px-3">Price: ₱{selectedMovie[0].price}</p>
             </div>
+
             <ul class="showcase">
               <li>
                   <div class="seatMini"></div>
                     <small>N/A</small>
-                  
               </li>
               <li>
                   <div class="seatClickedMini"></div>
                     <small>Selected</small>
-                  
               </li>
               <li>
                   <div class="seatBookedMini"></div>
                     <small>Booked</small>
-                  
               </li>
             </ul>
-            
-           
-          
-            
         </div>
-                    <div className="customContainer">
-            
-            
-            {displaySeats} 
-           
-            
-          </div>
+            <div className="customContainer">
+              {displaySeats} 
+            </div>
           <div className="theatreHalf2">
           <p class="text"> 
               You have selected <span className="textYellow"><strong>{selectedSeats.length}</strong></span> seats for a price of<span className="textGreen"><strong> ₱{selectedSeats.length * tempMovie[0].price}</strong></span>
@@ -230,8 +221,8 @@ function App() {
             >
               Save
             </button>
-           </div>
           </div>
+      </div>
 
   }
 
@@ -244,7 +235,12 @@ function App() {
           setHomeAppear={() => toggleComponent("home")}
         />
       </div>
-
+      {popUp && (
+                    <SuccessPopup onAnimationEnd={handleAnimationEnd} />
+                )}
+      {errorPopUp && (
+                    <ErrorPopup onAnimationEnd={handleAnimationEnd} />
+      )}
       {visibleComponent === "home" && (
         <div className="center">
           <img className="home-img" src={backdrop} alt="" />
@@ -271,8 +267,6 @@ function App() {
               setQuery: setQuery,
               selectedMovies: selectedMovies,
               setSelectedMovies: setSelectedMovies,
-              error: error,
-              setError: setError,
               fetchData: fetchData,
               newMovieId: newMovieId,
               setNewMovieId: setNewMovieId,
@@ -281,8 +275,8 @@ function App() {
               seatData: seatData,
               movieIndex: movieIndex,
               setMovieIndex: setMovieIndex,
-              success: success,
-              setSuccess: setSuccess,
+              setPopUp: setPopUp,
+              setErrorPopUp: setErrorPopUp,
             }}
           />
         </div>

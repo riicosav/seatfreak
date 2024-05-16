@@ -9,18 +9,16 @@ function AddMovie({ movieProps }) {
     setSelectedMovies,
     query,
     setQuery,
-    setError,
     fetchData,
     setNewMovieId,
     newMovieId,
     setExampleMovieList,
     exampleMovieList,
     seatData,
-    error,
     movieIndex,
     setMovieIndex,
-    success,
-    setSuccess,
+    setPopUp,
+    setErrorPopUp,
   } = movieProps;
 
   const [filterType, setFilterType] = useState("");
@@ -33,14 +31,10 @@ function AddMovie({ movieProps }) {
     });
 
     if (isDuplicate) {
-      setError(
-        "There is already a movie at that time! Please remove it first."
-      );
-      setSuccess("");
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
+      setErrorPopUp(true);
+      setTimeout(() => {
+        setErrorPopUp(false);
+    }, 700);
       return;
     } else {
       setSelectedMovies((prevState) => [
@@ -90,12 +84,7 @@ function AddMovie({ movieProps }) {
       // Update the state with the new movie list
       setExampleMovieList(newList);
       setMovieIndex(movieIndex + 1);
-      setError("");
-      setSuccess("Movie successfully added. Please proceed to My Movies page.");
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
+      setPopUp(true);
     }
   }
 
@@ -150,18 +139,6 @@ function AddMovie({ movieProps }) {
   return (
     <div>
       <div>
-        {error && (
-          <div className="error-card">
-            <h2>Error:</h2>
-            <p>{error}</p>
-          </div>
-        )}
-        {success && (
-          <div className="success-card">
-            <h2>Success!</h2>
-            <p>{success}</p>
-          </div>
-        )}
       </div>
       {/* Search function and Display of Movies from IMDB API */}
       <div className="gFeatures conatiner">
